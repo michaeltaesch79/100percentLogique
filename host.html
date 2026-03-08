@@ -388,13 +388,9 @@ function drawQR(canvas, text) {
 
 
 /* ── WEBSOCKET ─────────────────────────────────────────────────── */
+// Works both locally (ws://) and on Railway/online (wss://)
 const _wsProto = location.protocol === 'https:' ? 'wss' : 'ws';
-const _wsUrl   = 'ws://__WS_HOST__';   // server injects real host:port
-// If placeholder wasn't replaced (old server), fall back to window.location
-const _wsTarget = _wsUrl.includes('__WS_HOST__')
-  ? `${_wsProto}://${location.host}`
-  : _wsUrl;
-const ws = new WebSocket(_wsTarget);
+const ws = new WebSocket(`${_wsProto}://${location.host}`);
 
 let players  = [];
 let curQ     = null;

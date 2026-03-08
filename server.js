@@ -6,7 +6,7 @@ const fs   = require('fs');
 const path = require('path');
 const { WebSocketServer, WebSocket } = require('ws');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // ─── QUESTIONS with FUN FACTS ─────────────────────────────────────────────
 const QUESTIONS = [
@@ -433,8 +433,13 @@ wss.on('connection', (ws) => {
 });
 
 // ─── START ──────────────────────────────────────────────────────────────────
-// Detect local IP before server starts so HTTP handler can inject it
+// Detect local IP (for local play) or use Railway public URL (for online play)
 (function detectIP() {
+  // If running on Railway or similar, the public URL is in the env
+  if (process.env.RAILWAY_PUBLIC_DOMAIN) {
+    localIP = process.env.RAILWAY_PUBLIC_DOMAIN;
+    return;
+  }
   const { networkInterfaces } = require('os');
   const nets = networkInterfaces();
   for (const name of Object.keys(nets)) {
@@ -445,10 +450,14 @@ wss.on('connection', (ws) => {
 })();
 
 server.listen(PORT, '0.0.0.0', () => {
+  const isOnline = !!process.env.RAILWAY_PUBLIC_DOMAIN;
+  const baseUrl = isOnline
+    ? `https://${localIP}`
+    : `http://${localIP}:${PORT}`;
   console.log('\n╔══════════════════════════════════════════╗');
   console.log('║       100% LOGIQUE — Game Server         ║');
   console.log('╠══════════════════════════════════════════╣');
-  console.log(`║  Host (iPad)  →  http://${localIP}:${PORT}      ║`);
-  console.log(`║  Players      →  http://${localIP}:${PORT}/player║`);
+  console.log(`║  Host (iPad)  →  ${baseUrl}          ║`);
+  console.log(`║  Players      →  ${baseUrl}/player   ║`);
   console.log('╚══════════════════════════════════════════╝\n');
 });
