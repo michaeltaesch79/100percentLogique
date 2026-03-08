@@ -8,223 +8,407 @@ const { WebSocketServer, WebSocket } = require('ws');
 
 const PORT = process.env.PORT || 3000;
 
-// ─── QUESTIONS with FUN FACTS ─────────────────────────────────────────────
-const QUESTIONS = [
-  { pct:100, q:"What color is the sky on a clear day?",
+// ─── QUESTIONS (60 total, sorted easy→hard, each with hints + fact) ──────────
+const ALL_QUESTIONS = [
+  { q:"What color is the sky on a clear day?",
     a:["Red","Blue","Green","Yellow"], c:1,
-    fact:"The sky looks blue because air molecules scatter short blue light waves much more than red ones — a phenomenon called Rayleigh scattering, named after Lord Rayleigh who explained it in 1871." },
+    hint_teen:"It's the same color as the ocean on a sunny day 🌊",
+    hint_young:"Think about what color you see when you look up outside",
+    fact:"The sky looks blue because of Rayleigh scattering — air molecules scatter short blue light waves much more than red ones." },
 
-  { pct: 95, q:"How many legs does a spider have?",
+  { q:"How many legs does a spider have?",
     a:["4","6","8","10"], c:2,
-    fact:"Spiders have 8 legs, but they also have 2 extra appendages called pedipalps near their mouth — so they might look like 10 limbs! Insects only have 6 legs, which is how you tell them apart from spiders." },
+    hint_teen:"More than a cat, less than a centipede 🕷️",
+    hint_young:"Insects have 6 — spiders have more than that",
+    fact:"Spiders have 8 legs plus 2 pedipalps near their mouth. Insects only have 6 legs, which is how you tell them apart." },
 
-  { pct: 92, q:"What is 10 × 10?",
+  { q:"What is 10 × 10?",
     a:["10","100","1000","110"], c:1,
-    fact:"The word 'percent' literally means 'per hundred' from Latin — which is why 100% means everything! The number 100 is called a perfect square because it equals 10²." },
+    hint_teen:"Count how many squares are on a chessboard row, then multiply 🎲",
+    hint_young:"Ten groups of ten",
+    fact:"'Percent' literally means 'per hundred' in Latin — that's why 100% means everything!" },
 
-  { pct: 90, q:"What is the capital of France?",
+  { q:"What is the capital of France?",
     a:["Berlin","Rome","Paris","Madrid"], c:2,
-    fact:"Paris has been the capital of France for over 1,000 years. Its nickname 'The City of Light' came partly because it was one of the first European cities to use gas street lighting, back in the 1820s." },
+    hint_teen:"Home of the Eiffel Tower 🗼",
+    hint_young:"The city known as 'The City of Light'",
+    fact:"Paris has been the capital of France for over 1,000 years and was one of the first cities to use gas street lighting in the 1820s." },
 
-  { pct: 88, q:"How many sides does a triangle have?",
+  { q:"How many sides does a triangle have?",
     a:["2","3","4","5"], c:1,
-    fact:"The triangle is the strongest shape in engineering — that's why bridges and roof trusses use triangular frames. The word 'triangle' comes from Latin meaning 'three angles.'" },
+    hint_teen:"'Tri' means three in Latin 🔺",
+    hint_young:"Think about the prefix 'tri-' like tricycle",
+    fact:"The triangle is the strongest shape in engineering — that's why bridges and roof trusses use triangular frames." },
 
-  { pct: 85, q:"Which planet is closest to the Sun?",
+  { q:"Which planet is closest to the Sun?",
     a:["Venus","Earth","Mars","Mercury"], c:3,
-    fact:"Despite being closest to the Sun, Mercury is NOT the hottest planet — Venus is! Venus's thick atmosphere traps heat like a greenhouse, reaching 465°C, while Mercury has no atmosphere and swings wildly between -180°C and 430°C." },
+    hint_teen:"It's named after the Roman messenger god ☿",
+    hint_young:"It's the smallest planet in our solar system",
+    fact:"Despite being closest to the Sun, Mercury is NOT the hottest planet — Venus is, because its thick atmosphere traps heat." },
 
-  { pct: 83, q:"What is the largest ocean on Earth?",
+  { q:"What is the largest ocean on Earth?",
     a:["Atlantic","Indian","Arctic","Pacific"], c:3,
-    fact:"The Pacific Ocean is so enormous it covers more area than all of Earth's land combined! Explorer Ferdinand Magellan named it 'Pacific' (meaning peaceful in Latin) after experiencing unusually calm waters in 1520." },
+    hint_teen:"It borders both Asia and the Americas 🌏",
+    hint_young:"Its name means 'peaceful' in Latin",
+    fact:"The Pacific Ocean covers more area than all of Earth's land combined! Magellan named it 'Pacific' meaning peaceful in 1520." },
 
-  { pct: 80, q:"How many colors are in a rainbow?",
+  { q:"How many colors are in a rainbow?",
     a:["5","6","7","8"], c:2,
-    fact:"Technically a rainbow is a continuous spectrum of millions of colors, but Isaac Newton listed 7 (Red, Orange, Yellow, Green, Blue, Indigo, Violet) to match the 7 notes in a musical scale — a choice that stuck forever!" },
+    hint_teen:"Think ROY G BIV 🌈",
+    hint_young:"Same as the number of notes in a musical scale",
+    fact:"Isaac Newton chose 7 rainbow colors to match the 7 notes in a musical scale — Red, Orange, Yellow, Green, Blue, Indigo, Violet." },
 
-  { pct: 78, q:"What gas do plants absorb during photosynthesis?",
+  { q:"What gas do plants absorb during photosynthesis?",
     a:["Oxygen","Nitrogen","CO₂","Helium"], c:2,
-    fact:"Plants absorb CO₂ and release oxygen — the exact opposite of what we do! A single large tree absorbs up to 48 lbs of CO₂ per year and releases enough oxygen to support 2 people breathing for an entire year." },
+    hint_teen:"It's the gas humans breathe OUT 🌿",
+    hint_young:"Plants take in what we breathe out",
+    fact:"Plants absorb CO₂ and release oxygen. A single large tree absorbs up to 48 lbs of CO₂ per year." },
 
-  { pct: 75, q:"How many days are in a non-leap year?",
+  { q:"How many days are in a non-leap year?",
     a:["360","364","365","366"], c:2,
-    fact:"A year is actually 365.2422 days long. We add a leap day every 4 years to compensate — but even that's slightly too much, so century years (like 1900) skip the leap day unless also divisible by 400 (like 2000)." },
+    hint_teen:"Count the days from one birthday to the next 🎂",
+    hint_young:"It's between 364 and 366",
+    fact:"A year is actually 365.2422 days long, which is why we have leap years every 4 years to compensate." },
 
-  { pct: 73, q:"What is the chemical symbol for water?",
+  { q:"What is the chemical symbol for water?",
     a:["CO₂","H₂O","NaCl","O₂"], c:1,
-    fact:"Water is the only natural substance that exists as a solid, liquid, and gas at normal Earth temperatures. Uniquely, it EXPANDS when it freezes — which is why ice floats. If ice sank, lakes would freeze solid and most aquatic life would die." },
+    hint_teen:"2 Hydrogen + 1 Oxygen 💧",
+    hint_young:"H stands for Hydrogen, O for Oxygen",
+    fact:"Water is the only natural substance that exists as solid, liquid, and gas at normal Earth temperatures, and it expands when it freezes." },
 
-  { pct: 70, q:"Which animal is the largest on Earth?",
+  { q:"Which animal is the largest on Earth?",
     a:["African elephant","Whale shark","Blue whale","Giraffe"], c:2,
-    fact:"A blue whale can reach 100 feet long and weigh 200 tons — heavier than any dinosaur ever found! Its heart is the size of a small car, and a human could crawl through its largest arteries." },
+    hint_teen:"It lives in the ocean and can be 100 feet long 🐳",
+    hint_young:"It's a marine mammal, not a fish",
+    fact:"A blue whale can weigh 200 tons — heavier than any dinosaur ever found! Its heart is the size of a small car." },
 
-  { pct: 68, q:"How many hours are in a week?",
+  { q:"How many hours are in a week?",
     a:["124","148","168","192"], c:2,
-    fact:"7 × 24 = 168 hours. The 7-day week has been used for at least 4,000 years, likely originating in ancient Mesopotamia. The days were originally named after the 7 celestial bodies visible to the naked eye: Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn." },
+    hint_teen:"7 days × 24 hours 📅",
+    hint_young:"Multiply days in a week by hours in a day",
+    fact:"The 7-day week has been used for 4,000 years, with days named after the 7 celestial bodies visible to the naked eye." },
 
-  { pct: 65, q:"Who painted the Mona Lisa?",
+  { q:"Who painted the Mona Lisa?",
     a:["Michelangelo","Raphael","Botticelli","Leonardo da Vinci"], c:3,
-    fact:"Leonardo worked on the Mona Lisa for over 4 years and painted it on a poplar wood panel, not canvas. The subject has no visible eyebrows — either Leonardo left them out intentionally, or they faded over 500+ years." },
+    hint_teen:"Same person who designed flying machines in the 1400s ✈️",
+    hint_young:"An Italian Renaissance genius — also invented the helicopter concept",
+    fact:"Leonardo worked on the Mona Lisa for 4+ years on poplar wood panel. The subject famously has no visible eyebrows." },
 
-  { pct: 63, q:"What is the longest bone in the human body?",
+  { q:"What is the longest bone in the human body?",
     a:["Humerus","Radius","Tibia","Femur"], c:3,
-    fact:"The femur (thigh bone) is about 1/4 of your total height and can withstand forces of up to 1,700 pounds per square inch. By contrast, the smallest bone is the stirrup (stapes) in your inner ear — just 3mm long!" },
+    hint_teen:"It's in your leg — the thigh bone 🦴",
+    hint_young:"You use it when you kick a ball",
+    fact:"The femur is about 1/4 of your total height. The smallest bone is the stirrup in your ear at just 3mm long!" },
 
-  { pct: 60, q:"In what year did World War II end?",
+  { q:"In what year did World War II end?",
     a:["1943","1944","1945","1946"], c:2,
-    fact:"WWII ended in 1945: Germany surrendered May 8 (V-E Day) and Japan on September 2 (V-J Day). It was the deadliest conflict in history with an estimated 70–85 million deaths — roughly 3% of the entire world population at the time." },
+    hint_teen:"The atomic bombs were dropped that same year 💣",
+    hint_young:"Germany surrendered in May, Japan in September of that year",
+    fact:"WWII ended in 1945 with ~70–85 million deaths — roughly 3% of the world population at the time." },
 
-  { pct: 58, q:"What is the square root of 144?",
+  { q:"What is the square root of 144?",
     a:["10","11","12","14"], c:2,
-    fact:"The number 144 is also known as a 'gross' — a dozen dozens, used by merchants for centuries. There are also 144 total squares on a chessboard if you count squares of ALL sizes, not just the 64 individual ones!" },
+    hint_teen:"Think of a dozen dozens 🔢",
+    hint_young:"What number times itself equals 144?",
+    fact:"144 is called a 'gross' — a dozen dozens. Used by merchants for centuries." },
 
-  { pct: 55, q:"What currency does Japan use?",
+  { q:"What currency does Japan use?",
     a:["Yuan","Won","Yen","Baht"], c:2,
-    fact:"Japan's 1-yen coin weighs exactly 1 gram and is so light it can float on still water due to surface tension. The Yen was introduced in 1871 to modernize Japan's monetary system. 'Yen' means 'round object' in Japanese." },
+    hint_teen:"Its symbol looks like a Y with two lines: ¥ 🇯🇵",
+    hint_young:"It starts with Y and means 'round object'",
+    fact:"Japan's 1-yen coin weighs exactly 1 gram and is so light it can float on still water due to surface tension." },
 
-  { pct: 53, q:"What is the smallest country in the world?",
+  { q:"What is the smallest country in the world?",
     a:["Monaco","Liechtenstein","San Marino","Vatican City"], c:3,
-    fact:"Vatican City covers just 0.44 km² — smaller than most city parks — yet has its own postal system, newspaper, radio station, and army (the Swiss Guard, founded in 1506). With ~800 residents, it has the smallest population of any country." },
+    hint_teen:"It's inside the city of Rome 🇻🇦",
+    hint_young:"Home of the Pope — it's a city AND a country",
+    fact:"Vatican City covers just 0.44 km² — smaller than most city parks — yet has its own postal system, newspaper, and army." },
 
-  { pct: 50, q:"How many sides does a hexagon have?",
+  { q:"How many sides does a hexagon have?",
     a:["5","6","7","8"], c:1,
-    fact:"Hexagons are nature's favorite shape! Honeycombs, snowflakes, and basalt columns all form hexagons naturally because they pack perfectly without gaps and use the least material to enclose the most space — it's mathematical optimization by nature." },
+    hint_teen:"Honeybees use this shape for their hive 🐝",
+    hint_young:"'Hex' means six in Greek",
+    fact:"Hexagons are nature's favorite shape! Honeycombs, snowflakes, and basalt columns all form hexagons naturally." },
 
-  { pct: 48, q:"What is the capital of Australia?",
+  { q:"What is the capital of Australia?",
     a:["Sydney","Melbourne","Canberra","Brisbane"], c:2,
-    fact:"Canberra was purpose-built as a compromise between rivals Sydney and Melbourne. American architects Walter Burley Griffin and Marion Mahony Griffin won an international design competition in 1913. The city's name likely means 'meeting place' in the local Aboriginal language." },
+    hint_teen:"It's NOT Sydney — it was built as a compromise 🇦🇺",
+    hint_young:"It's a purpose-built capital, designed in 1913",
+    fact:"Canberra was built as a compromise between rivals Sydney and Melbourne. Its name likely means 'meeting place' in the local Aboriginal language." },
 
-  { pct: 45, q:"Which element has the chemical symbol 'Au'?",
+  { q:"Which element has the chemical symbol 'Au'?",
     a:["Silver","Aluminum","Gold","Copper"], c:2,
-    fact:"'Au' comes from 'aurum,' Latin for gold. All the gold ever mined in human history would fit into about 3.5 Olympic swimming pools. Gold is so rare that more steel is poured every single hour than all the gold ever mined throughout history." },
+    hint_teen:"It comes from the Latin word 'aurum' 💰",
+    hint_young:"Very shiny, very valuable, yellow metal",
+    fact:"All gold on Earth was formed in neutron star collisions. All gold ever mined would fit in about 3.5 Olympic swimming pools." },
 
-  { pct: 43, q:"How many chromosomes do humans have?",
+  { q:"How many chromosomes do humans have?",
     a:["23","44","46","48"], c:2,
-    fact:"Humans have 46 chromosomes in 23 pairs. Interestingly, a potato has 48 chromosomes — 2 more than us! The number of chromosomes has nothing to do with complexity; it's just how DNA happens to be packaged in that species." },
+    hint_teen:"They come in pairs — we have 23 pairs 🧬",
+    hint_young:"Two times the number of chromosome pairs",
+    fact:"Humans have 46 chromosomes. A potato has 48 — 2 more than us! The number has nothing to do with complexity." },
 
-  { pct: 40, q:"A train travels 60 mph for 2.5 hours. How far does it go?",
+  { q:"A train travels 60 mph for 2.5 hours. How far does it go?",
     a:["100 mi","120 mi","140 mi","150 mi"], c:3,
-    fact:"60 mph × 2.5 hrs = 150 miles. The world's fastest passenger train, China's Shanghai Maglev, reaches 267 mph — it would cover 150 miles in just 34 minutes. It levitates above the track using magnets, so there's zero friction!" },
+    hint_teen:"Distance = Speed × Time 🚂",
+    hint_young:"Multiply 60 by 2.5",
+    fact:"The Shanghai Maglev train reaches 267 mph — it would cover 150 miles in just 34 minutes, levitating above the track!" },
 
-  { pct: 38, q:"What is the speed of light (km/s, rounded)?",
+  { q:"What is the speed of light (km/s, rounded)?",
     a:["100,000","200,000","300,000","400,000"], c:2,
-    fact:"Light travels at exactly 299,792,458 m/s — it circles Earth about 7.5 times per second! Sunlight takes ~8 minutes to reach us, meaning we always see the Sun as it was 8 minutes ago. If the Sun vanished, we wouldn't notice for 8 minutes." },
+    hint_teen:"It circles Earth 7.5 times per second ⚡",
+    hint_young:"It takes 8 minutes to travel from the Sun to Earth",
+    fact:"Light travels at 299,792,458 m/s. Sunlight takes ~8 minutes to reach us — we always see the Sun as it was 8 minutes ago." },
 
-  { pct: 35, q:"Who composed the Ninth Symphony?",
+  { q:"Who composed the Ninth Symphony?",
     a:["Mozart","Bach","Beethoven","Brahms"], c:2,
-    fact:"Beethoven composed the Ninth Symphony while completely deaf, relying entirely on his inner musical imagination. At the 1824 premiere, he had to be turned around to see the standing ovation — he couldn't hear any of the thunderous applause." },
+    hint_teen:"He composed it while completely deaf 🎵",
+    hint_young:"A famous German composer — his most celebrated symphony",
+    fact:"Beethoven composed the Ninth Symphony while deaf. At the 1824 premiere he had to be turned to see the standing ovation." },
 
-  { pct: 33, q:"What is 17 × 19?",
+  { q:"What is 17 × 19?",
     a:["303","313","323","333"], c:2,
-    fact:"Quick trick: 17 × 19 = (18-1)(18+1) = 18² - 1² = 324 - 1 = 323. This uses the 'difference of squares' formula: (a-b)(a+b) = a²-b². Spotting the 'middle number' makes mental multiplication much faster!" },
+    hint_teen:"Try (18-1)(18+1) = 18² - 1 🔢",
+    hint_young:"It's between 300 and 340",
+    fact:"Quick trick: 17×19 = (18-1)(18+1) = 324-1 = 323 — the 'difference of squares' formula!" },
 
-  { pct: 30, q:"Which is the longest river in the world?",
+  { q:"Which is the longest river in the world?",
     a:["Amazon","Mississippi","Nile","Yangtze"], c:2,
-    fact:"The Nile vs. Amazon debate is still ongoing — some measurements put the Amazon longer! But the Amazon wins on water volume: it discharges about 20% of all fresh river water on Earth into the ocean, far more than the Nile." },
+    hint_teen:"It flows through Egypt and into the Mediterranean 🌍",
+    hint_young:"This African river is historically famous for ancient civilizations",
+    fact:"The Nile vs Amazon debate continues, but the Amazon wins on water volume — it discharges 20% of all fresh river water on Earth." },
 
-  { pct: 28, q:"What is the atomic number of hydrogen?",
+  { q:"What is the atomic number of hydrogen?",
     a:["1","2","3","4"], c:0,
-    fact:"Hydrogen is the simplest and most abundant element in the universe — about 75% of all normal matter by mass. Every star is essentially a massive hydrogen fusion reactor. Hydrogen was the very first element to form after the Big Bang, 13.8 billion years ago." },
+    hint_teen:"It's the very first element on the periodic table ⚗️",
+    hint_young:"The simplest, lightest element — number one",
+    fact:"Hydrogen makes up ~75% of all normal matter in the universe. Every star is essentially a massive hydrogen fusion reactor." },
 
-  { pct: 26, q:"How many bones are in the adult human body?",
+  { q:"How many bones are in the adult human body?",
     a:["186","196","206","216"], c:2,
-    fact:"Babies are born with ~270 bones, but many fuse during childhood. Adults end up with 206. More than half of all your bones are in your hands and feet — 54 in the hands and 52 in the feet!" },
+    hint_teen:"Babies have more — about 270 — many fuse together 🦴",
+    hint_young:"It's just over 200",
+    fact:"More than half of your bones are in your hands and feet — 54 in the hands and 52 in the feet!" },
 
-  { pct: 24, q:"What is the largest desert in the world?",
+  { q:"What is the largest desert in the world?",
     a:["Sahara","Gobi","Arabian","Antarctic"], c:3,
-    fact:"Most people say Sahara, but Antarctica is the largest desert at 14.2 million km²! A desert is defined by low precipitation, not temperature. Antarctica receives less than 200mm of precipitation per year, making it the driest continent on Earth." },
+    hint_teen:"A desert is defined by low rain, not heat ❄️",
+    hint_young:"Think cold and icy — deserts aren't always hot",
+    fact:"Antarctica is the largest desert at 14.2 million km²! A desert is defined by low precipitation, not temperature." },
 
-  { pct: 22, q:"A snail goes 10 ft forward and 3 ft back each day. Days to cross 50 ft?",
-    a:["10","7","12","13"], c:1,
-    fact:"The key insight: on day 6 the snail is at 42 ft (6×7). On day 7 it moves forward 10 ft, reaching 52 ft and crossing the 50 ft mark BEFORE sliding back. So the answer is 7 days! These 'trick' problems test whether you check your instinct." },
-
-  { pct: 20, q:"What is the chemical symbol for iron?",
+  { q:"What is the chemical symbol for iron?",
     a:["Ir","In","Fe","Fr"], c:2,
-    fact:"'Fe' comes from 'ferrum,' the Latin word for iron. Iron is the most abundant element on Earth by mass, making up about 32% of our planet — most of it locked in Earth's molten core. That core's movement is what creates Earth's magnetic field protecting us from solar radiation." },
+    hint_teen:"From the Latin word 'ferrum' ⚙️",
+    hint_young:"Not 'Ir' — that's iridium. Think Latin.",
+    fact:"Iron makes up ~32% of Earth's mass. Earth's iron core creates the magnetic field protecting us from solar radiation." },
 
-  { pct: 18, q:"Which country has the most freshwater lakes?",
+  { q:"Which country has the most freshwater lakes?",
     a:["Russia","Brazil","Canada","Finland"], c:2,
-    fact:"Canada has approximately 879,800 lakes — about 60% of the world's total! Finland is nicknamed 'the land of a thousand lakes' but actually has over 187,000. Canada's lakes collectively hold about 20% of all the world's surface fresh water." },
+    hint_teen:"It's in North America, north of the USA 🍁",
+    hint_young:"It has almost 880,000 lakes — about 60% of all lakes on Earth",
+    fact:"Canada has ~879,800 lakes. Finland is called 'land of a thousand lakes' but actually has over 187,000." },
 
-  { pct: 16, q:"What is the 8th planet from the Sun?",
+  { q:"What is the 8th planet from the Sun?",
     a:["Saturn","Uranus","Neptune","Jupiter"], c:2,
-    fact:"Neptune was the first planet discovered through pure mathematics before it was ever seen. Astronomers noticed Uranus wasn't moving as predicted, calculated where a hidden planet must be pulling on it, then found Neptune within 1° of that exact spot in 1846." },
+    hint_teen:"It was discovered by math before anyone saw it 🔭",
+    hint_young:"The last planet — Pluto is no longer a planet!",
+    fact:"Neptune was found through mathematics — astronomers calculated where it must be, then found it within 1° of that spot in 1846." },
 
-  { pct: 14, q:"How many prime numbers are between 1 and 20?",
+  { q:"How many prime numbers are between 1 and 20?",
     a:["6","7","8","9"], c:2,
-    fact:"The 8 primes are: 2, 3, 5, 7, 11, 13, 17, 19. Primes are the 'atoms' of mathematics — every whole number is built by multiplying primes together. The largest known prime (as of 2024) has over 41 million digits!" },
+    hint_teen:"Start counting: 2, 3, 5, 7... 🔢",
+    hint_young:"A prime is only divisible by 1 and itself",
+    fact:"The 8 primes are: 2, 3, 5, 7, 11, 13, 17, 19. The largest known prime has over 41 million digits!" },
 
-  { pct: 12, q:"Which philosopher said 'I think, therefore I am'?",
+  { q:"Which philosopher said 'I think, therefore I am'?",
     a:["Voltaire","Rousseau","Descartes","Pascal"], c:2,
-    fact:"Descartes wrote 'Cogito, ergo sum' in 1637 while trying to find one thing he couldn't doubt. He also invented the coordinate system — x and y axes! That's why they're called 'Cartesian coordinates' to this day." },
+    hint_teen:"He also invented the x-y coordinate system 📐",
+    hint_young:"A French philosopher — 'Cogito, ergo sum' in Latin",
+    fact:"Descartes wrote this in 1637. He also invented coordinate axes — that's why they're called 'Cartesian coordinates'!" },
 
-  { pct: 10, q:"What is the atomic number of gold?",
+  { q:"What is the atomic number of gold?",
     a:["74","79","82","47"], c:1,
-    fact:"All gold on Earth was formed in ancient neutron star collisions billions of years ago and arrived via asteroid impacts. Gold is so chemically stable it never tarnishes — gold artifacts from ancient Egypt still shine perfectly today, over 3,000 years later." },
+    hint_teen:"It's on the periodic table between platinum and mercury ⚗️",
+    hint_young:"A number in the high 70s",
+    fact:"All gold on Earth arrived via asteroid impacts after neutron star collisions. Gold never tarnishes — ancient Egyptian gold still shines today." },
 
-  { pct:  9, q:"What is the capital of Bhutan?",
+  { q:"What is the capital of Bhutan?",
     a:["Thimphu","Kathmandu","Dhaka","Rangoon"], c:0,
-    fact:"Thimphu is one of the only capital cities in the world with no traffic lights — police officers direct traffic instead, as lights were considered undignified. Bhutan also measures national success by 'Gross National Happiness' rather than just GDP." },
+    hint_teen:"It's in the Himalayas, between India and China 🏔️",
+    hint_young:"Bhutan is a small kingdom in South Asia near Nepal",
+    fact:"Thimphu has no traffic lights — police direct traffic instead. Bhutan measures 'Gross National Happiness' instead of just GDP." },
 
-  { pct:  8, q:"A bat and ball cost $1.10 total. The bat costs $1 more. How much is the ball?",
+  { q:"A bat and ball cost $1.10 total. The bat costs $1 more. How much is the ball?",
     a:["$0.10","$0.05","$0.15","$0.20"], c:1,
-    fact:"Most people instinctively say $0.10 — that's wrong! If ball = $0.10, bat = $1.10, total = $1.20 ≠ $1.10. Correct algebra: ball = x, bat = x+1, so 2x+1 = 1.10, giving x = $0.05. This is a famous 'Cognitive Reflection Test' question that catches even smart people!" },
+    hint_teen:"The answer is NOT $0.10 — check the math carefully 🧠",
+    hint_young:"Set up the equation: if ball=x, bat=x+1, total=1.10",
+    fact:"Most say $0.10 but that's wrong! Ball=x, bat=x+1, total=2x+1=1.10, so x=$0.05. This is a famous cognitive reflection test." },
 
-  { pct:  7, q:"What is the chemical formula for sulfuric acid?",
+  { q:"What is the chemical formula for sulfuric acid?",
     a:["HCl","H₂SO₄","HNO₃","H₃PO₄"], c:1,
-    fact:"Sulfuric acid is the world's most-produced industrial chemical — about 200 million tons per year. It's used in fertilizers, car batteries, paper manufacturing, and metal processing. So widespread that its global production is often used as an indicator of a country's industrial health." },
+    hint_teen:"It contains Hydrogen, Sulfur, and Oxygen ⚗️",
+    hint_young:"Look for the formula with S in it",
+    fact:"Sulfuric acid is the world's most-produced industrial chemical — ~200 million tons per year. Used in fertilizers and car batteries." },
 
-  { pct:  6, q:"5 machines make 5 widgets in 5 min. How long for 100 machines to make 100 widgets?",
+  { q:"5 machines make 5 widgets in 5 min. How long for 100 machines to make 100 widgets?",
     a:["100 min","10 min","5 min","1 min"], c:2,
-    fact:"Each machine makes 1 widget in 5 minutes regardless of how many machines there are. 100 machines working simultaneously each produce 1 widget in 5 minutes = 100 widgets total in 5 minutes. Adding machines adds output — not speed!" },
+    hint_teen:"Each machine makes 1 widget in 5 minutes — scaling up doesn't change that ⚙️",
+    hint_young:"More machines = more widgets, not faster machines",
+    fact:"Adding machines scales output, not speed. 100 machines each take 5 min = 100 widgets in 5 min total." },
 
-  { pct:  5, q:"How many light-years away is Proxima Centauri, the nearest star to our Sun?",
+  { q:"How many light-years away is Proxima Centauri, the nearest star?",
     a:["4.2","8.6","2.1","12.4"], c:0,
-    fact:"At 4.2 light-years away, if you drove at 60 mph it would take 48 million years to reach Proxima Centauri. Even the fastest spacecraft ever built (NASA's Parker Solar Probe at 430,000 mph) would take over 6,500 years to get there." },
+    hint_teen:"Driving at 60 mph would take 48 million years 🚗",
+    hint_young:"It's just over 4 light-years — the closest star after our Sun",
+    fact:"At 4.2 light-years away, even the fastest spacecraft ever built would take over 6,500 years to reach it." },
 
-  { pct:  4, q:"What is 2 to the power of 10?",
+  { q:"What is 2 to the power of 10?",
     a:["512","1024","2048","256"], c:1,
-    fact:"2¹⁰ = 1,024. This is why a 'kilobyte' is 1,024 bytes, not 1,000. Each doubling explains why digital storage grows so dramatically: 2²⁰ = 1 million, 2³⁰ = 1 billion, 2⁴⁰ = 1 trillion. Exponential growth is shockingly fast!" },
+    hint_teen:"It's why a 'kilobyte' is slightly more than 1000 💻",
+    hint_young:"Double 2, nine more times: 2→4→8→16→...",
+    fact:"2¹⁰=1,024. This is why a 'kilobyte' is 1,024 bytes. 2³⁰ = over 1 billion!" },
 
-  { pct:  3, q:"Which mathematician proved Fermat's Last Theorem in 1995?",
+  { q:"Which mathematician proved Fermat's Last Theorem in 1995?",
     a:["Gauss","Euler","Andrew Wiles","Riemann"], c:2,
-    fact:"Fermat's Last Theorem sat unsolved for 358 years. Andrew Wiles secretly worked on it alone for 7 years, announced a proof in 1993 — found an error, fixed it in secret for another year, and finally published in 1995. He called the discovery 'the most important moment of my working life.'" },
+    hint_teen:"He worked on it secretly for 7 years 📚",
+    hint_young:"A British mathematician who solved a 358-year-old problem",
+    fact:"Andrew Wiles worked secretly for 7 years, announced a proof in 1993, found an error, fixed it, and published in 1995." },
 
-  { pct:  2, q:"What is the unit of electrical inductance?",
+  { q:"What is the unit of electrical inductance?",
     a:["Farad","Ohm","Henry","Tesla"], c:2,
-    fact:"The Henry (H) is named after Joseph Henry, who discovered electromagnetic induction independently of Faraday. Inductance powers transformers, electric motors, and radio tuners. Your phone's wireless charger uses inductive coupling to transfer electricity without any physical contact!" },
+    hint_teen:"Named after Joseph Henry, who discovered electromagnetic induction 🔌",
+    hint_young:"It's used in transformers and wireless chargers",
+    fact:"The Henry is named after Joseph Henry. Your phone's wireless charger uses inductive coupling to transfer power without contact!" },
 
-  { pct:  1, q:"What is the only even prime number?",
+  { q:"What is the only even prime number?",
     a:["0","2","4","6"], c:1,
-    fact:"2 is the only even prime because every other even number is divisible by 2 (giving more than 2 factors). This makes 2 uniquely special — it's even, yet prime. Mathematicians jokingly call it 'the oddest prime' even though it's even!" },
+    hint_teen:"All other even numbers can be divided by 2 🔢",
+    hint_young:"Every even number greater than this one is divisible by it",
+    fact:"2 is unique — it's even, yet prime. Mathematicians call it 'the oddest prime' even though it's even!" },
 
-  // Extra three to reach 50
-  { pct: 77, q:"What is the capital of Spain?",
+  { q:"What is the capital of Spain?",
     a:["Barcelona","Seville","Valencia","Madrid"], c:3,
-    fact:"Madrid sits at 667 meters above sea level, making it one of the highest capital cities in Europe. Its famous Prado Museum houses over 20,000 artworks. Barcelona, though not the capital, is home to 9 UNESCO World Heritage Sites — more per city than almost anywhere on Earth." },
+    hint_teen:"It's in the center of Spain, not on the coast 🇪🇸",
+    hint_young:"Not Barcelona — that's the most famous city but not the capital",
+    fact:"Madrid sits at 667m above sea level, one of the highest capitals in Europe. Its Prado Museum houses over 20,000 artworks." },
 
-  { pct: 62, q:"What year did Christopher Columbus reach the Americas?",
+  { q:"What year did Christopher Columbus reach the Americas?",
     a:["1482","1492","1502","1512"], c:1,
-    fact:"Columbus landed in the Bahamas on October 12, 1492 — but he died in 1506 still believing he'd reached Asia! The Americas were named after Amerigo Vespucci, who correctly argued it was a previously unknown continent. Columbus never got a continent named after him." },
+    hint_teen:"'In 1492, Columbus sailed the ocean blue' 🚢",
+    hint_young:"The year ends in 92, and it's in the 1400s",
+    fact:"Columbus landed in the Bahamas on Oct 12, 1492 but died believing he'd reached Asia. The Americas were named after Amerigo Vespucci." },
 
-  { pct: 47, q:"How many strings does a standard guitar have?",
+  { q:"How many strings does a standard guitar have?",
     a:["4","5","6","7"], c:2,
-    fact:"A standard guitar's 6 strings are tuned E-A-D-G-B-E from low to high. Bass guitars have 4 strings; 7-string guitars are popular in metal. The guitar evolved from ancient lutes and reached its modern form in the 1850s. There are now over 50 million guitar players worldwide." },
+    hint_teen:"Bass guitars have 4 — regular guitars have more 🎸",
+    hint_young:"It's an even number between 4 and 8",
+    fact:"A standard guitar's 6 strings are tuned E-A-D-G-B-E. There are over 50 million guitar players worldwide." },
+
+  { q:"What is the powerhouse of the cell?",
+    a:["Nucleus","Ribosome","Mitochondria","Chloroplast"], c:2,
+    hint_teen:"You've definitely heard this in school 🧫",
+    hint_young:"It produces ATP energy for the cell",
+    fact:"Mitochondria produce ATP through cellular respiration. They have their own DNA, suggesting they were once independent bacteria!" },
+
+  { q:"How many continents are there on Earth?",
+    a:["5","6","7","8"], c:2,
+    hint_teen:"Count them: Africa, Asia, Europe... 🌍",
+    hint_young:"Some models say 6, but the most common answer is...",
+    fact:"The 7 continents are Africa, Antarctica, Asia, Australia, Europe, North America, and South America — though some models combine Europe+Asia as Eurasia." },
+
+  { q:"What is the boiling point of water in Celsius?",
+    a:["90°C","95°C","100°C","110°C"], c:2,
+    hint_teen:"It's a perfectly round number 💧",
+    hint_young:"The Celsius scale was literally designed around this number",
+    fact:"Anders Celsius defined his scale so water freezes at 0° and boils at 100° at sea level. At altitude, water boils at lower temperatures!" },
+
+  { q:"How many planets are in our solar system?",
+    a:["7","8","9","10"], c:1,
+    hint_teen:"Pluto was demoted in 2006 🪐",
+    hint_young:"Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune",
+    fact:"Pluto was reclassified as a 'dwarf planet' in 2006. The 8 planets are Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune." },
+
+  { q:"What is the hardest natural substance on Earth?",
+    a:["Quartz","Titanium","Diamond","Sapphire"], c:2,
+    hint_teen:"It's a gemstone made of pure carbon 💎",
+    hint_young:"It's used in engagement rings — extremely rare and hard",
+    fact:"Diamond scores 10 on the Mohs hardness scale. It's made of carbon atoms arranged in a crystal lattice — the same element as graphite in pencils!" },
+
+  { q:"In which country were the first modern Olympics held?",
+    a:["Italy","France","Greece","England"], c:2,
+    hint_teen:"The ancient Olympics were also held there 🏛️",
+    hint_young:"Think ancient civilization — Athens",
+    fact:"The first modern Olympics were held in Athens, Greece in 1896. 14 nations and 241 athletes participated — all men." },
+
+  { q:"What does DNA stand for?",
+    a:["Dynamic Nucleic Acid","Deoxyribonucleic Acid","Double Nitrogen Atom","Digital Neural Array"], c:1,
+    hint_teen:"It contains your genetic blueprint 🧬",
+    hint_young:"It has the words 'deoxy', 'ribo', 'nucleic', 'acid' in it",
+    fact:"DNA was first described in 1953 by Watson and Crick. If you uncoiled all the DNA in your body it would stretch to the Sun and back 300 times!" },
+
+  { q:"Which gas makes up most of Earth's atmosphere?",
+    a:["Oxygen","Carbon Dioxide","Nitrogen","Argon"], c:2,
+    hint_teen:"It's NOT oxygen — that's only 21% 🌬️",
+    hint_young:"It makes up about 78% of the air we breathe",
+    fact:"Nitrogen makes up 78% of our atmosphere, oxygen 21%, and argon 1%. Despite being essential for life, we can't directly breathe nitrogen." },
+
+  { q:"How far is the Earth from the Sun in km (approximate)?",
+    a:["15 million","150 million","1.5 billion","15 billion"], c:1,
+    hint_teen:"Light takes 8 minutes to travel that distance ☀️",
+    hint_young:"It's about 150 million km — called '1 Astronomical Unit'",
+    fact:"Earth is ~150 million km from the Sun, defined as 1 Astronomical Unit (AU). This distance varies slightly as Earth orbits in an ellipse." },
+
+  { q:"What is the most spoken language in the world by native speakers?",
+    a:["English","Spanish","Hindi","Mandarin Chinese"], c:3,
+    hint_teen:"It's spoken in China, home to 1.4 billion people 🇨🇳",
+    hint_young:"Think about which country has the most people",
+    fact:"Mandarin has ~920 million native speakers. English has more total speakers when including second-language speakers, but Mandarin wins for native speakers." },
+
+  { q:"How many hearts does an octopus have?",
+    a:["1","2","3","4"], c:2,
+    hint_teen:"Two pump blood to the gills, one pumps to the body 🐙",
+    hint_young:"More than one! It's an odd number.",
+    fact:"Octopuses have 3 hearts and blue blood (from copper-based hemocyanin instead of iron-based hemoglobin like us)." },
+
+  { q:"What is the Pythagorean theorem?",
+    a:["a+b=c","a²+b²=c²","a×b=c²","2a+2b=c"], c:1,
+    hint_teen:"It's about right triangles — a² + b² = ? 📐",
+    hint_young:"The square of the hypotenuse equals the sum of squares of the other two sides",
+    fact:"Pythagoras proved this ~500 BC, but the Babylonians knew it 1,000 years earlier! It's used in architecture, navigation, and physics daily." },
+
+  { q:"Which element is liquid at room temperature (besides mercury)?",
+    a:["Chlorine","Bromine","Fluorine","Iodine"], c:1,
+    hint_teen:"It's a reddish-brown halogen ⚗️",
+    hint_young:"Only 2 elements are liquid at room temperature — mercury is one",
+    fact:"Bromine is one of only two elements that are liquid at room temperature (the other is mercury). It's a reddish-brown toxic liquid." },
+
+  { q:"What year was the first iPhone released?",
+    a:["2005","2006","2007","2008"], c:2,
+    hint_teen:"Steve Jobs announced it saying 'an iPod, a phone, and an internet communicator' 📱",
+    hint_young:"It was in the mid-2000s",
+    fact:"The first iPhone launched on June 29, 2007. Steve Jobs said it was 5 years ahead of anything else. It had no App Store — that came a year later." },
+
+  { q:"How many zeros are in one trillion?",
+    a:["9","10","11","12"], c:3,
+    hint_teen:"Million=6 zeros, Billion=9 zeros, Trillion=? 🔢",
+    hint_young:"Each step multiplies by 1000: million→billion→trillion",
+    fact:"1 trillion = 1,000,000,000,000 — twelve zeros. If you counted one number per second, it would take 31,688 years to count to a trillion!" },
 ];
 
 // ─── STATE ─────────────────────────────────────────────────────────────────
 let game = {
-  phase:    'lobby',
-  players:  [],
-  hostWs:   null,
-  currentQ: -1,
-  answers:  {},
-  timerEnd: null,
-  timerTO:  null,
+  phase:      'lobby',
+  players:    [],
+  hostWs:     null,
+  currentQ:   -1,
+  answers:    {},
+  timerEnd:   null,
+  timerTO:    null,
+  questions:  [],   // selected subset for this game
+  gameLength: 20,   // 20, 40, or 60
 };
 
-const COLORS = ['#FFD700','#00D4FF','#FF6B6B','#76FF7A'];
-const ICONS  = ['👑','🌟','🔥','💎'];
+const COLORS = ['#FFD700','#00D4FF','#FF6B6B','#76FF7A','#FF9F43','#A29BFE','#FD79A8','#00CEC9'];
 
 // ─── HELPERS ───────────────────────────────────────────────────────────────
 function send(ws, obj) {
@@ -239,35 +423,70 @@ function broadcast(obj, excludeWs = null) {
     game.hostWs.send(msg);
 }
 function broadcastLobby() {
-  broadcast({ type:'lobby', players: game.players.map(p=>({ id:p.id, name:p.name, color:p.color, icon:p.icon, score:p.score })) });
+  broadcast({ type:'lobby', players: game.players.map(p=>({
+    id:p.id, name:p.name, color:p.color, avatar:p.avatar, score:p.score, ageGroup:p.ageGroup
+  }))});
 }
 function publicScores() {
-  return game.players.map(p => ({ id:p.id, name:p.name, color:p.color, icon:p.icon, score:p.score }));
+  return game.players.map(p => ({
+    id:p.id, name:p.name, color:p.color, avatar:p.avatar, score:p.score, ageGroup:p.ageGroup
+  }));
+}
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
 }
 
 // ─── GAME LOGIC ─────────────────────────────────────────────────────────────
 function startQuestion() {
-  if (game.currentQ >= QUESTIONS.length - 1) { finishGame(); return; }
+  if (game.currentQ >= game.questions.length - 1) { finishGame(); return; }
   game.currentQ++;
   game.answers = {};
   game.phase   = 'question';
 
-  const q = QUESTIONS[game.currentQ];
+  const q = game.questions[game.currentQ];
   const timeLimit = 30;
   game.timerEnd = Date.now() + timeLimit * 1000;
   clearTimeout(game.timerTO);
   game.timerTO = setTimeout(doReveal, timeLimit * 1000);
 
-  broadcast({
+  // Send question to host (no hints)
+  send(game.hostWs, {
     type: 'question',
     index: game.currentQ,
-    total: QUESTIONS.length,
-    pct:   q.pct,
+    total: game.questions.length,
     q:     q.q,
     answers: q.a,
     timeLimit,
     timerEnd: game.timerEnd,
   });
+
+  // Send question to each player with their personalised hint
+  game.players.forEach(p => {
+    const hint = p.ageGroup === 'teen' ? q.hint_teen
+               : p.ageGroup === 'young' ? q.hint_young
+               : null;
+    send(p.ws, {
+      type: 'question',
+      index: game.currentQ,
+      total: game.questions.length,
+      q:     q.q,
+      answers: q.a,
+      timeLimit,
+      timerEnd: game.timerEnd,
+      hint,
+    });
+  });
+
+  // Every 5 questions (but not Q1) trigger a mid-game podium on host
+  const qNum = game.currentQ + 1;
+  if (qNum > 1 && qNum % 5 === 1) {
+    // After previous reveal host will have triggered this — handled via host-next
+  }
 }
 
 function submitAnswer(playerId, answerIndex) {
@@ -275,9 +494,9 @@ function submitAnswer(playerId, answerIndex) {
   if (game.answers[playerId] !== undefined) return;
 
   game.answers[playerId] = answerIndex;
-  const q = QUESTIONS[game.currentQ];
+  const q = game.questions[game.currentQ];
   const correct = answerIndex === q.c;
-  const pts = correct ? Math.round((101 - q.pct) * 10) : 0;
+  const pts = correct ? 100 : 0;
 
   const player = game.players.find(p => p.id === playerId);
   if (player) player.score += pts;
@@ -304,7 +523,11 @@ function doReveal() {
   game.phase = 'reveal';
   clearTimeout(game.timerTO);
 
-  const q = QUESTIONS[game.currentQ];
+  const q = game.questions[game.currentQ];
+  const qNum = game.currentQ + 1;
+  // Trigger mid-game podium after every 5th question
+  const showPodium = qNum % 5 === 0 && qNum < game.questions.length;
+
   broadcast({
     type:         'reveal',
     correctIndex: q.c,
@@ -312,7 +535,9 @@ function doReveal() {
     fact:         q.fact,
     answers:      game.answers,
     scores:       publicScores(),
-    isLast:       game.currentQ >= QUESTIONS.length - 1,
+    isLast:       game.currentQ >= game.questions.length - 1,
+    showPodium,
+    qNum,
   });
 }
 
@@ -328,20 +553,30 @@ try { QRCode = require('qrcode'); } catch(e) { QRCode = null; }
 
 const server = http.createServer((req, res) => {
   const rawUrl = req.url.split('?')[0];
-  const qs     = new URLSearchParams(req.url.includes('?') ? req.url.split('?')[1] : '');
+  const qs = new URLSearchParams(req.url.includes('?') ? req.url.split('?')[1] : '');
 
-  // QR code endpoint — generates PNG server-side, no internet needed
   if (rawUrl === '/qr.png') {
     const data = qs.get('d') || `http://${localIP}:${PORT}/player`;
-    if (!QRCode) {
-      res.writeHead(503); res.end('qrcode not installed');
-      return;
-    }
-    QRCode.toBuffer(data, { type:'png', width:220, margin:2 }, (err, buf) => {
+    if (!QRCode) { res.writeHead(503); res.end('qrcode not installed'); return; }
+    QRCode.toBuffer(data, { type:'png', width:260, margin:2 }, (err, buf) => {
       if (err) { res.writeHead(500); res.end('QR error'); return; }
       res.writeHead(200, { 'Content-Type':'image/png', 'Cache-Control':'no-store' });
       res.end(buf);
     });
+    return;
+  }
+
+  // Serve character avatar images
+  if (rawUrl.match(/^\/avatars\/character\d+\.(png|jpg|jpeg|webp)$/i)) {
+    const imgPath = path.join(__dirname, 'avatars', path.basename(rawUrl));
+    if (fs.existsSync(imgPath)) {
+      const ext = rawUrl.split('.').pop().toLowerCase();
+      const mime = ext === 'png' ? 'image/png' : ext === 'jpg' || ext === 'jpeg' ? 'image/jpeg' : 'image/webp';
+      res.writeHead(200, { 'Content-Type': mime });
+      fs.createReadStream(imgPath).pipe(res);
+    } else {
+      res.writeHead(404); res.end('Avatar not found');
+    }
     return;
   }
 
@@ -355,15 +590,12 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(fs.readFileSync(filePath));
   } else if (rawUrl === '/music') {
-    // Serve the suspense music file
     const musicPath = path.join(__dirname, 'suspensmusic.mp3');
     if (fs.existsSync(musicPath)) {
       const stat = fs.statSync(musicPath);
-      res.writeHead(200, { 'Content-Type': 'audio/mpeg', 'Content-Length': stat.size, 'Accept-Ranges': 'bytes' });
+      res.writeHead(200, { 'Content-Type':'audio/mpeg', 'Content-Length':stat.size, 'Accept-Ranges':'bytes' });
       fs.createReadStream(musicPath).pipe(res);
-    } else {
-      res.writeHead(404); res.end('Music file not found');
-    }
+    } else { res.writeHead(404); res.end('Music not found'); }
   } else {
     res.writeHead(404); res.end('Not found');
   }
@@ -379,31 +611,45 @@ wss.on('connection', (ws) => {
   ws.on('message', (raw) => {
     let msg; try { msg = JSON.parse(raw); } catch { return; }
     switch (msg.type) {
+
       case 'host-connect':
         isHost = true; game.hostWs = ws;
-        send(ws, { type:'host-ack', players: game.players.map(p=>({ id:p.id, name:p.name, color:p.color, icon:p.icon, score:p.score })), phase: game.phase });
+        send(ws, { type:'host-ack', players: publicScores(), phase: game.phase });
         break;
 
       case 'player-join': {
         const colorIdx = game.players.length % COLORS.length;
         myId = 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2,6);
-        const player = { id:myId, name:(msg.name||'Player').slice(0,16), color:COLORS[colorIdx], icon:ICONS[colorIdx], score:0, ws };
+        const player = {
+          id:       myId,
+          name:     (msg.name||'Player').slice(0,16),
+          color:    COLORS[colorIdx],
+          avatar:   msg.avatar || 'character1.png',
+          ageGroup: msg.ageGroup || 'adult',   // 'teen' | 'young' | 'adult'
+          score:    0,
+          ws,
+        };
         game.players.push(player);
-        send(ws, { type:'join-ack', id:myId, color:player.color, icon:player.icon, name:player.name });
+        send(ws, { type:'join-ack', id:myId, color:player.color, avatar:player.avatar, name:player.name, ageGroup:player.ageGroup });
         broadcastLobby();
         break;
       }
 
-      case 'host-start':
+      case 'host-start': {
         if (!isHost) break;
-        game.currentQ = -1;
+        const len = msg.gameLength || 20;
+        game.gameLength = len;
+        // Shuffle and pick questions
+        game.questions = shuffle(ALL_QUESTIONS).slice(0, len);
+        game.currentQ  = -1;
         game.players.forEach(p => p.score = 0);
         startQuestion();
         break;
+      }
 
       case 'host-next':
-        if (!isHost || game.phase !== 'reveal') break;
-        startQuestion();
+        if (!isHost) break;
+        if (game.phase === 'reveal' || game.phase === 'podium') startQuestion();
         break;
 
       case 'host-reveal':
@@ -419,6 +665,7 @@ wss.on('connection', (ws) => {
         if (!isHost) break;
         clearTimeout(game.timerTO);
         game.phase = 'lobby'; game.currentQ = -1; game.answers = {};
+        game.questions = [];
         game.players.forEach(p => p.score = 0);
         broadcastLobby();
         send(ws, { type:'reset-ack' });
@@ -433,31 +680,22 @@ wss.on('connection', (ws) => {
 });
 
 // ─── START ──────────────────────────────────────────────────────────────────
-// Detect local IP (for local play) or use Railway public URL (for online play)
 (function detectIP() {
-  // If running on Railway or similar, the public URL is in the env
-  if (process.env.RAILWAY_PUBLIC_DOMAIN) {
-    localIP = process.env.RAILWAY_PUBLIC_DOMAIN;
-    return;
-  }
+  if (process.env.RAILWAY_PUBLIC_DOMAIN) { localIP = process.env.RAILWAY_PUBLIC_DOMAIN; return; }
   const { networkInterfaces } = require('os');
   const nets = networkInterfaces();
-  for (const name of Object.keys(nets)) {
-    for (const net of nets[name]) {
+  for (const name of Object.keys(nets))
+    for (const net of nets[name])
       if (net.family === 'IPv4' && !net.internal) { localIP = net.address; return; }
-    }
-  }
 })();
 
 server.listen(PORT, '0.0.0.0', () => {
   const isOnline = !!process.env.RAILWAY_PUBLIC_DOMAIN;
-  const baseUrl = isOnline
-    ? `https://${localIP}`
-    : `http://${localIP}:${PORT}`;
+  const baseUrl  = isOnline ? `https://${localIP}` : `http://${localIP}:${PORT}`;
   console.log('\n╔══════════════════════════════════════════╗');
   console.log('║       100% LOGIQUE — Game Server         ║');
   console.log('╠══════════════════════════════════════════╣');
-  console.log(`║  Host (iPad)  →  ${baseUrl}          ║`);
-  console.log(`║  Players      →  ${baseUrl}/player   ║`);
+  console.log(`║  Host  →  ${baseUrl}             ║`);
+  console.log(`║  Play  →  ${baseUrl}/player      ║`);
   console.log('╚══════════════════════════════════════════╝\n');
 });
