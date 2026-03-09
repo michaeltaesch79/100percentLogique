@@ -566,8 +566,8 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Serve character avatar images
-  if (rawUrl.match(/^\/avatars\/character\d+\.(png|jpg|jpeg|webp)$/i)) {
+  // Serve avatar images
+  if (rawUrl.match(/^\/avatars\/[^/]+\.(png|jpg|jpeg|webp)$/i)) {
     const imgPath = path.join(__dirname, 'avatars', path.basename(rawUrl));
     if (fs.existsSync(imgPath)) {
       const ext = rawUrl.split('.').pop().toLowerCase();
@@ -624,7 +624,7 @@ wss.on('connection', (ws) => {
           id:       myId,
           name:     (msg.name||'Player').slice(0,16),
           color:    COLORS[colorIdx],
-          avatar:   msg.avatar || 'character1.png',
+          avatar:   msg.avatar || 'Amelia.png',
           ageGroup: msg.ageGroup || 'adult',   // 'teen' | 'young' | 'adult'
           score:    0,
           ws,

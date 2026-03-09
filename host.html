@@ -335,15 +335,16 @@ ws.onmessage = (e) => {
 };
 
 /* ── AVATAR HELPER ── */
+const AVATARS=['Amelia.png','Cleopatra.png','Einstein.png','Joan of Arc.png','MLK.png','Shakespear.png'];
 const FALLBACK=['🦊','🐺','🐸','🦁','🐯','🐻'];
 function avatarEl(av, size=28){
   const wrap=document.createElement('div');
   wrap.style.cssText=`width:${size}px;height:${size}px;border-radius:50%;overflow:hidden;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:${size*0.6}px;flex-shrink:0;`;
   const img=new Image();
-  const idx=parseInt((av||'character1').replace(/\D/g,''))-1;
+  const idx=AVATARS.indexOf(av||AVATARS[0]);
   img.onload=()=>{ img.style.cssText='width:100%;height:100%;object-fit:cover;'; wrap.innerHTML=''; wrap.appendChild(img); };
   img.onerror=()=>{ wrap.textContent=FALLBACK[idx>=0?idx:0]; };
-  img.src=`/avatars/${av||'character1.png'}`;
+  img.src=`/avatars/${av||AVATARS[0]}`;
   wrap.appendChild(img);
   return wrap;
 }
@@ -512,10 +513,10 @@ function showFinal(scores){
     const avWrap=document.createElement('div');
     avWrap.className='pod-avatar'; avWrap.style.borderColor=colors[ri]||'#888';
     const img=new Image();
-    const idx=parseInt((p.avatar||'character1').replace(/\D/g,''))-1;
+    const idx=AVATARS.indexOf(p.avatar||AVATARS[0]);
     img.onload=()=>{ img.style.cssText='width:100%;height:100%;object-fit:cover;'; avWrap.innerHTML=''; avWrap.appendChild(img); };
     img.onerror=()=>{ avWrap.textContent=FALLBACK[idx>=0?idx:0]; };
-    img.src=`/avatars/${p.avatar||'character1.png'}`;
+    img.src=`/avatars/${p.avatar||AVATARS[0]}`;
     avWrap.appendChild(img);
     const name=document.createElement('div'); name.className='pod-pname'; name.textContent=p.name;
     const sc=document.createElement('div'); sc.className='pod-pscore'; sc.style.color=colors[ri]||'#888'; sc.textContent=p.score;
