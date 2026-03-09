@@ -693,7 +693,7 @@ server.listen(PORT, '0.0.0.0', () => {
   const isOnline = !!process.env.RAILWAY_PUBLIC_DOMAIN;
   const baseUrl  = isOnline ? `https://${localIP}` : `http://${localIP}:${PORT}`;
   console.log('\n╔══════════════════════════════════════════╗');
-  console.log('║       100% LOGIQUE — Game Server         ║');
+  console.log('║       100% LOGIQUE — Game Server  X      ║');
   console.log('╠══════════════════════════════════════════╣');
   console.log(`║  Host  →  ${baseUrl}             ║`);
   console.log(`║  Play  →  ${baseUrl}/player      ║`);
