@@ -2249,5 +2249,447 @@
     "hint_teen": "$1,000,000$.",
     "hint_young": "A million has six zeros.",
     "fact": "The numerical representation of one million has 6 zeros."
+  },
+  {
+    "q": "Which of these is the odd one out?\n[ 135 ] [ 246 ] [ 579 ] [ 791 ]",
+    "a": ["135", "246", "579", "791"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Check if the numbers are odd or even.",
+    "hint_young": "Which one uses even numbers (2, 4, 6)?",
+    "fact": "135, 579, and 791 are all made of odd digits. 246 is all even."
+  },
+  {
+    "q": "How many 'legs' are in this group: 🪑 🪑 🐈?",
+    "a": ["8", "10", "12", "14"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "Chair (4) + Chair (4) + Cat (4).",
+    "hint_young": "4 + 4 + 4 = ?",
+    "fact": "Each object/animal has 4 legs."
+  },
+  {
+    "q": "What is the next number in this simple pattern?  \n5, 10, 15, 20, ?",
+    "a": ["21", "25", "30", "50"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "We are counting by fives.",
+    "hint_young": "Add 5 to 20.",
+    "fact": "Arithmetic progression with a common difference of 5."
+  },
+  {
+    "q": "Which shape is missing?  \n🔴 🟦 🔴 🟦 ?",
+    "a": ["🔴", "🟦", "🟡", "🟢"],
+    "c": 0,
+    "difficulty": 1,
+    "hint_teen": "The colors are alternating.",
+    "hint_young": "Red, Blue, Red, Blue...",
+    "fact": "Simple ABAB repeating pattern."
+  },
+  {
+    "q": "How many '1's do you see here?  \n1 0 1 1 0",
+    "a": ["2", "3", "4", "5"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Count them from left to right.",
+    "hint_young": "One, two, three...",
+    "fact": "Visual counting."
+  },
+  {
+    "q": "Which of these is the largest number?\n[ 19 ] [ 91 ] [ 11 ] [ 99 ]",
+    "a": ["19", "91", "11", "99"],
+    "c": 3,
+    "difficulty": 1,
+    "hint_teen": "Look for the highest value.",
+    "hint_young": "Which one is the most?",
+    "fact": "Basic numerical comparison."
+  },
+  {
+    "q": "How many colors are in a standard 'Stop' sign?",
+    "a": ["1", "2", "3", "4"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Think of the background and the letters.",
+    "hint_young": "Red and White.",
+    "fact": "A standard stop sign is red with white lettering/border."
+  },
+  {
+    "q": "Which of these keys is used to make a capital letter?",
+    "a": ["Alt", "Shift", "Ctrl", "Tab"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "You hold this and a letter at the same time.",
+    "hint_young": "The key with an upward arrow.",
+    "fact": "The Shift key modifies letter casing."
+  },
+  {
+    "q": "What color do you get if you mix Red and Blue?",
+    "a": ["Green", "Purple", "Orange", "Pink"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "It's a secondary color.",
+    "hint_young": "Red + Blue = ?",
+    "fact": "Subtractive color mixing."
+  },
+  {
+    "q": "How many 'faces' are visible on a standard coin?",
+    "a": ["1", "2", "3", "4"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Heads or Tails.",
+    "hint_young": "Front and back.",
+    "fact": "Coins have two sides/faces."
+  },
+  {
+    "q": "If 'A' is 1 and 'B' is 2, what is 'D'?",
+    "a": ["3", "4", "5", "6"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Count the position in the alphabet.",
+    "hint_young": "A, B, C, ...",
+    "fact": "Alphabetical indexing."
+  },
+  {
+    "q": "Which tool is used to see stars clearly?",
+    "a": ["Microscope", "Telescope", "Glasses", "Mirror"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "'Tele' means far.",
+    "hint_young": "You look at the night sky through this.",
+    "fact": "Optical instrument for distant objects."
+  },
+  {
+    "q": "How many 'wheels' does a tricycle have?",
+    "a": ["1", "2", "3", "4"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "'Tri' means three.",
+    "hint_young": "One in front, two in back.",
+    "fact": "Definition of a tricycle."
+  },
+  {
+    "q": "What comes next: Morning, Afternoon, ?",
+    "a": ["Midnight", "Evening", "Noon", "Dawn"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "It's the time before you sleep.",
+    "hint_young": "When the sun goes down.",
+    "fact": "Temporal progression of a day."
+  },
+  {
+    "q": "Which of these numbers is even?\n[ 7 ] [ 13 ] [ 22 ] [ 31 ]",
+    "a": ["7", "13", "22", "31"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "It can be divided by 2.",
+    "hint_young": "Ends in 0, 2, 4, 6, or 8.",
+    "fact": "Parity of integers."
+  },
+  {
+    "q": "Which 'hand' on a clock moves the fastest?",
+    "a": ["Hour", "Minute", "Second", "They are equal"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "The one that counts every single second.",
+    "hint_young": "The skinny one that moves a lot.",
+    "fact": "Clock hand angular velocity."
+  },
+  {
+    "q": "How many sides does a rectangle have?",
+    "a": ["3", "4", "5", "6"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Two long, two short.",
+    "hint_young": "Count them: 1, 2, 3, 4.",
+    "fact": "Geometry basics."
+  },
+  {
+    "q": "Which of these is not a season?",
+    "a": ["Summer", "Autumn", "January", "Winter"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "One is a month, not a whole season.",
+    "hint_young": "Is January a season?",
+    "fact": "Calendrical categorization."
+  },
+  {
+    "q": "What is the opposite of 'Left'?",
+    "a": ["Up", "Right", "Down", "Forward"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "It's the other hand.",
+    "hint_young": "Turn the other way.",
+    "fact": "Directional antonyms."
+  },
+  {
+    "q": "Which letter is missing from the middle? \n X _ X",
+    "a": ["X", "O", "Z", "A"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "Think of Tic-Tac-Toe.",
+    "hint_young": "Hug, Kiss, Hug...",
+    "fact": "Common notation for XOX."
+  },
+  {
+    "q": "If you have 5 candies and eat 3, how many are left?",
+    "a": ["1", "2", "3", "8"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "5 minus 3.",
+    "hint_young": "5, take away 3.",
+    "fact": "Basic subtraction."
+  },
+  {
+    "q": "Which of these is used to 'click' on a computer?",
+    "a": ["Keyboard", "Mouse", "Monitor", "Printer"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "It's the hand-held pointer.",
+    "hint_young": "It squeaks... not really, but it's named after an animal.",
+    "fact": "Input device terminology."
+  },
+  {
+    "q": "How many 'zeros' are in the number 1,000?",
+    "a": ["1", "2", "3", "4"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Count them in 'One Thousand'.",
+    "hint_young": "1-0-0-0.",
+    "fact": "Numeric representation."
+  },
+  {
+    "q": "What is the next letter? \n A, C, E, ?",
+    "a": ["F", "G", "H", "I"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "We are skipping one letter each time.",
+    "hint_young": "A (skip B) C (skip D) E (skip F) ...",
+    "fact": "Skip-counting alphabet."
+  },
+  {
+    "q": "Which shape comes next? \n ⚪ 🟦 ⚪ 🟦 ?",
+    "a": ["⚪", "🟦", "🔺", "⭐"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "Circle, Square, Circle, Square...",
+    "hint_young": "What was the first shape?",
+    "fact": "Pattern repetition."
+  },
+  {
+    "q": "Which of these is the odd one out?\n[ DOG ] [ CAT ] [ BIRD ] [ CHAIR ]",
+    "a": ["DOG", "CAT", "BIRD", "CHAIR"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "Three are living things.",
+    "hint_young": "Which one is furniture?",
+    "fact": "Category grouping."
+  },
+  {
+    "q": "In the word 'APPLE', what is the 3rd letter?",
+    "a": ["A", "P", "L", "E"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "A-P-P...",
+    "hint_young": "Count 1, 2, 3.",
+    "fact": "Sequential string position."
+  },
+  {
+    "q": "How many hours are in half a day?",
+    "a": ["6", "12", "18", "24"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "24 divided by 2.",
+    "hint_young": "A whole day is 24 hours.",
+    "fact": "Time division."
+  },
+  {
+    "q": "If you are in a line and you are 3rd from the front and 3rd from the back, how many people are in the line?",
+    "a": ["4", "5", "6", "7"],
+    "c": 1,
+    "difficulty": 4,
+    "hint_teen": "Don't count yourself twice.",
+    "hint_young": "Two people in front, YOU, and two people behind.",
+    "fact": "Ordinal logic problem."
+  },
+  {
+    "q": "What number is missing? \n 1, 2, 4, 8, ?",
+    "a": ["10", "12", "16", "20"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "Each number is doubled.",
+    "hint_young": "8 + 8 = ?",
+    "fact": "Exponential sequence ($2^n$)."
+  },
+  {
+    "q": "Which of these can fly but has no engine?",
+    "a": ["Plane", "Helicopter", "Bird", "Rocket"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "It's a biological flyer.",
+    "hint_young": "It has feathers.",
+    "fact": "Natural vs. mechanical flight."
+  },
+  {
+    "q": "How many letters are in 'TEN'?",
+    "a": ["3", "10", "4", "2"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "Count the characters: T-E-N.",
+    "hint_young": "1, 2, 3.",
+    "fact": "Word length observation."
+  },
+  {
+    "q": "Which month comes after July?",
+    "a": ["June", "August", "September", "May"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "Think of the summer months.",
+    "hint_young": "July, ...",
+    "fact": "Calendrical sequence."
+  },
+  {
+    "q": "What is the sum of the digits in '123'?",
+    "a": ["3", "5", "6", "123"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "1 + 2 + 3 = ?",
+    "hint_young": "Add the numbers together.",
+    "fact": "Digit summation."
+  },
+  {
+    "q": "Which of these is the odd one out?\n[ M ] [ W ] [ E ] [ 3 ]",
+    "a": ["M", "W", "E", "3"],
+    "c": 3,
+    "difficulty": 4,
+    "hint_teen": "Three are letters; one is a number.",
+    "hint_young": "Which one isn't from the alphabet?",
+    "fact": "Character type classification (though all are visual rotations of a similar shape)."
+  },
+  {
+    "q": "How many 'legs' do two spiders have in total?",
+    "a": ["8", "12", "16", "20"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "One spider has 8 legs.",
+    "hint_young": "8 + 8 = ?",
+    "fact": "Multiplication by 8."
+  },
+  {
+    "q": "What color is a banana before it is ripe?",
+    "a": ["Yellow", "Green", "Brown", "Red"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "Think of the color it starts as.",
+    "hint_young": "It turns yellow later.",
+    "fact": "Fruit ripening process."
+  },
+  {
+    "q": "Which direction does the sun set?",
+    "a": ["North", "South", "East", "West"],
+    "c": 3,
+    "difficulty": 3,
+    "hint_teen": "It rises in the East.",
+    "hint_young": "Opposite of where it comes up.",
+    "fact": "Celestial navigation."
+  },
+  {
+    "q": "How many months in a year have exactly 30 days?",
+    "a": ["4", "5", "7", "11"],
+    "c": 0,
+    "difficulty": 5,
+    "hint_teen": "April, June, September, November.",
+    "hint_young": "Remember the '30 days hath September' poem.",
+    "fact": "Specific calendrical months: April, June, Sept, Nov (4 total). Others have 31 or 28/29."
+  },
+  {
+    "q": "What is the center letter in 'LOGIC'?",
+    "a": ["L", "O", "G", "I"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "L-O-(?)-I-C.",
+    "hint_young": "The middle one.",
+    "fact": "String indexing."
+  },
+  {
+    "q": "If 0 is a circle, what is 1?",
+    "a": ["Square", "Triangle", "Line", "Point"],
+    "c": 2,
+    "difficulty": 4,
+    "hint_teen": "Think of the visual shape of the digit.",
+    "hint_young": "What does the number 1 look like?",
+    "fact": "Visual symbol association."
+  },
+  {
+    "q": "How many 'p's are in 'pepper'?",
+    "a": ["1", "2", "3", "4"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "P-e-p-p-e-r.",
+    "hint_young": "Count them carefully.",
+    "fact": "Character counting."
+  },
+  {
+    "q": "Which key is used to delete characters to the right?",
+    "a": ["Backspace", "Delete", "Enter", "End"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Backspace goes left; this one goes right.",
+    "hint_young": "It's above the arrow keys.",
+    "fact": "Keyboard input logic."
+  },
+  {
+    "q": "How many sides does a hexagon have?",
+    "a": ["5", "6", "7", "8"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "'Hex' means six.",
+    "hint_young": "Count the sides of a honeycomb cell.",
+    "fact": "Geometric definitions."
+  },
+  {
+    "q": "What is 2 + 2 x 2?",
+    "a": ["4", "6", "8", "10"],
+    "c": 1,
+    "difficulty": 5,
+    "hint_teen": "Remember the order of operations (PEMDAS/BODMAS). Multiply first.",
+    "hint_young": "Do 2 x 2 first, then add 2.",
+    "fact": "Mathematical precedence: Multiplication before Addition."
+  },
+  {
+    "q": "If you are 10th in a line of 20, how many are behind you?",
+    "a": ["9", "10", "11", "20"],
+    "c": 1,
+    "difficulty": 4,
+    "hint_teen": "20 minus 10.",
+    "hint_young": "Total is 20, you are number 10.",
+    "fact": "Ordinal calculation."
+  },
+  {
+    "q": "Which shape does not have corners?",
+    "a": ["Square", "Triangle", "Hexagon", "Circle"],
+    "c": 3,
+    "difficulty": 1,
+    "hint_teen": "It's perfectly round.",
+    "hint_young": "It rolls.",
+    "fact": "Smooth manifolds vs. polygons."
+  },
+  {
+    "q": "How many vowels are in 'HELLO'?",
+    "a": ["1", "2", "3", "4"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "E and O.",
+    "hint_young": "A, E, I, O, U.",
+    "fact": "Phonetic counting."
+  },
+  {
+    "q": "What is the value of a 'baker's dozen'?",
+    "a": ["10", "12", "13", "14"],
+    "c": 2,
+    "difficulty": 5,
+    "hint_teen": "It's one more than a regular dozen.",
+    "hint_young": "A regular dozen is 12.",
+    "fact": "Historical unit of measure for bread."
   }
+]
 ]
