@@ -34,12 +34,17 @@ body { font-family:'Nunito',sans-serif; background:var(--blue); color:var(--whit
 .avatar-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
 .av-btn { background:rgba(255,255,255,.07); border:2px solid transparent;
   border-radius:12px; aspect-ratio:1; cursor:pointer; overflow:hidden;
-  transition:all .2s; display:flex; align-items:center; justify-content:center; }
-.av-btn:hover { border-color:rgba(255,215,0,.5); transform:scale(1.05); }
+  transition:all .2s; display:flex; align-items:center; justify-content:center;
+  padding:0; position:relative; }
+.av-btn:hover:not(:disabled) { border-color:rgba(255,215,0,.5); transform:scale(1.05); }
 .av-btn.selected { border-color:var(--gold); background:rgba(255,215,0,.15);
   box-shadow:0 0 12px rgba(255,215,0,.4); }
-.av-btn img { width:100%; height:100%; object-fit:cover; border-radius:10px; }
+.av-btn img { width:100%; height:100%; object-fit:cover; object-position:top center; display:block; }
 .av-btn .av-emoji { font-size:28px; line-height:1; }
+.av-btn:disabled { opacity:0.3; cursor:not-allowed; transform:none; }
+.av-btn:disabled::after { content:'✓'; position:absolute; inset:0; display:flex;
+  align-items:center; justify-content:center; font-size:22px;
+  background:rgba(0,0,0,.5); border-radius:10px; }
 
 /* Age group */
 .age-group { display:flex; gap:8px; }
@@ -280,6 +285,21 @@ let selectedAvatar = AVATARS[0];
 let selectedAge    = 'adult';
 let selectedLength = 20;
 
+function updateAvatarAvailability(takenAvatars) {
+  document.querySelectorAll('.av-btn').forEach((btn, i) => {
+    const av = AVATARS[i];
+    const isTaken = takenAvatars.includes(av);
+    btn.disabled = isTaken;
+    if (isTaken && selectedAvatar === av) {
+      const firstFree = AVATARS.findIndex(a => !takenAvatars.includes(a));
+      if (firstFree >= 0) {
+        selectedAvatar = AVATARS[firstFree];
+        document.querySelectorAll('.av-btn').forEach((b, j) => b.classList.toggle('selected', j === firstFree));
+      }
+    }
+  });
+}
+
 function buildAvatarGrid() {
   const grid = document.getElementById('avatarGrid');
   AVATARS.forEach((av, i) => {
@@ -374,7 +394,11 @@ ws.onmessage = (e) => {
       document.getElementById('myAgeBadge').textContent = ageLabels[msg.ageGroup] || 'Adult';
       showPage('lobbyPage');
       break;
+    case 'avatar-info':
+      updateAvatarAvailability(msg.takenAvatars || []);
+      break;
     case 'lobby':
+      if (msg.takenAvatars) updateAvatarAvailability(msg.takenAvatars);
       if (myId) showPage('lobbyPage');
       break;
     case 'question':

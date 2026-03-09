@@ -425,7 +425,7 @@ function broadcast(obj, excludeWs = null) {
 function broadcastLobby() {
   broadcast({ type:'lobby', players: game.players.map(p=>({
     id:p.id, name:p.name, color:p.color, avatar:p.avatar, score:p.score, ageGroup:p.ageGroup
-  }))});
+  })), takenAvatars: game.players.map(p => p.avatar) });
 }
 function publicScores() {
   return game.players.map(p => ({
@@ -568,7 +568,7 @@ const server = http.createServer((req, res) => {
 
   // Serve avatar images
   if (rawUrl.match(/^\/avatars\/[^/]+\.(png|jpg|jpeg|webp)$/i)) {
-    const imgPath = path.join(__dirname, 'avatars', path.basename(rawUrl));
+    const imgPath = path.join(__dirname, 'avatars', path.basename(decodeURIComponent(rawUrl)));
     if (fs.existsSync(imgPath)) {
       const ext = rawUrl.split('.').pop().toLowerCase();
       const mime = ext === 'png' ? 'image/png' : ext === 'jpg' || ext === 'jpeg' ? 'image/jpeg' : 'image/webp';
@@ -604,9 +604,13 @@ const server = http.createServer((req, res) => {
 // ─── WEBSOCKET ──────────────────────────────────────────────────────────────
 const wss = new WebSocketServer({ server });
 
+const ALL_AVATARS = ['Amelia.png','Cleopatra.png','Einstein.png','Joan of Arc.png','MLK.png','Shakespear.png'];
+
 wss.on('connection', (ws) => {
   let myId   = null;
   let isHost = false;
+  // Immediately tell the new client which avatars are taken
+  send(ws, { type:'avatar-info', takenAvatars: game.players.map(p => p.avatar) });
 
   ws.on('message', (raw) => {
     let msg; try { msg = JSON.parse(raw); } catch { return; }
@@ -620,11 +624,16 @@ wss.on('connection', (ws) => {
       case 'player-join': {
         const colorIdx = game.players.length % COLORS.length;
         myId = 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2,6);
+        const takenAvatars = game.players.map(p => p.avatar);
+        const requested = msg.avatar || 'Amelia.png';
+        const chosenAvatar = !takenAvatars.includes(requested)
+          ? requested
+          : ALL_AVATARS.find(a => !takenAvatars.includes(a)) || requested;
         const player = {
           id:       myId,
           name:     (msg.name||'Player').slice(0,16),
           color:    COLORS[colorIdx],
-          avatar:   msg.avatar || 'Amelia.png',
+          avatar:   chosenAvatar,
           ageGroup: msg.ageGroup || 'adult',   // 'teen' | 'young' | 'adult'
           score:    0,
           ws,
