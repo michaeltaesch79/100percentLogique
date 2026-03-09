@@ -8,9 +8,11 @@ const { WebSocketServer, WebSocket } = require('ws');
 
 const PORT = process.env.PORT || 3000;
 
-// ─── QUESTIONS (60 total, sorted easy→hard, each with hints + fact) ──────────
-const ALL_QUESTIONS = [
-  { q:"What color is the sky on a clear day?",
+// ─── QUESTIONS (loaded from questions.json) ──────────────────────────────────
+const ALL_QUESTIONS = JSON.parse(fs.readFileSync(path.join(__dirname, 'questions.json'), 'utf8'))
+  .filter(q => !q.disabled);
+
+const _placeholder = { q:"What color is the sky on a clear day?",
     a:["Red","Blue","Green","Yellow"], c:1,
     hint_teen:"It's the same color as the ocean on a sunny day 🌊",
     hint_young:"Think about what color you see when you look up outside",

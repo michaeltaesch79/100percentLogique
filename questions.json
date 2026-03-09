@@ -1,0 +1,492 @@
+[
+  {
+    "q": "What color is the sky on a clear day?",
+    "a": ["Red","Blue","Green","Yellow"], "c": 1,
+    "hint_teen": "It's the same color as the ocean on a sunny day 🌊",
+    "hint_young": "Think about what color you see when you look up outside",
+    "fact": "The sky looks blue because of Rayleigh scattering — air molecules scatter short blue light waves much more than red ones."
+  },
+  {
+    "q": "How many legs does a spider have?",
+    "a": ["4","6","8","10"], "c": 2,
+    "hint_teen": "More than a cat, less than a centipede 🕷️",
+    "hint_young": "Insects have 6 — spiders have more than that",
+    "fact": "Spiders have 8 legs plus 2 pedipalps near their mouth. Insects only have 6 legs, which is how you tell them apart."
+  },
+  {
+    "q": "What is 10 × 10?",
+    "a": ["10","100","1000","110"], "c": 1,
+    "hint_teen": "Count how many squares are on a chessboard row, then multiply 🎲",
+    "hint_young": "Ten groups of ten",
+    "fact": "'Percent' literally means 'per hundred' in Latin — that's why 100% means everything!"
+  },
+  {
+    "q": "What is the capital of France?",
+    "a": ["Berlin","Rome","Paris","Madrid"], "c": 2,
+    "hint_teen": "Home of the Eiffel Tower 🗼",
+    "hint_young": "The city known as 'The City of Light'",
+    "fact": "Paris has been the capital of France for over 1,000 years and was one of the first cities to use gas street lighting in the 1820s."
+  },
+  {
+    "q": "How many sides does a triangle have?",
+    "a": ["2","3","4","5"], "c": 1,
+    "hint_teen": "'Tri' means three in Latin 🔺",
+    "hint_young": "Think about the prefix 'tri-' like tricycle",
+    "fact": "The triangle is the strongest shape in engineering — that's why bridges and roof trusses use triangular frames."
+  },
+  {
+    "q": "Which planet is closest to the Sun?",
+    "a": ["Venus","Earth","Mars","Mercury"], "c": 3,
+    "hint_teen": "It's named after the Roman messenger god ☿",
+    "hint_young": "It's the smallest planet in our solar system",
+    "fact": "Despite being closest to the Sun, Mercury is NOT the hottest planet — Venus is, because its thick atmosphere traps heat."
+  },
+  {
+    "q": "What is the largest ocean on Earth?",
+    "a": ["Atlantic","Indian","Arctic","Pacific"], "c": 3,
+    "hint_teen": "It borders both Asia and the Americas 🌏",
+    "hint_young": "Its name means 'peaceful' in Latin",
+    "fact": "The Pacific Ocean covers more area than all of Earth's land combined! Magellan named it 'Pacific' meaning peaceful in 1520."
+  },
+  {
+    "q": "How many colors are in a rainbow?",
+    "a": ["5","6","7","8"], "c": 2,
+    "hint_teen": "Think ROY G BIV 🌈",
+    "hint_young": "Same as the number of notes in a musical scale",
+    "fact": "Isaac Newton chose 7 rainbow colors to match the 7 notes in a musical scale — Red, Orange, Yellow, Green, Blue, Indigo, Violet."
+  },
+  {
+    "q": "What gas do plants absorb during photosynthesis?",
+    "a": ["Oxygen","Nitrogen","CO₂","Helium"], "c": 2,
+    "hint_teen": "It's the gas humans breathe OUT 🌿",
+    "hint_young": "Plants take in what we breathe out",
+    "fact": "Plants absorb CO₂ and release oxygen. A single large tree absorbs up to 48 lbs of CO₂ per year."
+  },
+  {
+    "q": "How many days are in a non-leap year?",
+    "a": ["360","364","365","366"], "c": 2,
+    "hint_teen": "Count the days from one birthday to the next 🎂",
+    "hint_young": "It's between 364 and 366",
+    "fact": "A year is actually 365.2422 days long, which is why we have leap years every 4 years to compensate."
+  },
+  {
+    "q": "What is the chemical symbol for water?",
+    "a": ["CO₂","H₂O","NaCl","O₂"], "c": 1,
+    "hint_teen": "2 Hydrogen + 1 Oxygen 💧",
+    "hint_young": "H stands for Hydrogen, O for Oxygen",
+    "fact": "Water is the only natural substance that exists as solid, liquid, and gas at normal Earth temperatures, and it expands when it freezes."
+  },
+  {
+    "q": "Which animal is the largest on Earth?",
+    "a": ["African elephant","Whale shark","Blue whale","Giraffe"], "c": 2,
+    "hint_teen": "It lives in the ocean and can be 100 feet long 🐳",
+    "hint_young": "It's a marine mammal, not a fish",
+    "fact": "A blue whale can weigh 200 tons — heavier than any dinosaur ever found! Its heart is the size of a small car."
+  },
+  {
+    "q": "How many hours are in a week?",
+    "a": ["124","148","168","192"], "c": 2,
+    "hint_teen": "7 days × 24 hours 📅",
+    "hint_young": "Multiply days in a week by hours in a day",
+    "fact": "The 7-day week has been used for 4,000 years, with days named after the 7 celestial bodies visible to the naked eye."
+  },
+  {
+    "q": "Who painted the Mona Lisa?",
+    "a": ["Michelangelo","Raphael","Botticelli","Leonardo da Vinci"], "c": 3,
+    "hint_teen": "Same person who designed flying machines in the 1400s ✈️",
+    "hint_young": "An Italian Renaissance genius — also invented the helicopter concept",
+    "fact": "Leonardo worked on the Mona Lisa for 4+ years on poplar wood panel. The subject famously has no visible eyebrows."
+  },
+  {
+    "q": "What is the longest bone in the human body?",
+    "a": ["Humerus","Radius","Tibia","Femur"], "c": 3,
+    "hint_teen": "It's in your leg — the thigh bone 🦴",
+    "hint_young": "You use it when you kick a ball",
+    "fact": "The femur is about 1/4 of your total height. The smallest bone is the stirrup in your ear at just 3mm long!"
+  },
+  {
+    "q": "In what year did World War II end?",
+    "a": ["1943","1944","1945","1946"], "c": 2,
+    "hint_teen": "The atomic bombs were dropped that same year 💣",
+    "hint_young": "Germany surrendered in May, Japan in September of that year",
+    "fact": "WWII ended in 1945 with ~70–85 million deaths — roughly 3% of the world population at the time."
+  },
+  {
+    "q": "What is the square root of 144?",
+    "a": ["10","11","12","14"], "c": 2,
+    "hint_teen": "Think of a dozen dozens 🔢",
+    "hint_young": "What number times itself equals 144?",
+    "fact": "144 is called a 'gross' — a dozen dozens. Used by merchants for centuries."
+  },
+  {
+    "q": "What currency does Japan use?",
+    "a": ["Yuan","Won","Yen","Baht"], "c": 2,
+    "hint_teen": "Its symbol looks like a Y with two lines: ¥ 🇯🇵",
+    "hint_young": "It starts with Y and means 'round object'",
+    "fact": "Japan's 1-yen coin weighs exactly 1 gram and is so light it can float on still water due to surface tension."
+  },
+  {
+    "q": "What is the smallest country in the world?",
+    "a": ["Monaco","Liechtenstein","San Marino","Vatican City"], "c": 3,
+    "hint_teen": "It's inside the city of Rome 🇻🇦",
+    "hint_young": "Home of the Pope — it's a city AND a country",
+    "fact": "Vatican City covers just 0.44 km² — smaller than most city parks — yet has its own postal system, newspaper, and army."
+  },
+  {
+    "q": "How many sides does a hexagon have?",
+    "a": ["5","6","7","8"], "c": 1,
+    "hint_teen": "Honeybees use this shape for their hive 🐝",
+    "hint_young": "'Hex' means six in Greek",
+    "fact": "Hexagons are nature's favorite shape! Honeycombs, snowflakes, and basalt columns all form hexagons naturally."
+  },
+  {
+    "q": "What is the capital of Australia?",
+    "a": ["Sydney","Melbourne","Canberra","Brisbane"], "c": 2,
+    "hint_teen": "It's NOT Sydney — it was built as a compromise 🇦🇺",
+    "hint_young": "It's a purpose-built capital, designed in 1913",
+    "fact": "Canberra was built as a compromise between rivals Sydney and Melbourne. Its name likely means 'meeting place' in the local Aboriginal language."
+  },
+  {
+    "q": "Which element has the chemical symbol 'Au'?",
+    "a": ["Silver","Aluminum","Gold","Copper"], "c": 2,
+    "hint_teen": "It comes from the Latin word 'aurum' 💰",
+    "hint_young": "Very shiny, very valuable, yellow metal",
+    "fact": "All gold on Earth was formed in neutron star collisions. All gold ever mined would fit in about 3.5 Olympic swimming pools."
+  },
+  {
+    "q": "How many chromosomes do humans have?",
+    "a": ["23","44","46","48"], "c": 2,
+    "hint_teen": "They come in pairs — we have 23 pairs 🧬",
+    "hint_young": "Two times the number of chromosome pairs",
+    "fact": "Humans have 46 chromosomes. A potato has 48 — 2 more than us! The number has nothing to do with complexity."
+  },
+  {
+    "q": "A train travels 60 mph for 2.5 hours. How far does it go?",
+    "a": ["100 mi","120 mi","140 mi","150 mi"], "c": 3,
+    "hint_teen": "Distance = Speed × Time 🚂",
+    "hint_young": "Multiply 60 by 2.5",
+    "fact": "The Shanghai Maglev train reaches 267 mph — it would cover 150 miles in just 34 minutes, levitating above the track!"
+  },
+  {
+    "q": "What is the speed of light (km/s, rounded)?",
+    "a": ["100,000","200,000","300,000","400,000"], "c": 2,
+    "hint_teen": "It circles Earth 7.5 times per second ⚡",
+    "hint_young": "It takes 8 minutes to travel from the Sun to Earth",
+    "fact": "Light travels at 299,792,458 m/s. Sunlight takes ~8 minutes to reach us — we always see the Sun as it was 8 minutes ago."
+  },
+  {
+    "q": "Who composed the Ninth Symphony?",
+    "a": ["Mozart","Bach","Beethoven","Brahms"], "c": 2,
+    "hint_teen": "He composed it while completely deaf 🎵",
+    "hint_young": "A famous German composer — his most celebrated symphony",
+    "fact": "Beethoven composed the Ninth Symphony while deaf. At the 1824 premiere he had to be turned to see the standing ovation."
+  },
+  {
+    "q": "What is 17 × 19?",
+    "a": ["303","313","323","333"], "c": 2,
+    "hint_teen": "Try (18-1)(18+1) = 18² - 1 🔢",
+    "hint_young": "It's between 300 and 340",
+    "fact": "Quick trick: 17×19 = (18-1)(18+1) = 324-1 = 323 — the 'difference of squares' formula!"
+  },
+  {
+    "q": "Which is the longest river in the world?",
+    "a": ["Amazon","Mississippi","Nile","Yangtze"], "c": 2,
+    "hint_teen": "It flows through Egypt and into the Mediterranean 🌍",
+    "hint_young": "This African river is historically famous for ancient civilizations",
+    "fact": "The Nile vs Amazon debate continues, but the Amazon wins on water volume — it discharges 20% of all fresh river water on Earth."
+  },
+  {
+    "q": "What is the atomic number of hydrogen?",
+    "a": ["1","2","3","4"], "c": 0,
+    "hint_teen": "It's the very first element on the periodic table ⚗️",
+    "hint_young": "The simplest, lightest element — number one",
+    "fact": "Hydrogen makes up ~75% of all normal matter in the universe. Every star is essentially a massive hydrogen fusion reactor."
+  },
+  {
+    "q": "How many bones are in the adult human body?",
+    "a": ["186","196","206","216"], "c": 2,
+    "hint_teen": "Babies have more — about 270 — many fuse together 🦴",
+    "hint_young": "It's just over 200",
+    "fact": "More than half of your bones are in your hands and feet — 54 in the hands and 52 in the feet!"
+  },
+  {
+    "q": "What is the largest desert in the world?",
+    "a": ["Sahara","Gobi","Arabian","Antarctic"], "c": 3,
+    "hint_teen": "A desert is defined by low rain, not heat ❄️",
+    "hint_young": "Think cold and icy — deserts aren't always hot",
+    "fact": "Antarctica is the largest desert at 14.2 million km²! A desert is defined by low precipitation, not temperature."
+  },
+  {
+    "q": "What is the chemical symbol for iron?",
+    "a": ["Ir","In","Fe","Fr"], "c": 2,
+    "hint_teen": "From the Latin word 'ferrum' ⚙️",
+    "hint_young": "Not 'Ir' — that's iridium. Think Latin.",
+    "fact": "Iron makes up ~32% of Earth's mass. Earth's iron core creates the magnetic field protecting us from solar radiation."
+  },
+  {
+    "q": "Which country has the most freshwater lakes?",
+    "a": ["Russia","Brazil","Canada","Finland"], "c": 2,
+    "hint_teen": "It's in North America, north of the USA 🍁",
+    "hint_young": "It has almost 880,000 lakes — about 60% of all lakes on Earth",
+    "fact": "Canada has ~879,800 lakes. Finland is called 'land of a thousand lakes' but actually has over 187,000."
+  },
+  {
+    "q": "What is the 8th planet from the Sun?",
+    "a": ["Saturn","Uranus","Neptune","Jupiter"], "c": 2,
+    "hint_teen": "It was discovered by math before anyone saw it 🔭",
+    "hint_young": "The last planet — Pluto is no longer a planet!",
+    "fact": "Neptune was found through mathematics — astronomers calculated where it must be, then found it within 1° of that spot in 1846."
+  },
+  {
+    "q": "How many prime numbers are between 1 and 20?",
+    "a": ["6","7","8","9"], "c": 2,
+    "hint_teen": "Start counting: 2, 3, 5, 7... 🔢",
+    "hint_young": "A prime is only divisible by 1 and itself",
+    "fact": "The 8 primes are: 2, 3, 5, 7, 11, 13, 17, 19. The largest known prime has over 41 million digits!"
+  },
+  {
+    "q": "Which philosopher said 'I think, therefore I am'?",
+    "a": ["Voltaire","Rousseau","Descartes","Pascal"], "c": 2,
+    "hint_teen": "He also invented the x-y coordinate system 📐",
+    "hint_young": "A French philosopher — 'Cogito, ergo sum' in Latin",
+    "fact": "Descartes wrote this in 1637. He also invented coordinate axes — that's why they're called 'Cartesian coordinates'!"
+  },
+  {
+    "q": "What is the atomic number of gold?",
+    "a": ["74","79","82","47"], "c": 1,
+    "hint_teen": "It's on the periodic table between platinum and mercury ⚗️",
+    "hint_young": "A number in the high 70s",
+    "fact": "All gold on Earth arrived via asteroid impacts after neutron star collisions. Gold never tarnishes — ancient Egyptian gold still shines today."
+  },
+  {
+    "q": "What is the capital of Bhutan?",
+    "a": ["Thimphu","Kathmandu","Dhaka","Rangoon"], "c": 0,
+    "hint_teen": "It's in the Himalayas, between India and China 🏔️",
+    "hint_young": "Bhutan is a small kingdom in South Asia near Nepal",
+    "fact": "Thimphu has no traffic lights — police direct traffic instead. Bhutan measures 'Gross National Happiness' instead of just GDP."
+  },
+  {
+    "q": "A bat and ball cost $1.10 total. The bat costs $1 more. How much is the ball?",
+    "a": ["$0.10","$0.05","$0.15","$0.20"], "c": 1,
+    "hint_teen": "The answer is NOT $0.10 — check the math carefully 🧠",
+    "hint_young": "Set up the equation: if ball=x, bat=x+1, total=1.10",
+    "fact": "Most say $0.10 but that's wrong! Ball=x, bat=x+1, total=2x+1=1.10, so x=$0.05. This is a famous cognitive reflection test."
+  },
+  {
+    "q": "What is the chemical formula for sulfuric acid?",
+    "a": ["HCl","H₂SO₄","HNO₃","H₃PO₄"], "c": 1,
+    "hint_teen": "It contains Hydrogen, Sulfur, and Oxygen ⚗️",
+    "hint_young": "Look for the formula with S in it",
+    "fact": "Sulfuric acid is the world's most-produced industrial chemical — ~200 million tons per year. Used in fertilizers and car batteries."
+  },
+  {
+    "q": "5 machines make 5 widgets in 5 min. How long for 100 machines to make 100 widgets?",
+    "a": ["100 min","10 min","5 min","1 min"], "c": 2,
+    "hint_teen": "Each machine makes 1 widget in 5 minutes — scaling up doesn't change that ⚙️",
+    "hint_young": "More machines = more widgets, not faster machines",
+    "fact": "Adding machines scales output, not speed. 100 machines each take 5 min = 100 widgets in 5 min total."
+  },
+  {
+    "q": "How many light-years away is Proxima Centauri, the nearest star?",
+    "a": ["4.2","8.6","2.1","12.4"], "c": 0,
+    "hint_teen": "Driving at 60 mph would take 48 million years 🚗",
+    "hint_young": "It's just over 4 light-years — the closest star after our Sun",
+    "fact": "At 4.2 light-years away, even the fastest spacecraft ever built would take over 6,500 years to reach it."
+  },
+  {
+    "q": "What is 2 to the power of 10?",
+    "a": ["512","1024","2048","256"], "c": 1,
+    "hint_teen": "It's why a 'kilobyte' is slightly more than 1000 💻",
+    "hint_young": "Double 2, nine more times: 2→4→8→16→...",
+    "fact": "2¹⁰=1,024. This is why a 'kilobyte' is 1,024 bytes. 2³⁰ = over 1 billion!"
+  },
+  {
+    "q": "Which mathematician proved Fermat's Last Theorem in 1995?",
+    "a": ["Gauss","Euler","Andrew Wiles","Riemann"], "c": 2,
+    "hint_teen": "He worked on it secretly for 7 years 📚",
+    "hint_young": "A British mathematician who solved a 358-year-old problem",
+    "fact": "Andrew Wiles worked secretly for 7 years, announced a proof in 1993, found an error, fixed it, and published in 1995."
+  },
+  {
+    "q": "What is the unit of electrical inductance?",
+    "a": ["Farad","Ohm","Henry","Tesla"], "c": 2,
+    "hint_teen": "Named after Joseph Henry, who discovered electromagnetic induction 🔌",
+    "hint_young": "It's used in transformers and wireless chargers",
+    "fact": "The Henry is named after Joseph Henry. Your phone's wireless charger uses inductive coupling to transfer power without contact!"
+  },
+  {
+    "q": "What is the only even prime number?",
+    "a": ["0","2","4","6"], "c": 1,
+    "hint_teen": "All other even numbers can be divided by 2 🔢",
+    "hint_young": "Every even number greater than this one is divisible by it",
+    "fact": "2 is unique — it's even, yet prime. Mathematicians call it 'the oddest prime' even though it's even!"
+  },
+  {
+    "q": "What is the capital of Spain?",
+    "a": ["Barcelona","Seville","Valencia","Madrid"], "c": 3,
+    "hint_teen": "It's in the center of Spain, not on the coast 🇪🇸",
+    "hint_young": "Not Barcelona — that's the most famous city but not the capital",
+    "fact": "Madrid sits at 667m above sea level, one of the highest capitals in Europe. Its Prado Museum houses over 20,000 artworks."
+  },
+  {
+    "q": "What year did Christopher Columbus reach the Americas?",
+    "a": ["1482","1492","1502","1512"], "c": 1,
+    "hint_teen": "'In 1492, Columbus sailed the ocean blue' 🚢",
+    "hint_young": "The year ends in 92, and it's in the 1400s",
+    "fact": "Columbus landed in the Bahamas on Oct 12, 1492 but died believing he'd reached Asia. The Americas were named after Amerigo Vespucci."
+  },
+  {
+    "q": "How many strings does a standard guitar have?",
+    "a": ["4","5","6","7"], "c": 2,
+    "hint_teen": "Bass guitars have 4 — regular guitars have more 🎸",
+    "hint_young": "It's an even number between 4 and 8",
+    "fact": "A standard guitar's 6 strings are tuned E-A-D-G-B-E. There are over 50 million guitar players worldwide."
+  },
+  {
+    "q": "What is the powerhouse of the cell?",
+    "a": ["Nucleus","Ribosome","Mitochondria","Chloroplast"], "c": 2,
+    "hint_teen": "You've definitely heard this in school 🧫",
+    "hint_young": "It produces ATP energy for the cell",
+    "fact": "Mitochondria produce ATP through cellular respiration. They have their own DNA, suggesting they were once independent bacteria!"
+  },
+  {
+    "q": "How many continents are there on Earth?",
+    "a": ["5","6","7","8"], "c": 2,
+    "hint_teen": "Count them: Africa, Asia, Europe... 🌍",
+    "hint_young": "Some models say 6, but the most common answer is...",
+    "fact": "The 7 continents are Africa, Antarctica, Asia, Australia, Europe, North America, and South America — though some models combine Europe+Asia as Eurasia."
+  },
+  {
+    "q": "What is the boiling point of water in Celsius?",
+    "a": ["90°C","95°C","100°C","110°C"], "c": 2,
+    "hint_teen": "It's a perfectly round number 💧",
+    "hint_young": "The Celsius scale was literally designed around this number",
+    "fact": "Anders Celsius defined his scale so water freezes at 0° and boils at 100° at sea level. At altitude, water boils at lower temperatures!"
+  },
+  {
+    "q": "How many planets are in our solar system?",
+    "a": ["7","8","9","10"], "c": 1,
+    "hint_teen": "Pluto was demoted in 2006 🪐",
+    "hint_young": "Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune",
+    "fact": "Pluto was reclassified as a 'dwarf planet' in 2006. The 8 planets are Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune."
+  },
+  {
+    "q": "What is the hardest natural substance on Earth?",
+    "a": ["Quartz","Titanium","Diamond","Sapphire"], "c": 2,
+    "hint_teen": "It's a gemstone made of pure carbon 💎",
+    "hint_young": "It's used in engagement rings — extremely rare and hard",
+    "fact": "Diamond scores 10 on the Mohs hardness scale. It's made of carbon atoms arranged in a crystal lattice — the same element as graphite in pencils!"
+  },
+  {
+    "q": "In which country were the first modern Olympics held?",
+    "a": ["Italy","France","Greece","England"], "c": 2,
+    "hint_teen": "The ancient Olympics were also held there 🏛️",
+    "hint_young": "Think ancient civilization — Athens",
+    "fact": "The first modern Olympics were held in Athens, Greece in 1896. 14 nations and 241 athletes participated — all men."
+  },
+  {
+    "q": "What does DNA stand for?",
+    "a": ["Dynamic Nucleic Acid","Deoxyribonucleic Acid","Double Nitrogen Atom","Digital Neural Array"], "c": 1,
+    "hint_teen": "It contains your genetic blueprint 🧬",
+    "hint_young": "It has the words 'deoxy', 'ribo', 'nucleic', 'acid' in it",
+    "fact": "DNA was first described in 1953 by Watson and Crick. If you uncoiled all the DNA in your body it would stretch to the Sun and back 300 times!"
+  },
+  {
+    "q": "Which gas makes up most of Earth's atmosphere?",
+    "a": ["Oxygen","Carbon Dioxide","Nitrogen","Argon"], "c": 2,
+    "hint_teen": "It's NOT oxygen — that's only 21% 🌬️",
+    "hint_young": "It makes up about 78% of the air we breathe",
+    "fact": "Nitrogen makes up 78% of our atmosphere, oxygen 21%, and argon 1%. Despite being essential for life, we can't directly breathe nitrogen."
+  },
+  {
+    "q": "How far is the Earth from the Sun in km (approximate)?",
+    "a": ["15 million","150 million","1.5 billion","15 billion"], "c": 1,
+    "hint_teen": "Light takes 8 minutes to travel that distance ☀️",
+    "hint_young": "It's about 150 million km — called '1 Astronomical Unit'",
+    "fact": "Earth is ~150 million km from the Sun, defined as 1 Astronomical Unit (AU). This distance varies slightly as Earth orbits in an ellipse."
+  },
+  {
+    "q": "What is the most spoken language in the world by native speakers?",
+    "a": ["English","Spanish","Hindi","Mandarin Chinese"], "c": 3,
+    "hint_teen": "It's spoken in China, home to 1.4 billion people 🇨🇳",
+    "hint_young": "Think about which country has the most people",
+    "fact": "Mandarin has ~920 million native speakers. English has more total speakers when including second-language speakers, but Mandarin wins for native speakers."
+  },
+  {
+    "q": "How many hearts does an octopus have?",
+    "a": ["1","2","3","4"], "c": 2,
+    "hint_teen": "Two pump blood to the gills, one pumps to the body 🐙",
+    "hint_young": "More than one! It's an odd number.",
+    "fact": "Octopuses have 3 hearts and blue blood (from copper-based hemocyanin instead of iron-based hemoglobin like us)."
+  },
+  {
+    "q": "What is the Pythagorean theorem?",
+    "a": ["a+b=c","a²+b²=c²","a×b=c²","2a+2b=c"], "c": 1,
+    "hint_teen": "It's about right triangles — a² + b² = ? 📐",
+    "hint_young": "The square of the hypotenuse equals the sum of squares of the other two sides",
+    "fact": "Pythagoras proved this ~500 BC, but the Babylonians knew it 1,000 years earlier! It's used in architecture, navigation, and physics daily."
+  },
+  {
+    "q": "Which element is liquid at room temperature (besides mercury)?",
+    "a": ["Chlorine","Bromine","Fluorine","Iodine"], "c": 1,
+    "hint_teen": "It's a reddish-brown halogen ⚗️",
+    "hint_young": "Only 2 elements are liquid at room temperature — mercury is one",
+    "fact": "Bromine is one of only two elements that are liquid at room temperature (the other is mercury). It's a reddish-brown toxic liquid."
+  },
+  {
+    "q": "What year was the first iPhone released?",
+    "a": ["2005","2006","2007","2008"], "c": 2,
+    "hint_teen": "Steve Jobs announced it saying 'an iPod, a phone, and an internet communicator' 📱",
+    "hint_young": "It was in the mid-2000s",
+    "fact": "The first iPhone launched on June 29, 2007. Steve Jobs said it was 5 years ahead of anything else. It had no App Store — that came a year later."
+  },
+  {
+    "q": "How many zeros are in one trillion?",
+    "a": ["9","10","11","12"], "c": 3,
+    "hint_teen": "Million=6 zeros, Billion=9 zeros, Trillion=? 🔢",
+    "hint_young": "Each step multiplies by 1000: million→billion→trillion",
+    "fact": "1 trillion = 1,000,000,000,000 — twelve zeros. If you counted one number per second, it would take 31,688 years to count to a trillion!"
+  },
+
+  {
+    "disabled": true,
+    "type": "word-choice",
+    "q": "Which word is spelled incorrectly?",
+    "sentence": "The beautiful elephant carefully tiptoed accross the bridge.",
+    "a": ["beautiful", "carefully", "accross", "bridge"], "c": 2,
+    "hint_teen": "Look closely at each word's spelling 🔍",
+    "hint_young": "One of those words has too many letters",
+    "fact": "'Across' is always spelled with one 'c' and one 's' — it comes from Old French 'en croix' meaning 'in the form of a cross'."
+  },
+  {
+    "disabled": true,
+    "type": "word-choice",
+    "q": "Which word does NOT belong in this group?",
+    "sentence": "Apple — Banana — Carrot — Orange — Mango",
+    "a": ["Apple", "Banana", "Carrot", "Orange"], "c": 2,
+    "hint_teen": "Three of these grow on trees 🌳",
+    "hint_young": "One of them is a vegetable, not a fruit",
+    "fact": "Carrots are root vegetables while the others are fruits. Fun fact: botanically, a carrot is the taproot of the Daucus carota plant!"
+  },
+
+  {
+    "disabled": true,
+    "type": "image-choice",
+    "q": "Which image shows an animal that is NOT a mammal?",
+    "images": ["mammal-dog.jpg", "mammal-cat.jpg", "reptile-lizard.jpg", "mammal-horse.jpg"],
+    "a": ["Dog", "Cat", "Lizard", "Horse"], "c": 2,
+    "hint_teen": "Mammals are warm-blooded and nurse their young 🦎",
+    "hint_young": "Think about which one lays eggs and has scales",
+    "fact": "Lizards are reptiles — cold-blooded vertebrates with scales. Mammals have hair/fur and feed milk to their young."
+  },
+  {
+    "disabled": true,
+    "type": "image-choice",
+    "q": "Which flag belongs to Canada?",
+    "images": ["flag-usa.jpg", "flag-canada.jpg", "flag-australia.jpg", "flag-uk.jpg"],
+    "a": ["USA", "Canada", "Australia", "UK"], "c": 1,
+    "hint_teen": "Look for the maple leaf 🍁",
+    "hint_young": "Canada's flag has a red symbol on a white background",
+    "fact": "Canada adopted its maple leaf flag in 1965. Before that, it used the Canadian Red Ensign, which featured the Union Jack."
+  }
+]
