@@ -57,17 +57,6 @@ body { font-family:'Nunito',sans-serif; background:var(--blue); color:var(--whit
 .age-btn .age-label { font-size:11px; font-weight:800; display:block; }
 .age-btn .age-hint { font-size:10px; color:rgba(255,255,255,.5); display:block; margin-top:2px; }
 
-/* Game length */
-.length-btns { display:flex; gap:8px; }
-.len-btn { flex:1; background:rgba(255,255,255,.07); border:2px solid transparent;
-  border-radius:12px; padding:10px 4px; cursor:pointer; text-align:center;
-  transition:all .2s; color:var(--white); }
-.len-btn:hover { border-color:rgba(255,107,107,.4); }
-.len-btn.selected { border-color:#FF6B6B; background:rgba(255,107,107,.15); }
-.len-btn .len-num { font-family:'Bebas Neue',sans-serif; font-size:28px; color:var(--gold); display:block; }
-.len-btn .len-qs { font-size:10px; color:rgba(255,255,255,.6); display:block; }
-.len-btn .len-time { font-size:11px; font-weight:800; color:#FF6B6B; display:block; margin-top:2px; }
-
 /* Name input */
 .name-input { width:100%; background:rgba(255,255,255,.1); border:2px solid rgba(255,255,255,.2);
   border-radius:12px; padding:14px 16px; color:var(--white); font-size:18px; font-weight:800;
@@ -199,27 +188,6 @@ body { font-family:'Nunito',sans-serif; background:var(--blue); color:var(--whit
     </div>
 
     <div>
-      <div class="section-label">Game length</div>
-      <div class="length-btns">
-        <button class="len-btn" data-len="20" onclick="selectLength(this)">
-          <span class="len-num">20</span>
-          <span class="len-qs">questions</span>
-          <span class="len-time">~15 min</span>
-        </button>
-        <button class="len-btn" data-len="40" onclick="selectLength(this)">
-          <span class="len-num">40</span>
-          <span class="len-qs">questions</span>
-          <span class="len-time">~30 min</span>
-        </button>
-        <button class="len-btn" data-len="60" onclick="selectLength(this)">
-          <span class="len-num">60</span>
-          <span class="len-qs">questions</span>
-          <span class="len-time">~45 min</span>
-        </button>
-      </div>
-    </div>
-
-    <div>
       <div class="section-label">Your name</div>
       <input class="name-input" id="nameInput" placeholder="Enter your name" maxlength="16" autocomplete="off">
     </div>
@@ -283,7 +251,6 @@ const AVATARS = ['Amelia.png','Cleopatra.png','Einstein.png','Joan of Arc.png','
 const FALLBACK_EMOJIS = ['🦊','🐺','🐸','🦁','🐯','🐻'];
 let selectedAvatar = AVATARS[0];
 let selectedAge    = 'adult';
-let selectedLength = 20;
 
 function updateAvatarAvailability(takenAvatars) {
   document.querySelectorAll('.av-btn').forEach((btn, i) => {
@@ -326,14 +293,8 @@ function selectAge(btn) {
   btn.classList.add('selected');
   selectedAge = btn.dataset.age;
 }
-function selectLength(btn) {
-  document.querySelectorAll('.len-btn').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');
-  selectedLength = parseInt(btn.dataset.len);
-}
-// Default selections
+// Default selection
 document.querySelector('[data-age="adult"]').classList.add('selected');
-document.querySelector('[data-len="20"]').classList.add('selected');
 
 /* ── WEBSOCKET ───────────────────────────────────────────── */
 const wsProto = location.protocol === 'https:' ? 'wss' : 'ws';
@@ -423,7 +384,7 @@ function joinGame() {
   if (!name) { document.getElementById('nameInput').focus(); return; }
   document.getElementById('joinBtn').textContent = 'Joining…';
   document.getElementById('joinBtn').disabled = true;
-  const payload = { type:'player-join', name, avatar:selectedAvatar, ageGroup:selectedAge, gameLength:selectedLength };
+  const payload = { type:'player-join', name, avatar:selectedAvatar, ageGroup:selectedAge };
   if (ws.readyState === WebSocket.OPEN) send(payload);
   else pendingJoin = payload;
 }
@@ -486,8 +447,9 @@ function submitAnswer(idx, answers) {
 function showReveal(msg) {
   curCorrect = msg.correctIndex;
   const wasCorrect = myLastAnswer === msg.correctIndex;
-  const pts = wasCorrect ? 100 : 0;
-  if (wasCorrect) myScore += pts;
+  // Use server-authoritative score
+  const me = msg.scores && msg.scores.find(p => p.id === myId);
+  if (me) myScore = me.score;
 
   document.getElementById('revealEmoji').textContent = wasCorrect ? '🎉' : '😬';
   document.getElementById('revealPts').textContent   = wasCorrect ? '+100 pts' : '+0 pts';
