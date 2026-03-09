@@ -441,16 +441,26 @@ function showReveal(msg){
   players.forEach(p=>{
     const ai=msg.answers?.[p.id];
     const isCorrect = ai===msg.correctIndex;
+    const isFirst = p.id === msg.firstCorrectId;
     const card=document.createElement('div');
     card.className='reveal-card';
-    card.style.borderLeft=`3px solid ${isCorrect?'var(--ok)':'var(--err)'}`;
+    card.style.borderLeft=`3px solid ${isFirst?'var(--gold)':isCorrect?'var(--ok)':'var(--err)'}`;
     const av=avatarEl(p.avatar,32);
     const name=document.createElement('div'); name.className='rc-name'; name.textContent=p.name;
     const res=document.createElement('div'); res.className='rc-result';
-    res.textContent = ai===undefined ? '⏱️' : isCorrect ? '✅' : '❌';
+    res.textContent = ai===undefined ? '⏱️' : isFirst ? '⚡' : isCorrect ? '✅' : '❌';
     card.appendChild(av); card.appendChild(name); card.appendChild(res);
     cards.appendChild(card);
   });
+  if(msg.firstCorrectId){
+    const firstName = players.find(p=>p.id===msg.firstCorrectId)?.name;
+    if(firstName){
+      const badge=document.createElement('div');
+      badge.style.cssText='font-size:13px;font-weight:800;color:var(--gold);text-align:center;width:100%;';
+      badge.textContent=`⚡ ${firstName} answered first!`;
+      cards.appendChild(badge);
+    }
+  }
 
   document.getElementById('revealOverlay').classList.add('show');
 

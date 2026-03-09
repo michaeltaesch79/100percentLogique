@@ -110,24 +110,26 @@ function submitAnswer(playerId, answerIndex) {
   if (game.phase !== 'question') return;
   if (game.answers[playerId] !== undefined) return;
 
-  game.answers[playerId] = answerIndex;
+  const position = Object.keys(game.answers).length; // 0-based submission order
+  game.answers[playerId] = { index: answerIndex, position };
+
   const q = game.questions[game.currentQ];
   const correct = answerIndex === q.c;
-  const pts = correct ? 100 : 0;
+  const pts = correct ? Math.max(10, 100 - position * 10) : 0;
 
   const player = game.players.find(p => p.id === playerId);
   if (player) player.score += pts;
 
   send(game.hostWs, {
     type: 'answer-in',
-    playerId, answerIndex, correct, pts,
+    playerId, answerIndex, correct, pts, position,
     answeredCount: Object.keys(game.answers).length,
     totalPlayers:  game.players.length,
     scores: publicScores(),
   });
 
   const pWs = game.players.find(p => p.id === playerId)?.ws;
-  send(pWs, { type: 'answer-ack', answerIndex, correct, pts });
+  send(pWs, { type: 'answer-ack', answerIndex, correct, pts, position: position + 1 });
 
   if (Object.keys(game.answers).length >= game.players.length) {
     clearTimeout(game.timerTO);
@@ -145,16 +147,27 @@ function doReveal() {
   // Trigger mid-game podium after every 5th question
   const showPodium = qNum % 5 === 0 && qNum < game.questions.length;
 
+  // First player to answer correctly (by submission order)
+  const firstCorrectId = Object.entries(game.answers)
+    .filter(([, ans]) => ans.index === q.c)
+    .sort((a, b) => a[1].position - b[1].position)[0]?.[0] || null;
+
+  // Flatten to { playerId: answerIndex } for clients
+  const answersFlat = Object.fromEntries(
+    Object.entries(game.answers).map(([id, ans]) => [id, ans.index])
+  );
+
   broadcast({
     type:         'reveal',
     correctIndex: q.c,
     correctText:  q.a[q.c],
     fact:         q.fact,
-    answers:      game.answers,
+    answers:      answersFlat,
     scores:       publicScores(),
     isLast:       game.currentQ >= game.questions.length - 1,
     showPodium,
     qNum,
+    firstCorrectId,
   });
 }
 
@@ -265,8 +278,10 @@ wss.on('connection', (ws) => {
         if (!isHost) break;
         const len = msg.gameLength || 20;
         game.gameLength = len;
-        // Shuffle and pick questions
-        game.questions = shuffle(ALL_QUESTIONS).slice(0, len);
+        // Shuffle, pick, then sort by difficulty (easy → hard)
+        game.questions = shuffle(ALL_QUESTIONS)
+          .slice(0, len)
+          .sort((a, b) => (a.difficulty || 3) - (b.difficulty || 3));
         game.currentQ  = -1;
         game.players.forEach(p => p.score = 0);
         startQuestion();

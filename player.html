@@ -300,13 +300,14 @@ document.querySelector('[data-age="adult"]').classList.add('selected');
 const wsProto = location.protocol === 'https:' ? 'wss' : 'ws';
 const ws = new WebSocket(`${wsProto}://${location.host}`);
 
-let myId         = null;
-let myColor      = '#FFD700';
-let myAvatar     = AVATARS[0];
-let myScore      = 0;
-let myLastAnswer = null;
-let curCorrect   = null;
-let pendingJoin  = null;
+let myId             = null;
+let myColor          = '#FFD700';
+let myAvatar         = AVATARS[0];
+let myScore          = 0;
+let myLastAnswer     = null;
+let myAnswerPosition = null; // 1-based position of my answer submission
+let curCorrect       = null;
+let pendingJoin      = null;
 
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
@@ -373,6 +374,7 @@ ws.onmessage = (e) => {
       break;
     case 'answer-ack':
       myLastAnswer = msg.answerIndex;
+      myAnswerPosition = msg.position;
       document.getElementById('sentBanner').style.display = 'block';
       break;
   }
@@ -392,7 +394,7 @@ document.getElementById('nameInput').addEventListener('keydown', e => { if(e.key
 
 /* ── QUESTION ───────────────────────────────────── */
 function showQuestion(msg) {
-  myLastAnswer = null; curCorrect = null;
+  myLastAnswer = null; myAnswerPosition = null; curCorrect = null;
   document.getElementById('qBadge').textContent = `Q ${msg.index+1} / ${msg.total}`;
   document.getElementById('myScoreTxt').textContent = myScore;
   document.getElementById('qText').textContent = msg.q;
@@ -451,8 +453,13 @@ function showReveal(msg) {
   const me = msg.scores && msg.scores.find(p => p.id === myId);
   if (me) myScore = me.score;
 
-  document.getElementById('revealEmoji').textContent = wasCorrect ? '🎉' : '😬';
-  document.getElementById('revealPts').textContent   = wasCorrect ? '+100 pts' : '+0 pts';
+  const pts = wasCorrect ? Math.max(10, 100 - (myAnswerPosition - 1) * 10) : 0;
+  const posLabel = wasCorrect && myAnswerPosition
+    ? (myAnswerPosition === 1 ? '⚡ 1st to answer!' : `#${myAnswerPosition} to answer`)
+    : '';
+
+  document.getElementById('revealEmoji').textContent = wasCorrect ? (myAnswerPosition === 1 ? '⚡' : '🎉') : '😬';
+  document.getElementById('revealPts').textContent   = wasCorrect ? `+${pts} pts ${posLabel}` : '+0 pts';
   document.getElementById('revealAnswer').textContent = msg.correctText;
   document.getElementById('revealFact').textContent   = msg.fact;
   document.getElementById('myScoreTxt').textContent   = myScore;
