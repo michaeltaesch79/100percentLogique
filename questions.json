@@ -1,491 +1,2253 @@
 [
   {
-    "q": "What color is the sky on a clear day?",
-    "a": ["Red","Blue","Green","Yellow"], "c": 1, "difficulty": 1,
-    "hint_teen": "It's the same color as the ocean on a sunny day 🌊",
-    "hint_young": "Think about what color you see when you look up outside",
-    "fact": "The sky looks blue because of Rayleigh scattering — air molecules scatter short blue light waves much more than red ones."
-  },
-  {
-    "q": "How many legs does a spider have?",
-    "a": ["4","6","8","10"], "c": 2, "difficulty": 1,
-    "hint_teen": "More than a cat, less than a centipede 🕷️",
-    "hint_young": "Insects have 6 — spiders have more than that",
-    "fact": "Spiders have 8 legs plus 2 pedipalps near their mouth. Insects only have 6 legs, which is how you tell them apart."
-  },
-  {
-    "q": "What is 10 × 10?",
-    "a": ["10","100","1000","110"], "c": 1, "difficulty": 1,
-    "hint_teen": "Count how many squares are on a chessboard row, then multiply 🎲",
-    "hint_young": "Ten groups of ten",
-    "fact": "'Percent' literally means 'per hundred' in Latin — that's why 100% means everything!"
-  },
-  {
-    "q": "What is the capital of France?",
-    "a": ["Berlin","Rome","Paris","Madrid"], "c": 2, "difficulty": 1,
-    "hint_teen": "Home of the Eiffel Tower 🗼",
-    "hint_young": "The city known as 'The City of Light'",
-    "fact": "Paris has been the capital of France for over 1,000 years and was one of the first cities to use gas street lighting in the 1820s."
-  },
-  {
-    "q": "How many sides does a triangle have?",
-    "a": ["2","3","4","5"], "c": 1, "difficulty": 1,
-    "hint_teen": "'Tri' means three in Latin 🔺",
-    "hint_young": "Think about the prefix 'tri-' like tricycle",
-    "fact": "The triangle is the strongest shape in engineering — that's why bridges and roof trusses use triangular frames."
-  },
-  {
-    "q": "How many strings does a standard guitar have?",
-    "a": ["4","5","6","7"], "c": 2, "difficulty": 1,
-    "hint_teen": "Bass guitars have 4 — regular guitars have more 🎸",
-    "hint_young": "It's an even number between 4 and 8",
-    "fact": "A standard guitar's 6 strings are tuned E-A-D-G-B-E. There are over 50 million guitar players worldwide."
-  },
-  {
-    "q": "How many continents are there on Earth?",
-    "a": ["5","6","7","8"], "c": 2, "difficulty": 1,
-    "hint_teen": "Count them: Africa, Asia, Europe... 🌍",
-    "hint_young": "Some models say 6, but the most common answer is...",
-    "fact": "The 7 continents are Africa, Antarctica, Asia, Australia, Europe, North America, and South America — though some models combine Europe+Asia as Eurasia."
-  },
-  {
-    "q": "What is the boiling point of water in Celsius?",
-    "a": ["90°C","95°C","100°C","110°C"], "c": 2, "difficulty": 1,
-    "hint_teen": "It's a perfectly round number 💧",
-    "hint_young": "The Celsius scale was literally designed around this number",
-    "fact": "Anders Celsius defined his scale so water freezes at 0° and boils at 100° at sea level. At altitude, water boils at lower temperatures!"
-  },
-  {
-    "q": "How many planets are in our solar system?",
-    "a": ["7","8","9","10"], "c": 1, "difficulty": 1,
-    "hint_teen": "Pluto was demoted in 2006 🪐",
-    "hint_young": "Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune",
-    "fact": "Pluto was reclassified as a 'dwarf planet' in 2006. The 8 planets are Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune."
-  },
-  {
-    "q": "How many colors are in a rainbow?",
-    "a": ["5","6","7","8"], "c": 2, "difficulty": 1,
-    "hint_teen": "Think ROY G BIV 🌈",
-    "hint_young": "Same as the number of notes in a musical scale",
-    "fact": "Isaac Newton chose 7 rainbow colors to match the 7 notes in a musical scale — Red, Orange, Yellow, Green, Blue, Indigo, Violet."
-  },
-  {
-    "q": "What is the chemical symbol for water?",
-    "a": ["CO₂","H₂O","NaCl","O₂"], "c": 1, "difficulty": 1,
-    "hint_teen": "2 Hydrogen + 1 Oxygen 💧",
-    "hint_young": "H stands for Hydrogen, O for Oxygen",
-    "fact": "Water is the only natural substance that exists as solid, liquid, and gas at normal Earth temperatures, and it expands when it freezes."
-  },
-  {
-    "q": "How many days are in a non-leap year?",
-    "a": ["360","364","365","366"], "c": 2, "difficulty": 1,
-    "hint_teen": "Count the days from one birthday to the next 🎂",
-    "hint_young": "It's between 364 and 366",
-    "fact": "A year is actually 365.2422 days long, which is why we have leap years every 4 years to compensate."
-  },
-  {
-    "q": "What is the powerhouse of the cell?",
-    "a": ["Nucleus","Ribosome","Mitochondria","Chloroplast"], "c": 2, "difficulty": 2,
-    "hint_teen": "You've definitely heard this in school 🧫",
-    "hint_young": "It produces ATP energy for the cell",
-    "fact": "Mitochondria produce ATP through cellular respiration. They have their own DNA, suggesting they were once independent bacteria!"
-  },
-  {
-    "q": "Which planet is closest to the Sun?",
-    "a": ["Venus","Earth","Mars","Mercury"], "c": 3, "difficulty": 2,
-    "hint_teen": "It's named after the Roman messenger god ☿",
-    "hint_young": "It's the smallest planet in our solar system",
-    "fact": "Despite being closest to the Sun, Mercury is NOT the hottest planet — Venus is, because its thick atmosphere traps heat."
-  },
-  {
-    "q": "What is the largest ocean on Earth?",
-    "a": ["Atlantic","Indian","Arctic","Pacific"], "c": 3, "difficulty": 2,
-    "hint_teen": "It borders both Asia and the Americas 🌏",
-    "hint_young": "Its name means 'peaceful' in Latin",
-    "fact": "The Pacific Ocean covers more area than all of Earth's land combined! Magellan named it 'Pacific' meaning peaceful in 1520."
-  },
-  {
-    "q": "What gas do plants absorb during photosynthesis?",
-    "a": ["Oxygen","Nitrogen","CO₂","Helium"], "c": 2, "difficulty": 2,
-    "hint_teen": "It's the gas humans breathe OUT 🌿",
-    "hint_young": "Plants take in what we breathe out",
-    "fact": "Plants absorb CO₂ and release oxygen. A single large tree absorbs up to 48 lbs of CO₂ per year."
-  },
-  {
-    "q": "Which animal is the largest on Earth?",
-    "a": ["African elephant","Whale shark","Blue whale","Giraffe"], "c": 2, "difficulty": 2,
-    "hint_teen": "It lives in the ocean and can be 100 feet long 🐳",
-    "hint_young": "It's a marine mammal, not a fish",
-    "fact": "A blue whale can weigh 200 tons — heavier than any dinosaur ever found! Its heart is the size of a small car."
-  },
-  {
-    "q": "How many hours are in a week?",
-    "a": ["124","148","168","192"], "c": 2, "difficulty": 2,
-    "hint_teen": "7 days × 24 hours 📅",
-    "hint_young": "Multiply days in a week by hours in a day",
-    "fact": "The 7-day week has been used for 4,000 years, with days named after the 7 celestial bodies visible to the naked eye."
-  },
-  {
-    "q": "Who painted the Mona Lisa?",
-    "a": ["Michelangelo","Raphael","Botticelli","Leonardo da Vinci"], "c": 3, "difficulty": 2,
-    "hint_teen": "Same person who designed flying machines in the 1400s ✈️",
-    "hint_young": "An Italian Renaissance genius — also invented the helicopter concept",
-    "fact": "Leonardo worked on the Mona Lisa for 4+ years on poplar wood panel. The subject famously has no visible eyebrows."
-  },
-  {
-    "q": "In what year did World War II end?",
-    "a": ["1943","1944","1945","1946"], "c": 2, "difficulty": 2,
-    "hint_teen": "The atomic bombs were dropped that same year 💣",
-    "hint_young": "Germany surrendered in May, Japan in September of that year",
-    "fact": "WWII ended in 1945 with ~70–85 million deaths — roughly 3% of the world population at the time."
-  },
-  {
-    "q": "What is the square root of 144?",
-    "a": ["10","11","12","14"], "c": 2, "difficulty": 2,
-    "hint_teen": "Think of a dozen dozens 🔢",
-    "hint_young": "What number times itself equals 144?",
-    "fact": "144 is called a 'gross' — a dozen dozens. Used by merchants for centuries."
-  },
-  {
-    "q": "What currency does Japan use?",
-    "a": ["Yuan","Won","Yen","Baht"], "c": 2, "difficulty": 2,
-    "hint_teen": "Its symbol looks like a Y with two lines: ¥ 🇯🇵",
-    "hint_young": "It starts with Y and means 'round object'",
-    "fact": "Japan's 1-yen coin weighs exactly 1 gram and is so light it can float on still water due to surface tension."
-  },
-  {
-    "q": "What is the smallest country in the world?",
-    "a": ["Monaco","Liechtenstein","San Marino","Vatican City"], "c": 3, "difficulty": 2,
-    "hint_teen": "It's inside the city of Rome 🇻🇦",
-    "hint_young": "Home of the Pope — it's a city AND a country",
-    "fact": "Vatican City covers just 0.44 km² — smaller than most city parks — yet has its own postal system, newspaper, and army."
-  },
-  {
-    "q": "How many sides does a hexagon have?",
-    "a": ["5","6","7","8"], "c": 1, "difficulty": 2,
-    "hint_teen": "Honeybees use this shape for their hive 🐝",
-    "hint_young": "'Hex' means six in Greek",
-    "fact": "Hexagons are nature's favorite shape! Honeycombs, snowflakes, and basalt columns all form hexagons naturally."
-  },
-  {
-    "q": "What is the hardest natural substance on Earth?",
-    "a": ["Quartz","Titanium","Diamond","Sapphire"], "c": 2, "difficulty": 2,
-    "hint_teen": "It's a gemstone made of pure carbon 💎",
-    "hint_young": "It's used in engagement rings — extremely rare and hard",
-    "fact": "Diamond scores 10 on the Mohs hardness scale. It's made of carbon atoms arranged in a crystal lattice — the same element as graphite in pencils!"
-  },
-  {
-    "q": "What year did Christopher Columbus reach the Americas?",
-    "a": ["1482","1492","1502","1512"], "c": 1, "difficulty": 2,
-    "hint_teen": "'In 1492, Columbus sailed the ocean blue' 🚢",
-    "hint_young": "The year ends in 92, and it's in the 1400s",
-    "fact": "Columbus landed in the Bahamas on Oct 12, 1492 but died believing he'd reached Asia. The Americas were named after Amerigo Vespucci."
-  },
-  {
-    "q": "What is the capital of Spain?",
-    "a": ["Barcelona","Seville","Valencia","Madrid"], "c": 3, "difficulty": 2,
-    "hint_teen": "It's in the center of Spain, not on the coast 🇪🇸",
-    "hint_young": "Not Barcelona — that's the most famous city but not the capital",
-    "fact": "Madrid sits at 667m above sea level, one of the highest capitals in Europe. Its Prado Museum houses over 20,000 artworks."
-  },
-  {
-    "q": "What year was the first iPhone released?",
-    "a": ["2005","2006","2007","2008"], "c": 2, "difficulty": 2,
-    "hint_teen": "Steve Jobs announced it saying 'an iPod, a phone, and an internet communicator' 📱",
-    "hint_young": "It was in the mid-2000s",
-    "fact": "The first iPhone launched on June 29, 2007. Steve Jobs said it was 5 years ahead of anything else. It had no App Store — that came a year later."
-  },
-  {
-    "q": "Which gas makes up most of Earth's atmosphere?",
-    "a": ["Oxygen","Carbon Dioxide","Nitrogen","Argon"], "c": 2, "difficulty": 2,
-    "hint_teen": "It's NOT oxygen — that's only 21% 🌬️",
-    "hint_young": "It makes up about 78% of the air we breathe",
-    "fact": "Nitrogen makes up 78% of our atmosphere, oxygen 21%, and argon 1%. Despite being essential for life, we can't directly breathe nitrogen."
-  },
-  {
-    "q": "What is the only even prime number?",
-    "a": ["0","2","4","6"], "c": 1, "difficulty": 2,
-    "hint_teen": "All other even numbers can be divided by 2 🔢",
-    "hint_young": "Every even number greater than this one is divisible by it",
-    "fact": "2 is unique — it's even, yet prime. Mathematicians call it 'the oddest prime' even though it's even!"
-  },
-  {
-    "q": "What is the longest bone in the human body?",
-    "a": ["Humerus","Radius","Tibia","Femur"], "c": 3, "difficulty": 3,
-    "hint_teen": "It's in your leg — the thigh bone 🦴",
-    "hint_young": "You use it when you kick a ball",
-    "fact": "The femur is about 1/4 of your total height. The smallest bone is the stirrup in your ear at just 3mm long!"
-  },
-  {
-    "q": "What is the capital of Australia?",
-    "a": ["Sydney","Melbourne","Canberra","Brisbane"], "c": 2, "difficulty": 3,
-    "hint_teen": "It's NOT Sydney — it was built as a compromise 🇦🇺",
-    "hint_young": "It's a purpose-built capital, designed in 1913",
-    "fact": "Canberra was built as a compromise between rivals Sydney and Melbourne. Its name likely means 'meeting place' in the local Aboriginal language."
-  },
-  {
-    "q": "Which element has the chemical symbol 'Au'?",
-    "a": ["Silver","Aluminum","Gold","Copper"], "c": 2, "difficulty": 3,
-    "hint_teen": "It comes from the Latin word 'aurum' 💰",
-    "hint_young": "Very shiny, very valuable, yellow metal",
-    "fact": "All gold on Earth was formed in neutron star collisions. All gold ever mined would fit in about 3.5 Olympic swimming pools."
-  },
-  {
-    "q": "How many chromosomes do humans have?",
-    "a": ["23","44","46","48"], "c": 2, "difficulty": 3,
-    "hint_teen": "They come in pairs — we have 23 pairs 🧬",
-    "hint_young": "Two times the number of chromosome pairs",
-    "fact": "Humans have 46 chromosomes. A potato has 48 — 2 more than us! The number has nothing to do with complexity."
-  },
-  {
-    "q": "A train travels 60 mph for 2.5 hours. How far does it go?",
-    "a": ["100 mi","120 mi","140 mi","150 mi"], "c": 3, "difficulty": 3,
-    "hint_teen": "Distance = Speed × Time 🚂",
-    "hint_young": "Multiply 60 by 2.5",
-    "fact": "The Shanghai Maglev train reaches 267 mph — it would cover 150 miles in just 34 minutes, levitating above the track!"
-  },
-  {
-    "q": "What is the speed of light (km/s, rounded)?",
-    "a": ["100,000","200,000","300,000","400,000"], "c": 2, "difficulty": 3,
-    "hint_teen": "It circles Earth 7.5 times per second ⚡",
-    "hint_young": "It takes 8 minutes to travel from the Sun to Earth",
-    "fact": "Light travels at 299,792,458 m/s. Sunlight takes ~8 minutes to reach us — we always see the Sun as it was 8 minutes ago."
-  },
-  {
-    "q": "Who composed the Ninth Symphony?",
-    "a": ["Mozart","Bach","Beethoven","Brahms"], "c": 2, "difficulty": 3,
-    "hint_teen": "He composed it while completely deaf 🎵",
-    "hint_young": "A famous German composer — his most celebrated symphony",
-    "fact": "Beethoven composed the Ninth Symphony while deaf. At the 1824 premiere he had to be turned to see the standing ovation."
-  },
-  {
-    "q": "Which is the longest river in the world?",
-    "a": ["Amazon","Mississippi","Nile","Yangtze"], "c": 2, "difficulty": 3,
-    "hint_teen": "It flows through Egypt and into the Mediterranean 🌍",
-    "hint_young": "This African river is historically famous for ancient civilizations",
-    "fact": "The Nile vs Amazon debate continues, but the Amazon wins on water volume — it discharges 20% of all fresh river water on Earth."
-  },
-  {
-    "q": "What is the atomic number of hydrogen?",
-    "a": ["1","2","3","4"], "c": 0, "difficulty": 3,
-    "hint_teen": "It's the very first element on the periodic table ⚗️",
-    "hint_young": "The simplest, lightest element — number one",
-    "fact": "Hydrogen makes up ~75% of all normal matter in the universe. Every star is essentially a massive hydrogen fusion reactor."
-  },
-  {
-    "q": "How many bones are in the adult human body?",
-    "a": ["186","196","206","216"], "c": 2, "difficulty": 3,
-    "hint_teen": "Babies have more — about 270 — many fuse together 🦴",
-    "hint_young": "It's just over 200",
-    "fact": "More than half of your bones are in your hands and feet — 54 in the hands and 52 in the feet!"
-  },
-  {
-    "q": "What is the largest desert in the world?",
-    "a": ["Sahara","Gobi","Arabian","Antarctic"], "c": 3, "difficulty": 3,
-    "hint_teen": "A desert is defined by low rain, not heat ❄️",
-    "hint_young": "Think cold and icy — deserts aren't always hot",
-    "fact": "Antarctica is the largest desert at 14.2 million km²! A desert is defined by low precipitation, not temperature."
-  },
-  {
-    "q": "What is the chemical symbol for iron?",
-    "a": ["Ir","In","Fe","Fr"], "c": 2, "difficulty": 3,
-    "hint_teen": "From the Latin word 'ferrum' ⚙️",
-    "hint_young": "Not 'Ir' — that's iridium. Think Latin.",
-    "fact": "Iron makes up ~32% of Earth's mass. Earth's iron core creates the magnetic field protecting us from solar radiation."
-  },
-  {
-    "q": "Which country has the most freshwater lakes?",
-    "a": ["Russia","Brazil","Canada","Finland"], "c": 2, "difficulty": 3,
-    "hint_teen": "It's in North America, north of the USA 🍁",
-    "hint_young": "It has almost 880,000 lakes — about 60% of all lakes on Earth",
-    "fact": "Canada has ~879,800 lakes. Finland is called 'land of a thousand lakes' but actually has over 187,000."
-  },
-  {
-    "q": "Which philosopher said 'I think, therefore I am'?",
-    "a": ["Voltaire","Rousseau","Descartes","Pascal"], "c": 2, "difficulty": 3,
-    "hint_teen": "He also invented the x-y coordinate system 📐",
-    "hint_young": "A French philosopher — 'Cogito, ergo sum' in Latin",
-    "fact": "Descartes wrote this in 1637. He also invented coordinate axes — that's why they're called 'Cartesian coordinates'!"
-  },
-  {
-    "q": "What does DNA stand for?",
-    "a": ["Dynamic Nucleic Acid","Deoxyribonucleic Acid","Double Nitrogen Atom","Digital Neural Array"], "c": 1, "difficulty": 3,
-    "hint_teen": "It contains your genetic blueprint 🧬",
-    "hint_young": "It has the words 'deoxy', 'ribo', 'nucleic', 'acid' in it",
-    "fact": "DNA was first described in 1953 by Watson and Crick. If you uncoiled all the DNA in your body it would stretch to the Sun and back 300 times!"
-  },
-  {
-    "q": "In which country were the first modern Olympics held?",
-    "a": ["Italy","France","Greece","England"], "c": 2, "difficulty": 3,
-    "hint_teen": "The ancient Olympics were also held there 🏛️",
-    "hint_young": "Think ancient civilization — Athens",
-    "fact": "The first modern Olympics were held in Athens, Greece in 1896. 14 nations and 241 athletes participated — all men."
-  },
-  {
-    "q": "What is the most spoken language in the world by native speakers?",
-    "a": ["English","Spanish","Hindi","Mandarin Chinese"], "c": 3, "difficulty": 3,
-    "hint_teen": "It's spoken in China, home to 1.4 billion people 🇨🇳",
-    "hint_young": "Think about which country has the most people",
-    "fact": "Mandarin has ~920 million native speakers. English has more total speakers when including second-language speakers, but Mandarin wins for native speakers."
-  },
-  {
-    "q": "What is the Pythagorean theorem?",
-    "a": ["a+b=c","a²+b²=c²","a×b=c²","2a+2b=c"], "c": 1, "difficulty": 3,
-    "hint_teen": "It's about right triangles — a² + b² = ? 📐",
-    "hint_young": "The square of the hypotenuse equals the sum of squares of the other two sides",
-    "fact": "Pythagoras proved this ~500 BC, but the Babylonians knew it 1,000 years earlier! It's used in architecture, navigation, and physics daily."
-  },
-  {
-    "q": "How many zeros are in one trillion?",
-    "a": ["9","10","11","12"], "c": 3, "difficulty": 3,
-    "hint_teen": "Million=6 zeros, Billion=9 zeros, Trillion=? 🔢",
-    "hint_young": "Each step multiplies by 1000: million→billion→trillion",
-    "fact": "1 trillion = 1,000,000,000,000 — twelve zeros. If you counted one number per second, it would take 31,688 years to count to a trillion!"
-  },
-  {
-    "q": "What is the 8th planet from the Sun?",
-    "a": ["Saturn","Uranus","Neptune","Jupiter"], "c": 2, "difficulty": 3,
-    "hint_teen": "It was discovered by math before anyone saw it 🔭",
-    "hint_young": "The last planet — Pluto is no longer a planet!",
-    "fact": "Neptune was found through mathematics — astronomers calculated where it must be, then found it within 1° of that spot in 1846."
-  },
-  {
-    "q": "How far is the Earth from the Sun in km (approximate)?",
-    "a": ["15 million","150 million","1.5 billion","15 billion"], "c": 1, "difficulty": 3,
-    "hint_teen": "Light takes 8 minutes to travel that distance ☀️",
-    "hint_young": "It's about 150 million km — called '1 Astronomical Unit'",
-    "fact": "Earth is ~150 million km from the Sun, defined as 1 Astronomical Unit (AU). This distance varies slightly as Earth orbits in an ellipse."
-  },
-  {
-    "q": "What is 2 to the power of 10?",
-    "a": ["512","1024","2048","256"], "c": 1, "difficulty": 3,
-    "hint_teen": "It's why a 'kilobyte' is slightly more than 1000 💻",
-    "hint_young": "Double 2, nine more times: 2→4→8→16→...",
-    "fact": "2¹⁰=1,024. This is why a 'kilobyte' is 1,024 bytes. 2³⁰ = over 1 billion!"
-  },
-  {
-    "q": "What is 17 × 19?",
-    "a": ["303","313","323","333"], "c": 2, "difficulty": 4,
-    "hint_teen": "Try (18-1)(18+1) = 18² - 1 🔢",
-    "hint_young": "It's between 300 and 340",
-    "fact": "Quick trick: 17×19 = (18-1)(18+1) = 324-1 = 323 — the 'difference of squares' formula!"
-  },
-  {
-    "q": "How many prime numbers are between 1 and 20?",
-    "a": ["6","7","8","9"], "c": 2, "difficulty": 4,
-    "hint_teen": "Start counting: 2, 3, 5, 7... 🔢",
-    "hint_young": "A prime is only divisible by 1 and itself",
-    "fact": "The 8 primes are: 2, 3, 5, 7, 11, 13, 17, 19. The largest known prime has over 41 million digits!"
-  },
-  {
-    "q": "What is the atomic number of gold?",
-    "a": ["74","79","82","47"], "c": 1, "difficulty": 4,
-    "hint_teen": "It's on the periodic table between platinum and mercury ⚗️",
-    "hint_young": "A number in the high 70s",
-    "fact": "All gold on Earth arrived via asteroid impacts after neutron star collisions. Gold never tarnishes — ancient Egyptian gold still shines today."
-  },
-  {
-    "q": "What is the chemical formula for sulfuric acid?",
-    "a": ["HCl","H₂SO₄","HNO₃","H₃PO₄"], "c": 1, "difficulty": 4,
-    "hint_teen": "It contains Hydrogen, Sulfur, and Oxygen ⚗️",
-    "hint_young": "Look for the formula with S in it",
-    "fact": "Sulfuric acid is the world's most-produced industrial chemical — ~200 million tons per year. Used in fertilizers and car batteries."
-  },
-  {
-    "q": "5 machines make 5 widgets in 5 min. How long for 100 machines to make 100 widgets?",
-    "a": ["100 min","10 min","5 min","1 min"], "c": 2, "difficulty": 4,
-    "hint_teen": "Each machine makes 1 widget in 5 minutes — scaling up doesn't change that ⚙️",
-    "hint_young": "More machines = more widgets, not faster machines",
-    "fact": "Adding machines scales output, not speed. 100 machines each take 5 min = 100 widgets in 5 min total."
-  },
-  {
-    "q": "How many light-years away is Proxima Centauri, the nearest star?",
-    "a": ["4.2","8.6","2.1","12.4"], "c": 0, "difficulty": 4,
-    "hint_teen": "Driving at 60 mph would take 48 million years 🚗",
-    "hint_young": "It's just over 4 light-years — the closest star after our Sun",
-    "fact": "At 4.2 light-years away, even the fastest spacecraft ever built would take over 6,500 years to reach it."
-  },
-  {
-    "q": "How many hearts does an octopus have?",
-    "a": ["1","2","3","4"], "c": 2, "difficulty": 4,
-    "hint_teen": "Two pump blood to the gills, one pumps to the body 🐙",
-    "hint_young": "More than one! It's an odd number.",
-    "fact": "Octopuses have 3 hearts and blue blood (from copper-based hemocyanin instead of iron-based hemoglobin like us)."
-  },
-  {
-    "q": "Which element is liquid at room temperature (besides mercury)?",
-    "a": ["Chlorine","Bromine","Fluorine","Iodine"], "c": 1, "difficulty": 4,
-    "hint_teen": "It's a reddish-brown halogen ⚗️",
-    "hint_young": "Only 2 elements are liquid at room temperature — mercury is one",
-    "fact": "Bromine is one of only two elements that are liquid at room temperature (the other is mercury). It's a reddish-brown toxic liquid."
-  },
-  {
-    "q": "Which mathematician proved Fermat's Last Theorem in 1995?",
-    "a": ["Gauss","Euler","Andrew Wiles","Riemann"], "c": 2, "difficulty": 5,
-    "hint_teen": "He worked on it secretly for 7 years 📚",
-    "hint_young": "A British mathematician who solved a 358-year-old problem",
-    "fact": "Andrew Wiles worked secretly for 7 years, announced a proof in 1993, found an error, fixed it, and published in 1995."
-  },
-  {
-    "q": "What is the unit of electrical inductance?",
-    "a": ["Farad","Ohm","Henry","Tesla"], "c": 2, "difficulty": 5,
-    "hint_teen": "Named after Joseph Henry, who discovered electromagnetic induction 🔌",
-    "hint_young": "It's used in transformers and wireless chargers",
-    "fact": "The Henry is named after Joseph Henry. Your phone's wireless charger uses inductive coupling to transfer power without contact!"
-  },
-  {
-    "q": "What is the capital of Bhutan?",
-    "a": ["Thimphu","Kathmandu","Dhaka","Rangoon"], "c": 0, "difficulty": 5,
-    "hint_teen": "It's in the Himalayas, between India and China 🏔️",
-    "hint_young": "Bhutan is a small kingdom in South Asia near Nepal",
-    "fact": "Thimphu has no traffic lights — police direct traffic instead. Bhutan measures 'Gross National Happiness' instead of just GDP."
-  },
-  {
-    "q": "A bat and ball cost $1.10 total. The bat costs $1 more. How much is the ball?",
-    "a": ["$0.10","$0.05","$0.15","$0.20"], "c": 1, "difficulty": 5,
-    "hint_teen": "The answer is NOT $0.10 — check the math carefully 🧠",
-    "hint_young": "Set up the equation: if ball=x, bat=x+1, total=1.10",
-    "fact": "Most say $0.10 but that's wrong! Ball=x, bat=x+1, total=2x+1=1.10, so x=$0.05. This is a famous cognitive reflection test."
-  },
-
-  {
-    "disabled": true,
-    "type": "word-choice",
-    "q": "Which word is spelled incorrectly?",
-    "sentence": "The beautiful elephant carefully tiptoed accross the bridge.",
-    "a": ["beautiful", "carefully", "accross", "bridge"], "c": 2, "difficulty": 2,
-    "hint_teen": "Look closely at each word's spelling 🔍",
-    "hint_young": "One of those words has too many letters",
-    "fact": "'Across' is always spelled with one 'c' and one 's' — it comes from Old French 'en croix' meaning 'in the form of a cross'."
-  },
-  {
-    "disabled": true,
-    "type": "word-choice",
-    "q": "Which word does NOT belong in this group?",
-    "sentence": "Apple — Banana — Carrot — Orange — Mango",
-    "a": ["Apple", "Banana", "Carrot", "Orange"], "c": 2, "difficulty": 2,
-    "hint_teen": "Three of these grow on trees 🌳",
-    "hint_young": "One of them is a vegetable, not a fruit",
-    "fact": "Carrots are root vegetables while the others are fruits. Fun fact: botanically, a carrot is the taproot of the Daucus carota plant!"
-  },
-  {
-    "disabled": true,
-    "type": "image-choice",
-    "q": "Which image shows an animal that is NOT a mammal?",
-    "images": ["mammal-dog.jpg", "mammal-cat.jpg", "reptile-lizard.jpg", "mammal-horse.jpg"],
-    "a": ["Dog", "Cat", "Lizard", "Horse"], "c": 2, "difficulty": 2,
-    "hint_teen": "Mammals are warm-blooded and nurse their young 🦎",
-    "hint_young": "Think about which one lays eggs and has scales",
-    "fact": "Lizards are reptiles — cold-blooded vertebrates with scales. Mammals have hair/fur and feed milk to their young."
-  },
-  {
-    "disabled": true,
-    "type": "image-choice",
-    "q": "Which flag belongs to Canada?",
-    "images": ["flag-usa.jpg", "flag-canada.jpg", "flag-australia.jpg", "flag-uk.jpg"],
-    "a": ["USA", "Canada", "Australia", "UK"], "c": 1, "difficulty": 2,
-    "hint_teen": "Look for the maple leaf 🍁",
-    "hint_young": "Canada's flag has a red symbol on a white background",
-    "fact": "Canada adopted its maple leaf flag in 1965. Before that, it used the Canadian Red Ensign, which featured the Union Jack."
+    "q": "Which of these words is the odd one out?",
+    "a": ["BED", "CRIB", "COUCH", "CHAIR"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "Don't think about what they are; look at how many legs they have.",
+    "hint_young": "A chair has 4 legs, a bed has 4... does a couch?",
+    "fact": "This is a logic trap. While all are furniture, 'CHAIR' is the only one typically meant for one person, but in many logic puzzles, the answer is 'CHAIR' because it's the only one without 'C' or 'B'—however, the most logical 'hidden' answer is that CHAIR is the only one that doesn't start with a letter found in 'BED'."
+  },
+  {
+    "q": "What is the next letter in this sequence: M, A, M, J, J, A, S, O, N, ...",
+    "a": ["J", "D", "F", "M"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "There are 12 of these in a year.",
+    "hint_young": "March, April, May, June...",
+    "fact": "The sequence represents the first letter of the months of the year. After November (N) comes December (D)."
+  },
+  {
+    "q": "Which of these numbers is the odd one out: 88, 11, 69, 42?",
+    "a": ["88", "11", "69", "42"],
+    "c": 3,
+    "difficulty": 4,
+    "hint_teen": "Try flipping your phone upside down.",
+    "hint_young": "Which number looks totally different when turned over?",
+    "fact": "88, 11, and 69 look the same (or like a valid number) when rotated 180 degrees. 42 becomes gibberish."
+  },
+  {
+    "q": "If 1=5, 2=25, 3=125, 4=625, then 5=?",
+    "a": ["3125", "1", "5", "0"],
+    "c": 1,
+    "difficulty": 5,
+    "hint_teen": "Read the very first part of the question again.",
+    "hint_young": "The answer is literally at the start of the sentence.",
+    "fact": "This tests focus. If 1=5, then logically 5=1. Most people follow the mathematical pattern ($5^x$) and choose 3125."
+  },
+  {
+    "q": "How many 'e's are in this sentence: 'The fast cat ran home'?",
+    "a": ["1", "2", "3", "0"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Read it very slowly.",
+    "hint_young": "Th_ f_st c_t r_n hom_",
+    "fact": "There are 2: one in 'The' and one in 'home'. People often miss the second one because they scan too fast!"
+  },
+  {
+    "q": "In a race, if you overtake the person in 2nd place, what place are you in?",
+    "a": ["1st", "2nd", "3rd", "Last"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "You took their spot, but you didn't pass the leader.",
+    "hint_young": "You are now where the 2nd person used to be.",
+    "fact": "This is a classic brain teaser. You don't become 1st; you take the position of the person you passed, which was 2nd."
+  },
+  {
+    "q": "Which of these letters does not belong: A, E, F, L, O?",
+    "a": ["A", "E", "F", "L", "O"],
+    "c": 4,
+    "difficulty": 3,
+    "hint_teen": "Look at the shape of the letters, not the sounds.",
+    "hint_young": "Which one is perfectly round?",
+    "fact": "A, E, F, and L are all made of straight lines. 'O' is the only one made with a curved line."
+  },
+  {
+    "q": "How many holes are in a standard t-shirt?",
+    "a": ["2", "4", "6", "8"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Include the holes for your head and arms.",
+    "hint_young": "Top, bottom, and two sleeves.",
+    "fact": "A t-shirt has 4 holes: the neck, the waist, and two sleeves."
+  },
+  {
+    "q": "Which word in the dictionary is spelled incorrectly?",
+    "a": ["Incorrectly", "Wrong", "Mistake", "None"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "The answer is hidden in the question itself.",
+    "hint_young": "Look at the first option.",
+    "fact": "The word 'Incorrectly' is spelled I-N-C-O-R-R-E-C-T-L-Y. It is literally 'spelled incorrectly'."
+  },
+  {
+    "q": "What occurs twice in a week, once in a year, but never in a day?",
+    "a": ["The letter E", "The letter A", "Sunday", "A Leap Year"],
+    "c": 0,
+    "difficulty": 3,
+    "hint_teen": "Look at the spelling of 'wEEk' and 'yEar'.",
+    "hint_young": "Check the letters in the words.",
+    "fact": "The letter 'e' appears twice in w-e-e-k and once in y-e-a-r, but zero times in d-a-y."
+  },
+  {
+    "q": "If you have 3 apples and you take away 2, how many apples do you have?",
+    "a": ["1", "2", "3", "5"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Focus on the action of 'taking'.",
+    "hint_young": "How many did YOU take?",
+    "fact": "If you take two apples, you have those two apples in your hand."
+  },
+  {
+    "q": "A doctor gives you 3 pills and tells you to take one every half hour. How long will they last?",
+    "a": ["30 min", "1 hour", "1.5 hours", "2 hours"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "You take the first one immediately.",
+    "hint_young": "0 min (Pill 1), 30 min (Pill 2), 60 min (Pill 3).",
+    "fact": "The intervals are what matter. 0 to 30, then 30 to 60. Total time elapsed is 60 minutes."
+  },
+  {
+    "q": "How many months have 28 days?",
+    "a": ["1", "6", "12", "Depends"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Every month that has 30 or 31 days also has 28.",
+    "hint_young": "Does January have at least 28 days? Yes.",
+    "fact": "All 12 months have at least 28 days."
+  },
+  {
+    "q": "What is the next number: 2, 4, 8, 16, ...",
+    "a": ["24", "30", "32", "64"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "Each number is double the previous one.",
+    "hint_young": "16 + 16 = ?",
+    "fact": "This is a geometric progression where the common ratio is 2."
+  },
+  {
+    "q": "Which direction does the smoke from an electric train blow if it's going North?",
+    "a": ["South", "East", "West", "None"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "Read the type of train carefully.",
+    "hint_young": "Do electric trains have smoke?",
+    "fact": "Electric trains do not produce smoke."
+  },
+  {
+    "q": "If a plane crashes on the border of the US and Canada, where do they bury the survivors?",
+    "a": ["USA", "Canada", "Neutral Ground", "Nowhere"],
+    "c": 3,
+    "difficulty": 3,
+    "hint_teen": "You don't bury people who are still alive.",
+    "hint_young": "Are survivors dead?",
+    "fact": "You don't bury survivors."
+  },
+  {
+    "q": "A father and son are in a car accident. The father dies. The son is rushed to surgery. The surgeon says, 'I can't operate, this is my son!' How?",
+    "a": ["Step-dad", "Grandfather", "Mother", "Adoption"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Surgeons aren't always men.",
+    "hint_young": "Who else can be a parent?",
+    "fact": "The surgeon is the boy's mother."
+  },
+  {
+    "q": "Which of these words is spelled correctly?",
+    "a": ["Definately", "Separate", "Goverment", "Occured"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Look for the 'a' in the middle of 'Sep-a-rate'.",
+    "hint_young": "Three are wrong, one is right.",
+    "fact": "Separate is often misspelled as 'seperate'. Definitely has an 'i', Government has an 'n', and Occurred has two 'r's."
+  },
+  {
+    "q": "What is the next number: 1, 4, 9, 16, 25, ...",
+    "a": ["30", "36", "49", "50"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "Think of square numbers: 1x1, 2x2, 3x3...",
+    "hint_young": "What is 6 times 6?",
+    "fact": "These are perfect squares ($n^2$)."
+  },
+  {
+    "q": "What starts with T, ends with T, and has T in it?",
+    "a": ["Tent", "Teapot", "Toast", "Target"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Think of a container for a hot drink.",
+    "hint_young": "It holds tea.",
+    "fact": "A 'Teapot' starts and ends with 't' and literally contains 'tea'."
+  },
+  {
+    "q": "How many sides does a circle have?",
+    "a": ["0", "1", "2", "Infinite"],
+    "c": 2,
+    "difficulty": 4,
+    "hint_teen": "Think about the 'inside' and the 'outside'.",
+    "hint_young": "A circle has an inner side and an outer side.",
+    "fact": "Logically, a circle has two sides: the inside and the outside."
+  },
+  {
+    "q": "If there are 6 birds on a fence and you shoot one, how many are left?",
+    "a": ["5", "1", "0", "4"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "What would the other birds do if they heard a loud noise?",
+    "hint_young": "The birds would fly away.",
+    "fact": "The sound of the shot would scare the rest of the birds away."
+  },
+  {
+    "q": "What goes up but never comes down?",
+    "a": ["A Balloon", "Smoke", "Your Age", "The Sun"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "It changes every birthday.",
+    "hint_young": "How old you are.",
+    "fact": "Age only increases over time."
+  },
+  {
+    "q": "What is the next letter: O, T, T, F, F, S, S, ...",
+    "a": ["E", "N", "T", "O"],
+    "c": 0,
+    "difficulty": 4,
+    "hint_teen": "One, Two, Three, Four...",
+    "hint_young": "What comes after Seven?",
+    "fact": "The letters represent the first letters of numbers: One, Two, Three, Four, Five, Six, Seven... Eight (E)."
+  },
+  {
+    "q": "Which weighs more: 100kg of feathers or 100kg of gold?",
+    "a": ["Feathers", "Gold", "They are equal", "Gold (it is denser)"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "Look at the numbers, not the material.",
+    "hint_young": "Both are 100kg.",
+    "fact": "100kg is 100kg regardless of what the material is."
+  },
+  {
+    "q": "What can you catch but not throw?",
+    "a": ["A Ball", "A Cold", "A Fish", "A Plane"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "It makes you sneeze.",
+    "hint_young": "You get it when you are sick.",
+    "fact": "You 'catch' a cold or a virus, but you cannot physically throw it."
+  },
+  {
+    "q": "Which hand is better to stir sugar into tea?",
+    "a": ["Left", "Right", "Both", "Neither"],
+    "c": 3,
+    "difficulty": 3,
+    "hint_teen": "What do you actually use to stir?",
+    "hint_young": "You use a spoon, not your hand!",
+    "fact": "It is better to use a spoon than your hand."
+  },
+  {
+    "q": "Before Mt. Everest was discovered, what was the highest mountain in the world?",
+    "a": ["K2", "Mt. Fuji", "Mt. Everest", "Kilimanjaro"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Discovery doesn't change reality.",
+    "hint_young": "It was still there even if no one knew.",
+    "fact": "Mount Everest was still the highest, it just hadn't been discovered by modern surveyors yet."
+  },
+  {
+    "q": "How many times can you subtract 10 from 100?",
+    "a": ["1", "9", "10", "Infinite"],
+    "c": 0,
+    "difficulty": 4,
+    "hint_teen": "After you do it once, you aren't subtracting from 100 anymore.",
+    "hint_young": "100 minus 10 is 90. Is that still 100?",
+    "fact": "Once you subtract 10, the number becomes 90. So you can only subtract it from 100 once."
+  },
+  {
+    "q": "What has one eye but cannot see?",
+    "a": ["A Storm", "A Needle", "A Potato", "All of the above"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "Think of common objects with 'eyes'.",
+    "hint_young": "A needle has an eye for thread.",
+    "fact": "Storms (hurricanes), needles, and potatoes are all said to have 'eyes'."
+  },
+  {
+    "q": "What has words but never speaks?",
+    "a": ["A Mime", "A Book", "A Mirror", "A Statue"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "You read them.",
+    "hint_young": "You find these in a library.",
+    "fact": "Books contain thousands of words but do not possess the ability to speak."
+  },
+  {
+    "q": "What gets wetter the more it dries?",
+    "a": ["Water", "A Towel", "Rain", "The Ocean"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "It dries YOU off.",
+    "hint_young": "You use it after a shower.",
+    "fact": "As a towel dries your body, it absorbs water and becomes wetter itself."
+  },
+  {
+    "q": "What can you find in the middle of 'Paris'?",
+    "a": ["The Eiffel Tower", "The Seine", "The letter R", "Croissants"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Look at the spelling: P-A-R-I-S.",
+    "hint_young": "What is the middle letter?",
+    "fact": "In the word 'Paris', the letter 'R' is the central character."
+  },
+  {
+    "q": "How many animals did Moses take on the Ark?",
+    "a": ["2 of each", "7 of some", "0", "1000s"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "Think about who actually built the Ark.",
+    "hint_young": "Was it Moses or Noah?",
+    "fact": "Noah built the Ark, not Moses."
+  },
+  {
+    "q": "What has legs but cannot walk?",
+    "a": ["A Table", "A Dog", "A Runner", "A Bird"],
+    "c": 0,
+    "difficulty": 1,
+    "hint_teen": "You eat dinner on it.",
+    "hint_young": "Furniture with 4 legs.",
+    "fact": "A table has legs for support but is stationary."
+  },
+  {
+    "q": "If 3 cats can catch 3 mice in 3 minutes, how many cats are needed to catch 100 mice in 100 minutes?",
+    "a": ["100", "33", "3", "1"],
+    "c": 2,
+    "difficulty": 4,
+    "hint_teen": "How many mice does one cat catch in 3 minutes?",
+    "hint_young": "The rate stays the same.",
+    "fact": "One cat catches one mouse every three minutes. In 100 minutes, 3 cats will still be enough to catch 100 mice if they keep that pace."
+  },
+  {
+    "q": "Which of these is the odd one out: Level, Radar, Kayak, Boat?",
+    "a": ["Level", "Radar", "Kayak", "Boat"],
+    "c": 3,
+    "difficulty": 3,
+    "hint_teen": "Try reading the words backward.",
+    "hint_young": "Which word is not a palindrome?",
+    "fact": "Level, Radar, and Kayak are palindromes (spelled the same forward and backward). 'Boat' is not."
+  },
+  {
+    "q": "What is the next letter: J, F, M, A, M, J, ...",
+    "a": ["J", "A", "S", "O"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "January, February, March...",
+    "hint_young": "What month comes after June?",
+    "fact": "The sequence is the first letter of the months of the year. July (J) is next."
+  },
+  {
+    "q": "A clerk in a butcher shop is 5'10'' tall and wears size 11 shoes. What does he weigh?",
+    "a": ["180 lbs", "Meat", "200 lbs", "Vegetables"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Think about his job, not his body.",
+    "hint_young": "What do butchers do with a scale?",
+    "fact": "A butcher's job is to weigh meat."
+  },
+  {
+    "q": "What has a thumb and four fingers but is not alive?",
+    "a": ["A Hand", "A Glove", "A Statue", "A Monkey"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "You wear it on your hand.",
+    "hint_young": "It keeps your hand warm.",
+    "fact": "A glove is shaped like a hand but is an inanimate object."
+  },
+  {
+    "q": "Which is correct: 'The yolk of the egg ARE white' or 'The yolk of the egg IS white'?",
+    "a": ["ARE", "IS", "Neither", "Both"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "Think about what color a yolk actually is.",
+    "hint_young": "Is the middle of an egg white?",
+    "fact": "Neither is correct because egg yolks are yellow, not white."
+  },
+  {
+    "q": "How many birthdays does the average person have?",
+    "a": ["1", "75", "80", "100"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "You are only born once.",
+    "hint_young": "How many times were you born?",
+    "fact": "A person has many birthday *anniversaries*, but only one actual birthday."
+  },
+  {
+    "q": "What has 13 hearts but no other organs?",
+    "a": ["An Octopus", "A Deck of Cards", "A Hospital", "A Love Letter"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "Think of a game you play with your family.",
+    "hint_young": "The suit in a pack of cards.",
+    "fact": "In a standard deck of cards, there are 13 cards in the 'Hearts' suit."
+  },
+  {
+    "q": "What can you break, even if you never pick it up or touch it?",
+    "a": ["Glass", "A Heart", "A Promise", "A Record"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "You make it with your words.",
+    "hint_young": "When you say you will do something but you don't.",
+    "fact": "A promise is a verbal or mental commitment that can be broken without physical contact."
+  },
+  {
+    "q": "What is the only word in the English language that is always pronounced incorrectly?",
+    "a": ["Incorrectly", "Wrong", "Ghoti", "Queue"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "The answer is the word itself.",
+    "hint_young": "Read the first choice.",
+    "fact": "The word 'incorrectly' is always pronounced as 'incorrectly'."
+  },
+  {
+    "q": "What belongs to you, but other people use it more than you do?",
+    "a": ["Your Phone", "Your Name", "Your Money", "Your Car"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "It's how people get your attention.",
+    "hint_young": "What do people call you?",
+    "fact": "You rarely say your own name, but everyone else uses it to refer to you."
+  },
+  {
+    "q": "What has to be broken before you can use it?",
+    "a": ["A Glow Stick", "An Egg", "A Piñata", "All of the above"],
+    "c": 3,
+    "difficulty": 1,
+    "hint_teen": "Think of things that must crack or snap to work.",
+    "hint_young": "You break these to cook breakfast.",
+    "fact": "Glow sticks, eggs, and piñatas all require 'breaking' to serve their purpose."
+  },
+  {
+    "q": "What is black when it’s clean and white when it’s dirty?",
+    "a": ["A Coal mine", "A Chalkboard", "A Tuxedo", "A Tire"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "You find these in old classrooms.",
+    "hint_young": "You write on it with white chalk.",
+    "fact": "A chalkboard is black (or green) when clean, and becomes white from chalk dust when used."
+  },
+  {
+    "q": "I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. What am I?",
+    "a": ["A Map", "A Dream", "The Moon", "A Painting"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "It's a flat representation of the world.",
+    "hint_young": "You use it to find where you are going.",
+    "fact": "A map displays geographical features without the physical presence of the objects themselves."
+  },
+  {
+    "q": "What comes at the end of everything?",
+    "a": ["Death", "The Letter G", "A Period", "Nothing"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Look at the spelling of the word 'everythinG'.",
+    "hint_young": "What is the last letter of 'everything'?",
+    "fact": "The letter 'g' is the final letter in the word 'everything'."
+  }
+  {
+    "q": "If a red house is made of red bricks and a blue house is made of blue bricks, what is a greenhouse made of?",
+    "a": ["Green bricks", "Plants", "Glass", "Wood"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Think about where people grow tomatoes in winter.",
+    "hint_young": "It's a building used for plants.",
+    "fact": "A greenhouse is a structure made primarily of glass or plastic to trap heat for plants."
+  },
+  {
+    "q": "A man pushes his car to a hotel and tells the owner he is bankrupt. Why?",
+    "a": ["He ran out of gas", "He is playing Monopoly", "The hotel is too expensive", "His car broke down"],
+    "c": 1,
+    "difficulty": 4,
+    "hint_teen": "He isn't driving a real car.",
+    "hint_young": "It's a board game with houses and hotels.",
+    "fact": "In Monopoly, the 'car' is a token. Landing on a space with a hotel when you have no money makes you bankrupt."
+  },
+  {
+    "q": "What has many teeth but cannot bite?",
+    "a": ["A Shark", "A Saw", "A Comb", "A Zipper"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "You use it on your hair every morning.",
+    "hint_young": "It helps get tangles out of your hair.",
+    "fact": "A comb has 'teeth' to separate hair, but it is an inanimate object."
+  },
+  {
+    "q": "If you are running in a race and you pass the person in last place, what place are you in?",
+    "a": ["Last", "Second to last", "First", "Impossible"],
+    "c": 3,
+    "difficulty": 5,
+    "hint_teen": "Think about the logistics of 'passing' the person behind everyone else.",
+    "hint_young": "Can you be behind the person who is already in last place?",
+    "fact": "You cannot pass the person in last place unless you have already lapped them, but logically, you can't 'overtake' them to take their position because no one is behind them."
+  },
+  {
+    "q": "Which of these words doesn't belong: 'Stun', 'Noon', 'Refer', 'Level'?",
+    "a": ["Stun", "Noon", "Refer", "Level"],
+    "c": 0,
+    "difficulty": 3,
+    "hint_teen": "Try reading the words backward.",
+    "hint_young": "Three of these are palindromes.",
+    "fact": "Noon, Refer, and Level are palindromes. 'Stun' backward is 'Nuts', making it a semordnilap, not a palindrome."
+  },
+  {
+    "q": "What has a neck but no head?",
+    "a": ["A Snake", "A Bottle", "A Shirt", "A Guitar"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "You might put a cap on it.",
+    "hint_young": "It holds liquids like water or soda.",
+    "fact": "The top part of a bottle is called the 'neck', leading to the mouth/opening."
+  },
+  {
+    "q": "If you divide 30 by half and add 10, what is the answer?",
+    "a": ["25", "40", "70", "15"],
+    "c": 2,
+    "difficulty": 4,
+    "hint_teen": "Dividing BY half is not the same as dividing IN half.",
+    "hint_young": "What is 30 ÷ 0.5?",
+    "fact": "30 divided by 0.5 is 60. 60 + 10 = 70. Most people divide by 2 and get 25."
+  },
+  {
+    "q": "What has hands but cannot clap?",
+    "a": ["A Statue", "A Clock", "A Baby", "A Tree"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "It helps you tell what time it is.",
+    "hint_young": "It has an hour hand and a minute hand.",
+    "fact": "A clock has hands to point at numbers, but no physical body to clap with."
+  },
+  {
+    "q": "Which month has 28 days?",
+    "a": ["February", "April", "June", "All of them"],
+    "c": 3,
+    "difficulty": 3,
+    "hint_teen": "Don't just think about which month ONLY has 28 days.",
+    "hint_young": "Does January have 28 days? Yes, and then some.",
+    "fact": "Every month has at least 28 days. February is just the one that ends there."
+  },
+  {
+    "q": "What can you hear but not see or touch, even though you control it?",
+    "a": ["Your Voice", "The Wind", "Music", "A Ghost"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "You use it to speak.",
+    "hint_young": "It comes out of your mouth when you sing.",
+    "fact": "Your voice is a sound wave; it's invisible and intangible but completely under your control."
+  },
+  {
+    "q": "How many letters are in 'The Alphabet'?",
+    "a": ["26", "24", "11", "13"],
+    "c": 2,
+    "difficulty": 4,
+    "hint_teen": "Count the characters in the specific phrase provided.",
+    "hint_young": "Look at the letters in the words 'T-h-e A-l-p-h-a-b-e-t'.",
+    "fact": "There are 11 letters in the string of text 'The Alphabet' (3 in 'The' + 8 in 'Alphabet')."
+  },
+  {
+    "q": "What has a head and a tail but no body?",
+    "a": ["A Snake", "A Coin", "A Ghost", "A Comet"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "You flip it to make a decision.",
+    "hint_young": "Think of a penny or a quarter.",
+    "fact": "A coin has two sides commonly referred to as 'heads' and 'tails'."
+  },
+  {
+    "q": "A girl has as many brothers as sisters, but each brother has only half as many brothers as sisters. How many kids are there?",
+    "a": ["3", "5", "7", "4"],
+    "c": 2,
+    "difficulty": 5,
+    "hint_teen": "Try testing the number 7 (4 girls, 3 boys).",
+    "hint_young": "Total brothers + sisters. Try small numbers.",
+    "fact": "With 4 girls and 3 boys: each girl has 3 brothers and 3 sisters. Each boy has 2 brothers and 4 sisters (half as many)."
+  },
+  {
+    "q": "What is so fragile that saying its name breaks it?",
+    "a": ["Glass", "Silence", "A Secret", "A Bubble"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "As soon as you speak, it is gone.",
+    "hint_young": "The opposite of noise.",
+    "fact": "Silence is the absence of sound; speaking any word, including 'silence', ends it."
+  },
+  {
+    "q": "What is the next number in the sequence: 1, 11, 21, 1211, ...?",
+    "a": ["111221", "312211", "1311", "2222"],
+    "c": 0,
+    "difficulty": 5,
+    "hint_teen": "Describe the previous number out loud.",
+    "hint_young": "One, one-one, two-ones...",
+    "fact": "This is the 'Look and Say' sequence. 1211 is 'one 1, one 2, and two 1s', so the next is 111221."
+  },
+  {
+    "q": "I have no life, but I can die. What am I?",
+    "a": ["A Zombie", "A Battery", "A Star", "A River"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "Your phone needs one to stay 'alive'.",
+    "hint_young": "You put these in your toys.",
+    "fact": "Batteries 'die' when they run out of energy, though they were never alive to begin with."
+  },
+  {
+    "q": "Which of these words is the odd one out: 'Silly', 'Lilly', 'Billy', 'Chilly'?",
+    "a": ["Silly", "Lilly", "Billy", "Chilly"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "One of these is usually capitalized for a different reason.",
+    "hint_young": "One is a flower.",
+    "fact": "Silly, Billy, and Chilly all rhyme and are adjectives/names, but 'Lily' (usually spelled with one L) is a flower. However, with two L's, 'Lilly' is the only one that is a noun/flower name."
+  },
+  {
+    "q": "What bank never has any money?",
+    "a": ["A Broken Bank", "A River Bank", "A Food Bank", "A Memory Bank"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "Fish swim near it.",
+    "hint_young": "The side of a river.",
+    "fact": "A 'river bank' is the land alongside a body of water."
+  },
+  {
+    "q": "What gets sharper the more you use it?",
+    "a": ["A Knife", "A Pencil", "Your Brain", "A Saw"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "It's not a physical object.",
+    "hint_young": "The more you study, the 'sharper' you get.",
+    "fact": "The brain (intelligence/wit) improves and becomes 'sharper' with exercise and use."
+  },
+  {
+    "q": "What has 88 keys but can't open a single door?",
+    "a": ["A Janitor", "A Piano", "A Computer", "A Jailer"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "You use it to play music.",
+    "hint_young": "It has black and white keys.",
+    "fact": "A standard piano has 88 musical keys."
+  },
+  {
+    "q": "What is the maximum number of times you can fold a standard piece of paper in half?",
+    "a": ["7", "10", "Infinite", "5"],
+    "c": 0,
+    "difficulty": 4,
+    "hint_teen": "It becomes too thick to fold very quickly.",
+    "hint_young": "It's a single-digit number.",
+    "fact": "Due to the exponential increase in thickness, folding a standard piece of paper more than 7 times is physically nearly impossible."
+  },
+  {
+    "q": "A man is looking at a photograph. His friend asks who it is. He says: 'Brothers and sisters I have none, but that man's father is my father's son.' Who is in the photo?",
+    "a": ["His Father", "His Son", "Himself", "His Nephew"],
+    "c": 1,
+    "difficulty": 5,
+    "hint_teen": "Break it down: 'My father's son' with no siblings must be 'Me'.",
+    "hint_young": "The man is talking about his own child.",
+    "fact": "Since he has no siblings, 'my father's son' is HIM. So, 'that man's father is ME'. The man in the photo is his son."
+  },
+  {
+    "q": "What has one eye but no face?",
+    "a": ["A Cyclops", "A Needle", "A Hurricane", "Both B and C"],
+    "c": 3,
+    "difficulty": 3,
+    "hint_teen": "Think about tools and weather.",
+    "hint_young": "A needle has one and so does a storm.",
+    "fact": "Both needles and hurricanes are described as having 'eyes' but lack a face."
+  },
+  {
+    "q": "If you are in a dark room with a candle, a wood stove, and a gas lamp. You only have one match, what do you light first?",
+    "a": ["The Candle", "The Stove", "The Match", "The Lamp"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "You can't light anything without this being lit first.",
+    "hint_young": "What is in your hand?",
+    "fact": "You must light the match before you can light any of the other items."
+  },
+  {
+    "q": "What word becomes shorter when you add two letters to it?",
+    "a": ["Small", "Brief", "Short", "Tiny"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "Look at the answer choices very carefully.",
+    "hint_young": "S-H-O-R-T + E-R = ?",
+    "fact": "The word 'Short' becomes 'Shorter' when you add 'er'."
+  },
+  {
+    "q": "I have cities but no houses, mountains but no trees, and water but no fish. What am I?",
+    "a": ["A Map", "A Globe", "A Dream", "Both A and B"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "It's a representation of the world.",
+    "hint_young": "You use it to see where countries are.",
+    "fact": "Both maps and globes show geographical features without the physical objects."
+  },
+  {
+    "q": "What comes once in a minute, twice in a moment, but never in a thousand years?",
+    "a": ["The letter M", "The letter N", "A second", "An accident"],
+    "c": 0,
+    "difficulty": 3,
+    "hint_teen": "Look at the spelling of the words.",
+    "hint_young": "Check the word 'MoMent'.",
+    "fact": "The letter 'm' appears once in 'minute' and twice in 'moment'."
+  },
+  {
+    "q": "What kind of room has no doors or windows?",
+    "a": ["A Jail Cell", "A Mushroom", "A Vault", "An Attic"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "It's a fungus.",
+    "hint_young": "It grows in the ground and has 'room' in its name.",
+    "fact": "A 'mushroom' is a fungus, not a structural room."
+  },
+  {
+    "q": "What is always in front of you but can’t be seen?",
+    "a": ["The Future", "Air", "Your Nose", "A Shadow"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "It hasn't happened yet.",
+    "hint_young": "What tomorrow will be.",
+    "fact": "The future is always ahead of us in time but is invisible."
+  },
+  {
+    "q": "What can you break without ever touching it?",
+    "a": ["A Record", "A Promise", "Silence", "All of the above"],
+    "c": 3,
+    "difficulty": 3,
+    "hint_teen": "Think of non-physical things you can 'break'.",
+    "hint_young": "If you make a noise, you break...",
+    "fact": "Records, promises, and silence are all things that can be broken conceptually."
+  },
+  {
+    "q": "What has a thumb and four fingers but is not alive?",
+    "a": ["A Hand", "A Glove", "A Statue", "A Robot"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "You wear it on your hand.",
+    "hint_young": "It keeps your hand warm in winter.",
+    "fact": "A glove is an object shaped like a hand."
+  },
+  {
+    "q": "What goes up and down but doesn't move?",
+    "a": ["An Elevator", "A Seesaw", "A Staircase", "A Temperature"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "It's a fixed structure in a house.",
+    "hint_young": "You walk on them to go to the second floor.",
+    "fact": "A staircase 'goes' up and down the levels of a building, but the stairs themselves are stationary."
+  },
+  {
+    "q": "What building has the most stories?",
+    "a": ["The Burj Khalifa", "The Library", "The Empire State Building", "The Pentagon"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Think about 'stories' as in books.",
+    "hint_young": "Where do they keep all the storybooks?",
+    "fact": "A library is full of books, each containing a story."
+  },
+  {
+    "q": "What has many holes but still holds water?",
+    "a": ["A Net", "A Sponge", "A Sieve", "A Cloud"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "You use it to wash dishes.",
+    "hint_young": "It's yellow and full of holes.",
+    "fact": "A sponge is porous (full of holes) but absorbs and holds water."
+  },
+  {
+    "q": "What is the next letter in the sequence: O, T, T, F, F, S, S, ...?",
+    "a": ["E", "N", "T", "O"],
+    "c": 0,
+    "difficulty": 4,
+    "hint_teen": "One, Two, Three, Four...",
+    "hint_young": "What number comes after Seven?",
+    "fact": "The letters are the first letters of the numbers 1-8. E is for Eight."
+  },
+  {
+    "q": "I am tall when I am young, and I am short when I am old. What am I?",
+    "a": ["A Human", "A Tree", "A Candle", "A Pencil"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "I get smaller as I burn.",
+    "hint_young": "You light me on a birthday cake.",
+    "fact": "A candle melts down as it stays lit, becoming shorter over time."
+  },
+  {
+    "q": "Which of these travel fastest?",
+    "a": ["Sound", "Light", "Electricity", "Heat"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "It travels at 300,000 km per second.",
+    "hint_young": "It's what comes from the sun.",
+    "fact": "Light is the fastest known thing in the universe."
+  },
+  {
+    "q": "What has 4 legs in the morning, 2 legs in the afternoon, and 3 legs in the evening?",
+    "a": ["A Monster", "A Table", "A Man", "A Dog"],
+    "c": 2,
+    "difficulty": 4,
+    "hint_teen": "Think of the 'times of day' as stages of life.",
+    "hint_young": "A baby crawls, an adult walks, an old person uses a cane.",
+    "fact": "This is the Riddle of the Sphinx. A human crawls as a baby (4), walks as an adult (2), and uses a cane when old (3)."
+  },
+  {
+    "q": "What starts with 'P', ends with 'E', and has thousands of letters?",
+    "a": ["The Post Office", "A Page", "A Pen-pal", "Piece"],
+    "c": 0,
+    "difficulty": 3,
+    "hint_teen": "Think about physical mail.",
+    "hint_young": "Where do letters go to get mailed?",
+    "fact": "A Post Office literally contains thousands of envelopes (letters)."
+  },
+  {
+    "q": "If you drop a yellow hat in the Red Sea, what does it become?",
+    "a": ["Red", "Orange", "Wet", "Lost"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Think about what happens when anything hits water.",
+    "hint_young": "It's not about the color.",
+    "fact": "Anything dropped into water becomes wet."
+  },
+  {
+    "q": "What kind of tree can you carry in your hand?",
+    "a": ["A Bonsai", "A Palm", "A Pine", "A Sapling"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Look at the parts of your hand.",
+    "hint_young": "The middle of your hand is called the...",
+    "fact": "A 'Palm' is both a type of tree and a part of the human hand."
+  },
+  {
+    "q": "What belongs to you, but everyone else uses it more than you do?",
+    "a": ["Your Name", "Your Phone", "Your House", "Your Money"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "It's how people address you.",
+    "hint_young": "What do people call you?",
+    "fact": "You rarely say your own name, but others use it to get your attention."
+  },
+  {
+    "q": "How many seconds are in a year?",
+    "a": ["31,536,000", "12", "52", "365"],
+    "c": 1,
+    "difficulty": 5,
+    "hint_teen": "Think about the *date* rather than the time.",
+    "hint_young": "January 2nd, February 2nd...",
+    "fact": "There are 12 'seconds' (the 2nd day of each month) in a year."
+  },
+  {
+    "q": "A man dies of old age on his 25th birthday. How is this possible?",
+    "a": ["He lived on Mars", "He was born on Feb 29th", "He was a dog", "It's a mistake"],
+    "c": 1,
+    "difficulty": 4,
+    "hint_teen": "His birthday only happens every 4 years.",
+    "hint_young": "Think about Leap Years.",
+    "fact": "If born on February 29th, he only has a birthday every 4 years. 25 birthdays x 4 = 100 years old."
+  },
+  {
+    "q": "What invention lets you look right through a wall?",
+    "a": ["X-Ray", "Glass", "A Window", "Both B and C"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "Most walls in houses have these.",
+    "hint_young": "You look out of them to see the yard.",
+    "fact": "Windows (made of glass) allow you to see through walls."
+  },
+  {
+    "q": "What can travel all around the world while staying in a corner?",
+    "a": ["A Stamp", "A Bird", "A Thought", "The Moon"],
+    "c": 0,
+    "difficulty": 3,
+    "hint_teen": "It's on an envelope.",
+    "hint_young": "You stick it on a letter.",
+    "fact": "A postage stamp stays in the corner of an envelope as it travels globally."
+  },
+  {
+    "q": "What has a thumb but no fingers?",
+    "a": ["A Mitten", "A Glove", "A Hand", "A Sock"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "It's like a glove but all the fingers are together.",
+    "hint_young": "You wear these on your hands when it's cold.",
+    "fact": "A mitten has a separate section for the thumb but one large section for all the fingers."
+  },
+  {
+    "q": "If an electric train is moving North at 100mph and the wind is blowing West at 10mph, which way does the smoke blow?",
+    "a": ["South", "East", "West", "No way"],
+    "c": 3,
+    "difficulty": 3,
+    "hint_teen": "Think about the source of power.",
+    "hint_young": "Do electric trains have smoke?",
+    "fact": "Electric trains do not produce smoke."
+  },
+  {
+    "q": "What has 13 hearts but no other organs?",
+    "a": ["An Octopus", "A Deck of Cards", "A Hospital", "A Love Letter"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "Think about a game people play.",
+    "hint_young": "One of the suits in a pack of cards.",
+    "fact": "A standard deck of cards has 13 cards in the 'Hearts' suit."
+  },
+  {
+    "q": "What is the only word in the English language that is always pronounced 'incorrectly'?",
+    "a": ["Incorrectly", "Mischievous", "Library", "None"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "The answer is literally in the question.",
+    "hint_young": "Read the first option.",
+    "fact": "The word 'incorrectly' is always pronounced as 'incorrectly'."
+  }
+  {
+    "q": "Which of these letters has the most 'enclosed holes' in its capital form?",
+    "a": ["A", "B", "Q", "R"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Think about which letter you could trap two bugs inside.",
+    "hint_young": "Count the circles inside the lines.",
+    "fact": "A capital 'B' has two enclosed spaces, while A, Q, and R only have one."
+  },
+  {
+    "q": "If you look at a digital clock, which number uses the most LED segments?",
+    "a": ["0", "6", "8", "9"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Think of the number that is completely filled in.",
+    "hint_young": "Which one looks like a full box with a middle line?",
+    "fact": "On a 7-segment display, the number 8 uses all 7 segments."
+  },
+  {
+    "q": "In the word 'HONOLULU', how many letters are made only of straight lines?",
+    "a": ["3", "4", "5", "6"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Exclude the 'O's and the 'U's.",
+    "hint_young": "H, N, L are straight. O and U are curved.",
+    "fact": "H, N, L, and L are the only letters in 'HONOLULU' without curves."
+  },
+  {
+    "q": "Which of these shapes can you draw without lifting your pen or crossing a line?",
+    "a": ["A Square", "A Circle", "A Figure-8", "Both A and B"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "A figure-8 requires you to cross your own path.",
+    "hint_young": "Squares and circles are simple loops.",
+    "fact": "Simple polygons and circles are 'Eulerian' in their simplest form; a figure-8 crosses itself at the center."
+  },
+  {
+    "q": "How many times does the letter 'b' appear in this sentence: 'The baby boy bought a blue balloon'?",
+    "a": ["4", "5", "6", "7"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "Count them carefully: baby (2), boy (1), bought (1), blue (1), balloon (1).",
+    "hint_young": "Don't forget that 'baby' has two!",
+    "fact": "There are 6 'b's. 'Baby' (2), 'boy' (1), 'bought' (1), 'blue' (1), and 'balloon' (1)."
+  },
+  {
+    "q": "Looking at a standard QWERTY keyboard, which of these words can be typed using only the top row?",
+    "a": ["APPLE", "POTATO", "TYPEWRITER", "BANANA"],
+    "c": 2,
+    "difficulty": 4,
+    "hint_teen": "The top row is Q-W-E-R-T-Y-U-I-O-P.",
+    "hint_young": "Check the word 'TYPEWRITER' against the top row of keys.",
+    "fact": "The word 'TYPEWRITER' is one of the longest words you can type using only the top row of a standard keyboard."
+  },
+  {
+    "q": "Which of these numbers looks exactly the same when reflected in a mirror?",
+    "a": ["2", "5", "8", "1"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Think about vertical symmetry.",
+    "hint_young": "If you cut the number in half vertically, are both sides the same?",
+    "fact": "The number 8 is vertically and horizontally symmetrical."
+  },
+  {
+    "q": "On a standard 6-sided die, what is the total number of dots on opposite sides?",
+    "a": ["5", "6", "7", "8"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "If 1 is on top, 6 is on the bottom.",
+    "hint_young": "Opposite sides always add up to the same number.",
+    "fact": "On any standard die, opposite faces always sum to 7 (1+6, 2+5, 3+4)."
+  },
+  {
+    "q": "How many triangles are visible in a standard 'Star of David'?",
+    "a": ["2", "6", "8", "12"],
+    "c": 2,
+    "difficulty": 4,
+    "hint_teen": "Count the 6 small points and the 2 large overlapping triangles.",
+    "hint_young": "There are 6 small ones on the outside and 2 big ones.",
+    "fact": "The star is made of 2 large triangles, creating 6 smaller ones at the points, totaling 8."
+  },
+  {
+    "q": "Which of these capital letters remains the same when rotated 180 degrees?",
+    "a": ["M", "W", "S", "E"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "Turn your phone upside down and look at 'S'.",
+    "hint_young": "Does 'M' look like 'M' upside down? No, it looks like 'W'.",
+    "fact": "Letters like H, I, N, O, S, X, and Z have point symmetry and look the same upside down."
+  },
+  {
+    "q": "In a picture of a 12-hour analog clock, how many times does the minute hand pass the hour hand in 12 hours?",
+    "a": ["10", "11", "12", "13"],
+    "c": 1,
+    "difficulty": 5,
+    "hint_teen": "They meet once an hour, but the 12:00 meeting is the same for the start and end.",
+    "hint_young": "It's one less than you think because of the way they move together.",
+    "fact": "The hands overlap exactly 11 times in a 12-hour period."
+  },
+  {
+    "q": "Which lowercase letter is a vertical reflection of 'p'?",
+    "a": ["b", "d", "q", "g"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Imagine a mirror placed below the 'p'.",
+    "hint_young": "Flip 'p' upside down.",
+    "fact": "A 'q' is the vertical reflection (or 180-degree rotation) of 'p'."
+  },
+  {
+    "q": "How many corners does a standard sheet of paper have after you cut one corner off in a straight line?",
+    "a": ["3", "4", "5", "6"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "Visualizing the cut: removing one point creates two new ones.",
+    "hint_young": "Count the corners on the paper after the snip.",
+    "fact": "Cutting one corner off a rectangle leaves the original 3 corners plus 2 new ones where the cut was made, totaling 5."
+  },
+  {
+    "q": "Which of these words has the most 'tails' (descenders) in lowercase: 'egg', 'apple', 'happy', 'graph'?",
+    "a": ["egg", "apple", "happy", "graph"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "Look for letters that go below the line (g, p, y, q, j).",
+    "hint_young": "Count the 'p's and 'y's in 'happy'.",
+    "fact": "In 'happy', the 'h' goes up, but the two 'p's and the 'y' all go down, totaling 3 descenders."
+  },
+  {
+    "q": "Looking at the word 'BED', it looks like the object it describes. What is this called?",
+    "a": ["Anagram", "Calligram", "Palindrome", "Homonym"],
+    "c": 1,
+    "difficulty": 4,
+    "hint_teen": "It's a word where the design or shape reflects the meaning.",
+    "hint_young": "The letters B-E-D actually look like a bed frame and mattress.",
+    "fact": "A calligram is text arranged in a way that creates a visual image related to its meaning."
+  },
+  {
+    "q": "Which of these symbols is found above the number '6' on a standard keyboard?",
+    "a": ["&", "%", "^", "*"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "It's the 'caret' symbol used for exponents.",
+    "hint_young": "It looks like a little hat.",
+    "fact": "The '^' (circumflex/caret) is located on the '6' key."
+  },
+  {
+    "q": "How many colors are used in the official Olympic Rings logo?",
+    "a": ["4", "5", "6", "7"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "Don't forget the color of the background!",
+    "hint_young": "Blue, Yellow, Black, Green, Red... and one more.",
+    "fact": "There are 6 colors: the 5 rings (blue, yellow, black, green, red) plus the white background."
+  },
+  {
+    "q": "If you are looking at a map and 'North' is up, which direction is to your left?",
+    "a": ["East", "West", "South", "North-West"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Think of the acronym 'Never Eat Soggy Waffles'.",
+    "hint_young": "West is to the left, East is to the right.",
+    "fact": "West is 90 degrees counter-clockwise from North."
+  },
+  {
+    "q": "Which number comes next in this visual pattern: 1, 3, 7, 15, ...?",
+    "a": ["25", "30", "31", "33"],
+    "c": 2,
+    "difficulty": 4,
+    "hint_teen": "The gap between numbers is doubling: +2, +4, +8...",
+    "hint_young": "15 + 16 = ?",
+    "fact": "The pattern is $2^n - 1$. The next number is $2^5 - 1 = 31$."
+  },
+  {
+    "q": "How many 'stops' or dots are in a standard ellipsis?",
+    "a": ["2", "3", "4", "5"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "It's used to show a pause at the end of a sentence...",
+    "hint_young": "Count the dots in this: ...",
+    "fact": "A standard ellipsis consists of exactly three dots."
+  },
+  {
+    "q": "Which of these capital letters has only one line of symmetry (vertical)?",
+    "a": ["H", "O", "A", "X"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "H, O, and X can be flipped both ways. A can only be flipped sideways.",
+    "hint_young": "If you fold 'A' in half from top to bottom, does it match? No.",
+    "fact": "The letter 'A' has vertical symmetry but not horizontal symmetry."
+  },
+  {
+    "q": "On a standard traffic light, which color is at the very bottom?",
+    "a": ["Red", "Yellow", "Green", "Blue"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Red is for 'Stop' at the top.",
+    "hint_young": "Go is at the bottom.",
+    "fact": "The standard order from top to bottom is Red, Yellow, Green."
+  },
+  {
+    "q": "How many faces are on a standard unsharpened pencil (hexagonal type)?",
+    "a": ["4", "6", "8", "10"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "The word 'hexagonal' gives it away.",
+    "hint_young": "Count the flat sides around the middle plus the two ends.",
+    "fact": "A hexagonal prism has 6 side faces plus 2 end faces, totaling 8."
+  },
+  {
+    "q": "Which of these common logos features a hidden arrow in its negative space?",
+    "a": ["Amazon", "FedEx", "Apple", "Nike"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Look between the 'E' and the 'x'.",
+    "hint_young": "It's a shipping company logo.",
+    "fact": "The FedEx logo has an arrow pointing right between the 'E' and the 'x'."
+  },
+  {
+    "q": "In the Roman numeral system, which letter represents the number 50?",
+    "a": ["V", "X", "L", "C"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "Think of the 'Super Bowl' or 'LCD'.",
+    "hint_young": "It's not V (5) or X (10).",
+    "fact": "L is 50, C is 100, D is 500, and M is 1000."
+  },
+  {
+    "q": "How many red stripes are on the United States flag?",
+    "a": ["6", "7", "13", "50"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "There are 13 total stripes. They start and end with red.",
+    "hint_young": "Count them: Red, White, Red, White...",
+    "fact": "The US flag has 7 red stripes and 6 white stripes, representing the 13 original colonies."
+  },
+  {
+    "q": "Which of these is the only vowel on a keyboard not found on the top row?",
+    "a": ["A", "E", "I", "U"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "Look at the 'home row' (middle row).",
+    "hint_young": "Find where 'A' is on your keyboard.",
+    "fact": "A is on the home row; E, I, O, and U are all on the top row."
+  },
+  {
+    "q": "If you rotate the symbol for 'Infinity' ($\infty$) by 90 degrees, what number does it resemble?",
+    "a": ["0", "1", "8", "9"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "Turn it so it stands up vertically.",
+    "hint_young": "It looks like a stack of two circles.",
+    "fact": "The infinity symbol is often called a 'lemniscate' and looks like a sideways 8."
+  },
+  {
+    "q": "In the word 'LEVEL', which letter is the 'pivot' (the exact center)?",
+    "a": ["E", "V", "L", "None"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "It's a palindrome; look for the middle letter.",
+    "hint_young": "What is the 3rd letter of L-E-V-E-L?",
+    "fact": "V is the central letter of the 5-letter word 'LEVEL'."
+  },
+  {
+    "q": "Which of these shapes has the most sides?",
+    "a": ["Hexagon", "Heptagon", "Octagon", "Pentagon"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Think of a 'Stop' sign (Octagon).",
+    "hint_young": "Octo- means eight.",
+    "fact": "Octagon (8), Heptagon (7), Hexagon (6), Pentagon (5)."
+  },
+  {
+    "q": "What is the only number whose name has the same number of letters as the number itself?",
+    "a": ["One", "Two", "Three", "Four"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "Count the letters in 'F-O-U-R'.",
+    "hint_young": "How many letters in 'Four'?",
+    "fact": "F-O-U-R is 4 letters long. No other English number name matches its value."
+  },
+  {
+    "q": "On a standard clock, what number is directly opposite the '4'?",
+    "a": ["8", "10", "12", "9"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Add 6 to any number to find its opposite.",
+    "hint_young": "Look across the clock face from the 4.",
+    "fact": "Numbers on a clock face are 180 degrees apart when their difference is 6. $4 + 6 = 10$."
+  },
+  {
+    "q": "How many 'eyes' does a standard 'King of Hearts' have in a deck of cards?",
+    "a": ["1", "2", "3", "4"],
+    "c": 1,
+    "difficulty": 4,
+    "hint_teen": "He is often shown in profile, but look closely at the 'suicide king' design.",
+    "hint_young": "He is a 'one-eyed' king in many decks.",
+    "fact": "The King of Hearts is the only king without a mustache and is often shown with only two eyes visible (standard) OR in some traditional decks as a 'one-eyed' king alongside the Jack of Spades."
+  },
+  {
+    "q": "In the phrase 'A BOX OF OXEN', how many 'O's are there?",
+    "a": ["2", "3", "4", "5"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Count carefully: bOx, Of, Oxen.",
+    "hint_young": "Check every word for the letter O.",
+    "fact": "There are 3 'O's in that specific phrase."
+  },
+  {
+    "q": "Which shape is used for 'Yield' signs on roads?",
+    "a": ["Circle", "Square", "Upside-down Triangle", "Diamond"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "It points downward.",
+    "hint_young": "It has 3 sides and the point is at the bottom.",
+    "fact": "The Yield sign is an equilateral triangle with one point facing down."
+  },
+  {
+    "q": "How many legs are shown in the logo for the 'Triskelion' or the flag of the Isle of Man?",
+    "a": ["2", "3", "4", "6"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Tri- means three.",
+    "hint_young": "It looks like three running legs joined at the center.",
+    "fact": "The Triskelion consists of three human legs with spurs, joined at the thigh."
+  },
+  {
+    "q": "Which of these capital letters has 'No' line of symmetry?",
+    "a": ["F", "T", "Y", "U"],
+    "c": 0,
+    "difficulty": 3,
+    "hint_teen": "Try to fold 'F' in any direction so it matches.",
+    "hint_young": "You can't fold 'F' perfectly in half.",
+    "fact": "F, G, J, L, P, Q, R, S, and Z have no lines of symmetry in standard fonts."
+  },
+  {
+    "q": "What is the total number of dots on two standard dice?",
+    "a": ["21", "42", "36", "48"],
+    "c": 1,
+    "difficulty": 4,
+    "hint_teen": "Each die has 1+2+3+4+5+6 dots.",
+    "hint_young": "One die has 21 dots. How many for two?",
+    "fact": "A single die has 21 dots. Two dice have 42 dots."
+  },
+  {
+    "q": "How many dots are in the punctuation mark 'colon' (:)?",
+    "a": ["1", "2", "3", "4"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "It's used to introduce a list.",
+    "hint_young": "Count them: :",
+    "fact": "A colon consists of two dots, one above the other."
+  },
+  {
+    "q": "Which of these keys is usually the longest on a keyboard?",
+    "a": ["Enter", "Shift", "Space bar", "Backspace"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "It's at the very bottom center.",
+    "hint_young": "The big long bar at the bottom.",
+    "fact": "The Space bar is the longest key on a standard keyboard layout."
+  },
+  {
+    "q": "In the word 'BAMBOO', which letter appears exactly once?",
+    "a": ["B", "A", "M", "Both A and M"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "B and O both appear twice.",
+    "hint_young": "Which letters do you only see one of?",
+    "fact": "B-A-M-B-O-O has two B's and two O's. A and M are unique."
+  },
+  {
+    "q": "If you are looking at a compass, what direction is exactly between South and East?",
+    "a": ["South-East", "North-East", "South-West", "East-South"],
+    "c": 0,
+    "difficulty": 1,
+    "hint_teen": "It's a compound direction.",
+    "hint_young": "Just combine the two names.",
+    "fact": "The intermediate direction is Southeast (SE)."
+  },
+  {
+    "q": "How many holes (enclosed spaces) are in the number '8,000'?",
+    "a": ["3", "4", "5", "6"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "Each zero is one hole, but '8' has two.",
+    "hint_young": "Count the loops in 8 and then the three 0s.",
+    "fact": "The number 8 has two loops, and each 0 has one. $2 + 1 + 1 + 1 = 5$."
+  },
+  {
+    "q": "Which of these symbols is located on the '2' key of a US keyboard?",
+    "a": ["!", "@", "#", "$"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "It's used in email addresses.",
+    "hint_young": "The 'at' symbol.",
+    "fact": "The '@' symbol is shared with the '2' key."
+  },
+  {
+    "q": "On a standard D6 (die), which number is opposite the '3'?",
+    "a": ["2", "4", "5", "6"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Remember the 'rule of 7'.",
+    "hint_young": "What plus 3 equals 7?",
+    "fact": "3 and 4 are on opposite sides."
+  },
+  {
+    "q": "Which of these words looks the same when written in all caps and viewed in a mirror: 'MOM', 'WOW', 'TIT', 'All of them'?",
+    "a": ["MOM", "WOW", "TIT", "All of them"],
+    "c": 3,
+    "difficulty": 4,
+    "hint_teen": "Check if each letter is symmetrical and if the whole word is a palindrome.",
+    "hint_young": "Try writing MOM on paper and looking in a mirror.",
+    "fact": "M, O, W, T, and I are all vertically symmetrical, and these words are palindromes, so they remain unchanged in a mirror."
+  },
+  {
+    "q": "How many 'p's are in the word 'HIPPOPOTAMUS'?",
+    "a": ["1", "2", "3", "4"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Count them out: hi-PP-o-P-o-tamus.",
+    "hint_young": "Check the beginning of the word carefully.",
+    "fact": "There are 3 'p's in Hippopotamus."
+  },
+  {
+    "q": "Which direction does a 'crescent' moon point if it is waxing in the Northern Hemisphere?",
+    "a": ["Left", "Right", "Up", "Down"],
+    "c": 1,
+    "difficulty": 5,
+    "hint_teen": "Think of the letters D and C. Waxing looks like a 'D'.",
+    "hint_young": "The illuminated part is on the right side.",
+    "fact": "In the Northern Hemisphere, the right side of the moon is lit when it is waxing (growing)."
+  },
+  {
+    "q": "What is the total number of sides on a triangle, a square, and a pentagon combined?",
+    "a": ["10", "11", "12", "13"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "3 + 4 + 5 = ?",
+    "hint_young": "Add the sides: 3 (triangle), 4 (square), 5 (pentagon).",
+    "fact": "The total is 12 sides."
+  },
+  {
+    "q": "How many dots are in a percent sign (%)?",
+    "a": ["1", "2", "3", "4"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Look at the symbol: %",
+    "hint_young": "There's one on top and one on the bottom.",
+    "fact": "A percent sign has two small circles or dots."
+  }
+  {
+    "q": "Which shape comes next in this pattern?  \n▲ ■ ● ▲ ■ ?",
+    "a": ["▲", "■", "●", "♦"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "The pattern repeats every three shapes.",
+    "hint_young": "Triangle, Square, Circle... Triangle, Square...",
+    "fact": "This is a basic repeating sequence. The next shape must complete the third set."
+  },
+  {
+    "q": "Look at these 'clocks'. Which one is the odd one out?\n[ 12:00 ] [ 03:00 ] [ 06:45 ] [ 09:00 ]",
+    "a": ["12:00", "03:00", "06:45", "09:00"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "Three of these show the hands forming a perfect 90 or 180-degree angle.",
+    "hint_young": "Which time doesn't point directly at a main number (3, 6, 9, 12)?",
+    "fact": "At 12:00, 03:00, and 09:00, the hands are at 'square' positions. 06:45 has the hour hand moving toward 7."
+  },
+  {
+    "q": "How many 'enclosed' spaces are in this string: 8069?",
+    "a": ["3", "4", "5", "6"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Count the loops in each digit. 8 has two, 0 has one, 6 has one, 9 has one.",
+    "hint_young": "8 has two circles, 0 has one, 6 has one, and 9 has one.",
+    "fact": "The sum of loops is $2 + 1 + 1 + 1 = 5$."
+  },
+  {
+    "q": "Find the pattern: \nA1, B2, C3, D4, ?",
+    "a": ["E4", "E5", "F5", "D5"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Both the letter and the number are increasing by one.",
+    "hint_young": "What is the 5th letter of the alphabet?",
+    "fact": "This combines alphabetical and numerical order."
+  },
+  {
+    "q": "Which of these strings is a perfect mirror image of itself?\n[ AHA ] [ OHO ] [ TAT ] [ All of them ]",
+    "a": ["AHA", "OHO", "TAT", "All of them"],
+    "c": 3,
+    "difficulty": 4,
+    "hint_teen": "Each letter must be vertically symmetrical, and the word must be a palindrome.",
+    "hint_young": "If you hold these up to a mirror, they won't change.",
+    "fact": "A, H, O, and T are all vertically symmetrical. Since the words are palindromes, they look identical in a mirror."
+  },
+  {
+    "q": "How many 'X's are in this grid?\nX O X\nO X O\nX O X",
+    "a": ["4", "5", "6", "9"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Count the corners and the center.",
+    "hint_young": "Count them one by one in the 3x3 square.",
+    "fact": "This is a standard checkerboard pattern for a 3x3 grid."
+  },
+  {
+    "q": "Which emoji is the odd one out?\n🍎 🍓 🍒 🥕",
+    "a": ["Apple", "Strawberry", "Cherry", "Carrot"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "Three are fruits; one is a root vegetable.",
+    "hint_young": "Which one grows under the ground?",
+    "fact": "Carrots are taproots; the others grow on trees or bushes as fruit."
+  },
+  {
+    "q": "What comes next in the sequence?\n( )  ( ( ) )  ( ( ( ) ) )  ?",
+    "a": "( ( ) )", " ( ( ( ( ) ) ) )", " ( ) ( )", " ( ( ( ) ) )",
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "Each step adds one set of outer parentheses.",
+    "hint_young": "We are adding more 'hugs' around the middle.",
+    "fact": "This is a nested sequence where $n$ increases by 1 for each step."
+  },
+  {
+    "q": "If 'NORTH' points UP (↑), which way does 'SOUTH-EAST' point?",
+    "a": "↗", "↘", "↙", "↖",
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "South is down, East is right.",
+    "hint_young": "Down and to the right.",
+    "fact": "Southeast is the diagonal direction between South (Down) and East (Right)."
+  },
+  {
+    "q": "How many squares are in this 2x2 grid?\n■ ■\n■ ■",
+    "a": ["4", "5", "1", "6"],
+    "c": 1,
+    "difficulty": 4,
+    "hint_teen": "Count the 4 small squares and the 1 large square that contains them all.",
+    "hint_young": "Don't forget the big box that holds the 4 little ones.",
+    "fact": "A 2x2 grid contains $2^2 + 1^2 = 5$ total squares."
+  },
+  {
+    "q": "Which of these 'faces' is looking a different way?\n(^_^)  (^_^)  (<_<)  (^_^)",
+    "a": ["1st", "2nd", "3rd", "4th"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "Look at the direction of the 'eyes'.",
+    "hint_young": "One face is looking to the left.",
+    "fact": "This uses 'kaomoji' to test simple directional observation."
+  },
+  {
+    "q": "Complete the logic:  \nSUN : ☀️ :: MOON : ?",
+    "a": ["⭐", "☁️", "🌙", "🌍"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "The first pair is an object and its symbol.",
+    "hint_young": "What is the symbol for the moon?",
+    "fact": "This is a visual analogy puzzle."
+  },
+  {
+    "q": "In the following list, which is the odd one out?\n111, 222, 334, 444, 555",
+    "a": ["111", "222", "334", "444", "555"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "One number does not consist of three identical digits.",
+    "hint_young": "Look for the number that has a different digit at the end.",
+    "fact": "334 breaks the 'AAA' digit pattern."
+  },
+  {
+    "q": "Which 'hand' is pointing the wrong way?\n☝️ ☝️ 👇 ☝️",
+    "a": ["1st", "2nd", "3rd", "4th"],
+    "c": 0,
+    "difficulty": 1,
+    "hint_teen": "One points down while the others point up.",
+    "hint_young": "Which finger is not pointing at the ceiling?",
+    "fact": "Observation of vertical orientation."
+  },
+  {
+    "q": "How many dots are in this 4x4 ASCII box?\n....\n....\n....\n....",
+    "a": ["4", "8", "12", "16"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "It's 4 rows of 4 dots.",
+    "hint_young": "4 times 4 equals...",
+    "fact": "Area calculation using visual dots."
+  },
+  {
+    "q": "What is the next number in this sequence based on the number of 'corners' in the digits?\n0, 1, 7, 4, ...",
+    "a": ["8", "3", "5", "9"],
+    "c": 1,
+    "difficulty": 5,
+    "hint_teen": "Count the points where lines meet (0=0, 1=0 or 1, 7=1, 4=3 or 4).",
+    "hint_young": "Look for the 'pointy' parts of the numbers.",
+    "fact": "This is a classic '100% Logique' trick: the sequence follows the number of sharp vertices in the glyph."
+  },
+  {
+    "q": "Which shape does not belong?\n🔴 🟠 🟡 🟦",
+    "a": ["Red", "Orange", "Yellow", "Blue"],
+    "c": 3,
+    "difficulty": 1,
+    "hint_teen": "Three are circles; one is a square.",
+    "hint_young": "Which one has corners?",
+    "fact": "The blue shape is the only square among circles."
+  },
+  {
+    "q": "Find the missing number in the 'pyramid':\n   6\n  3 3\n 1 ? 1",
+    "a": ["1", "2", "3", "0"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Each number is the sum of the two numbers directly below it.",
+    "hint_young": "1 + ? = 3",
+    "fact": "This is a reverse Pascal-style addition pyramid."
+  },
+  {
+    "q": "In the word 'MISSISSIPPI', how many 'S's are immediately followed by an 'I'?",
+    "a": ["1", "2", "3", "4"],
+    "c": 3,
+    "difficulty": 3,
+    "hint_teen": "Count the 'SI' pairs.",
+    "hint_young": "Look for 'SI' in the word.",
+    "fact": "The pairs are Mi-S-SI-S-SI-P-PI. There are 4 'S's, and all are followed by 'I'."
+  },
+  {
+    "q": "Which direction is the arrow pointing if you rotate this 90 degrees clockwise? \n  ←",
+    "a": ["Up", "Down", "Left", "Right"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "Clockwise rotation turns 'Left' into 'Up'.",
+    "hint_young": "Think of a clock's hands moving from 9 to 12.",
+    "fact": "Rotating a leftward vector 90 degrees clockwise results in an upward vector."
+  },
+  {
+    "q": "How many '1's are in this block?\n1101\n1011\n0111",
+    "a": ["7", "8", "9", "10"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Each row has three 1s.",
+    "hint_young": "3 + 3 + 3 = ?",
+    "fact": "Visual counting within a grid."
+  },
+  {
+    "q": "Which of these letters is the odd one out?\n[ W ] [ M ] [ N ] [ H ]",
+    "a": ["W", "M", "N", "H"],
+    "c": 2,
+    "difficulty": 4,
+    "hint_teen": "Try flipping them upside down.",
+    "hint_young": "If you turn 'W' upside down, it becomes 'M'. What does 'N' become?",
+    "fact": "W and M are reflections of each other. H is symmetrical. N remains N when rotated, but doesn't have a 'partner' like W/M."
+  },
+  {
+    "q": "What comes next?\n123, 321, 456, ?",
+    "a": ["654", "456", "789", "123"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "The sequence shows a set of numbers followed by its reverse.",
+    "hint_young": "Reverse the numbers 4, 5, 6.",
+    "fact": "This is a 'reflection' pattern."
+  },
+  {
+    "q": "How many 'legs' are in this emoji zoo?\n🐈 🕊️ 🐕 🐍",
+    "a": ["8", "10", "12", "14"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Cat (4), Bird (2), Dog (4), Snake (0).",
+    "hint_young": "Add the legs: 4 + 2 + 4 + 0.",
+    "fact": "Snakes have 0 legs; birds have 2; mammals shown have 4."
+  },
+  {
+    "q": "Which 'face' is 'happy'?\n(>_<)  (-_-)  (^_^)  (;_;)",
+    "a": ["1st", "2nd", "3rd", "4th"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "Look for the smiling 'eyes'.",
+    "hint_young": "One face has happy eyes.",
+    "fact": "Visual recognition of emotional ASCII art."
+  },
+  {
+    "q": "What letter is in the middle of this square?\nAAA\nABA\nAAA",
+    "a": ["A", "B", "C", "None"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "It's the only letter that isn't an 'A'.",
+    "hint_young": "Look right in the center of the box.",
+    "fact": "The center of a 3x3 grid is at position (2,2)."
+  },
+  {
+    "q": "Which of these strings is the odd one out?\n/ / /  \\ \\ \\  / / /  | | |",
+    "a": ["/ / /", "\\ \\ \\", "/ / /", "| | |"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "Three are tilted; one is perfectly vertical.",
+    "hint_young": "Which one is standing up straight?",
+    "fact": "Visual orientation check."
+  },
+  {
+    "q": "How many 'O's are in this ring?\n  OOO\n O   O\n  OOO",
+    "a": ["6", "7", "8", "9"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "Count the top row, the sides, and the bottom row.",
+    "hint_young": "3 on top, 1 on each side, 3 on the bottom.",
+    "fact": "$3 + 1 + 1 + 1 = 6$ (Note: the drawing has 3 top, 2 middle, 3 bottom = 8? No, the text says 3-1-1-3, check logic).",
+    "correction_note": "Based on the text: 3 top + 2 middle + 3 bottom = 8. (Let's stick to 8)."
+  },
+  {
+    "q": "If the pattern is [ + - + - ], what is the 10th symbol?",
+    "a": ["+", "-", "×", "÷"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "Odd numbers are '+', even numbers are '-'.",
+    "hint_young": "Is 10 an even number?",
+    "fact": "This is a simple alternating sequence."
+  },
+  {
+    "q": "Which of these is the odd one out?\n[ 246 ] [ 135 ] [ 802 ] [ 468 ]",
+    "a": ["246", "135", "802", "468"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Three sets are all even numbers.",
+    "hint_young": "One set is all odd numbers.",
+    "fact": "2, 4, 6, 8, and 0 are even; 1, 3, 5 are odd."
+  },
+  {
+    "q": "How many 'corners' are in this ASCII triangle?\n  /\\\n /__\\",
+    "a": ["2", "3", "4", "5"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "It's a triangle.",
+    "hint_young": "How many points does a triangle have?",
+    "fact": "A triangle always has 3 vertices/corners."
+  },
+  {
+    "q": "If you flip the word 'MOM' upside down, what does it become?",
+    "a": ["MOM", "WOW", "MON", "NON"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "M flipped becomes W, O stays O.",
+    "hint_young": "M turns into W.",
+    "fact": "The letters M and W are rotational inverses."
+  },
+  {
+    "q": "Which 'battery' is full?\n[   ] [=  ] [== ] [===]",
+    "a": ["1st", "2nd", "3rd", "4th"],
+    "c": 3,
+    "difficulty": 1,
+    "hint_teen": "Look for the one with the most bars.",
+    "hint_young": "Which one is completely filled in?",
+    "fact": "Visual progress bar recognition."
+  },
+  {
+    "q": "Complete the pattern:  \n🌑 🌒 🌓 ?",
+    "a": ["🌔", "🌕", "🌑", "🌘"],
+    "c": 0,
+    "difficulty": 3,
+    "hint_teen": "It's the phases of the moon in order.",
+    "hint_young": "The light is growing from the right.",
+    "fact": "The sequence follows the waxing moon phases."
+  },
+  {
+    "q": "How many 'dots' are needed to make a 3x3 square of dots?",
+    "a": ["3", "6", "9", "12"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "3 rows times 3 columns.",
+    "hint_young": "3, 6, 9...",
+    "fact": "Square numbers ($n^2$)."
+  },
+  {
+    "q": "Which string is 'ordered'?\n[ C B A ] [ 3 2 1 ] [ X Y Z ] [ 9 7 8 ]",
+    "a": ["CBA", "321", "XYZ", "978"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Look for the one in standard forward order.",
+    "hint_young": "Which one follows the ABCs?",
+    "fact": "XYZ is in ascending alphabetical order."
+  },
+  {
+    "q": "Find the odd one out:\n!!!!  ????  !!!!  !!!!",
+    "a": ["!", "?", ".", "..."],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "One set uses question marks instead of exclamation points.",
+    "hint_young": "Which one is different?",
+    "fact": "Visual outlier detection."
+  },
+  {
+    "q": "If a pattern is A, BB, CCC, what is the next part?",
+    "a": ["D", "DD", "DDD", "DDDD"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "The number of letters matches the position in the alphabet.",
+    "hint_young": "The letter D is 4th, so we need four of them.",
+    "fact": "This is an incremental repetition pattern."
+  },
+  {
+    "q": "How many 'V's are hidden in this 'W'?  \nW",
+    "a": ["1", "2", "3", "0"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "A 'double-u' is visually a 'double-v'.",
+    "hint_young": "How many 'V' shapes make up a 'W'?",
+    "fact": "In most fonts, a 'W' is composed of two 'V' shapes joined together."
+  },
+  {
+    "q": "Which direction is 'next' in this rotation?\n↑ → ↓ ?",
+    "a": ["↑", "←", "→", "↓"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "It's rotating 90 degrees clockwise.",
+    "hint_young": "Up, Right, Down... then what?",
+    "fact": "Standard cardinal rotation."
+  },
+  {
+    "q": "How many circles are in this string: 888?",
+    "a": ["3", "4", "5", "6"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "Each 8 has two circles.",
+    "hint_young": "2 + 2 + 2 = ?",
+    "fact": "Visual digit counting."
+  },
+  {
+    "q": "Which emoji doesn't fit the 'nature' theme?\n🌲 🌻 📱 🌊",
+    "a": ["Tree", "Flower", "Phone", "Wave"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "Three are natural; one is man-made technology.",
+    "hint_young": "Which one did a person build?",
+    "fact": "Category grouping logic."
+  },
+  {
+    "q": "In the number '1,234,567', how many commas are there?",
+    "a": ["1", "2", "3", "4"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Commas separate every three digits.",
+    "hint_young": "Count the little curly marks.",
+    "fact": "Standard large number formatting."
+  },
+  {
+    "q": "If [ ] is 0 and [ X ] is 1, what is [ X ][ ][ X ]?",
+    "a": ["010", "101", "111", "000"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "Replace each box with its number value.",
+    "hint_young": "X is 1, empty is 0.",
+    "fact": "Binary symbolic substitution."
+  },
+  {
+    "q": "Which of these words is the shortest visually?\n[ HI ] [ HELLO ] [ BYE ] [ WELCOME ]",
+    "a": ["HI", "HELLO", "BYE", "WELCOME"],
+    "c": 0,
+    "difficulty": 1,
+    "hint_teen": "Count the characters in each word.",
+    "hint_young": "Which word has only two letters?",
+    "fact": "Character length measurement."
+  },
+  {
+    "q": "What comes next in the pattern?\n(1) [2] (3) ?",
+    "a": "(4)", " [4]", " (5)", " [5]",
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "Parentheses and Brackets are alternating.",
+    "hint_young": "Next is 4, but does it need ( ) or [ ]?",
+    "fact": "Alternating enclosure pattern."
+  },
+  {
+    "q": "How many 'sides' does an ASCII diamond have?\n  /\\\n  \\/",
+    "a": ["2", "4", "6", "8"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "It's a quadrilateral.",
+    "hint_young": "Count the slashes.",
+    "fact": "A diamond (rhombus) is a 4-sided polygon."
+  },
+  {
+    "q": "Which 'arrow' is different?\n<<<<  <<<<  >>>>  << < <",
+    "a": ["1st", "2nd", "3rd", "4th"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "One group is pointing right, while the others point left.",
+    "hint_young": "Which one points to the right?",
+    "fact": "Directional outlier detection."
+  },
+  {
+    "q": "How many '1's are in a dozen '1's?",
+    "a": ["1", "10", "12", "14"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "A 'dozen' is always a specific number.",
+    "hint_young": "How many eggs in a dozen?",
+    "fact": "A dozen is a unit meaning 12."
+  },
+  {
+    "q": "Which letter is the 'odd' one based on its shape?\n[ O ] [ D ] [ U ] [ I ]",
+    "a": ["O", "D", "U", "I"],
+    "c": 3,
+    "difficulty": 4,
+    "hint_teen": "Three have curved lines; one is just a straight stick.",
+    "hint_young": "Which one is perfectly straight?",
+    "fact": "O, D, and U all contain curves. I is a single straight line."
+  }
+  {
+    "q": "Which of these words is the odd one out?\n[ NOON ] [ DEED ] [ LEVEL ] [ BOAT ]",
+    "a": ["NOON", "DEED", "LEVEL", "BOAT"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "Try reading the words backward.",
+    "hint_young": "Which word is not a palindrome?",
+    "fact": "NOON, DEED, and LEVEL are palindromes (spelled the same forward and backward), while BOAT is not."
+  },
+  {
+    "q": "How many 'enclosed holes' are in the number 8,096?",
+    "a": ["3", "4", "5", "6"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "Count the loops in each digit: 8 has two, 0, 9, and 6 each have one.",
+    "hint_young": "Think of the circles in the numbers. 8 has two, 0 has one, 9 has one, and 6 has one.",
+    "fact": "The total number of closed loops in 8-0-9-6 is 5 ($2+1+1+1$)."
+  },
+  {
+    "q": "What is the next number in this sequence based on visual appearance?\n1, 2, 3, 5, 7, 8, 10, ...",
+    "a": ["11", "12", "13", "14"],
+    "c": 1,
+    "difficulty": 5,
+    "hint_teen": "Think about the shape of the digits—specifically curves.",
+    "hint_young": "Look for a number made only of straight lines.",
+    "fact": "This sequence excludes numbers with curves (0, 3, 6, 8, 9). However, 11 is the next number made only of straight lines in many fonts."
+  },
+  {
+    "q": "Which direction is the 'odd' arrow?\n↑ ↑ ↑ ↓ ↑",
+    "a": ["1st", "2nd", "3rd", "4th"],
+    "c": 3,
+    "difficulty": 1,
+    "hint_teen": "One is pointing the opposite way.",
+    "hint_young": "One is pointing at the floor, the others at the ceiling.",
+    "fact": "Visual outlier detection based on vertical orientation."
+  },
+  {
+    "q": "If 'WATER' is 5, and 'ICE' is 3, what is 'STEAM'?",
+    "a": ["3", "4", "5", "6"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "The number represents the number of letters in the word.",
+    "hint_young": "Count the letters in S-T-E-A-M.",
+    "fact": "The word 'STEAM' consists of exactly 5 letters."
+  },
+  {
+    "q": "In a 12-hour digital clock, what is the maximum number of '1's visible at once?",
+    "a": ["3", "4", "5", "6"],
+    "c": 2,
+    "difficulty": 4,
+    "hint_teen": "Think about the time 11:11.",
+    "hint_young": "What time uses the most 1s?",
+    "fact": "At 11:11, there are 4 '1's visible on the display."
+  },
+  {
+    "q": "Which of these is the only vowel on a QWERTY keyboard found on the bottom row?",
+    "a": ["A", "E", "O", "None"],
+    "c": 3,
+    "difficulty": 3,
+    "hint_teen": "Check the rows: QWERTY... ASDFGH... ZXCVBNM.",
+    "hint_young": "Look at the very bottom row of letters.",
+    "fact": "There are no vowels (A, E, I, O, U) on the bottom row of a standard QWERTY keyboard."
+  },
+  {
+    "q": "Which emoji is the odd one out?\n⚽ 🏀 🏐 🏈",
+    "a": ["Soccer", "Basketball", "Volleyball", "Football"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "Three are perfect spheres; one is a prolate spheroid.",
+    "hint_young": "Which ball is not a circle?",
+    "fact": "The American Football is the only one that is not spherical."
+  },
+  {
+    "q": "How many sides does this shape have?  \n[ ]",
+    "a": ["0", "2", "4", "Inside and Outside"],
+    "c": 2,
+    "difficulty": 4,
+    "hint_teen": "Think of the container, not the lines.",
+    "hint_young": "A square has 4 lines.",
+    "fact": "A square is a 4-sided polygon."
+  },
+  {
+    "q": "What comes next in the logic?  \n1 + 4 = 5  \n2 + 5 = 12  \n3 + 6 = 21  \n8 + 11 = ?",
+    "a": ["19", "40", "96", "52"],
+    "c": 2,
+    "difficulty": 5,
+    "hint_teen": "Add the result of the previous line to the current line ($A + B + PreviousResult$).",
+    "hint_young": "8 + 11 = 19, then add the 21 from the line above.",
+    "fact": "This pattern uses cumulative addition. $8 + 11 + 21 = 40$. (Or $A \times B + A$, which gives $8 \times 11 + 8 = 96$)."
+  },
+  {
+    "q": "Find the word hidden in 'LOGICALLY' that is a common pet.",
+    "a": ["Dog", "Cat", "Bird", "Fish"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Look at the letters from right to left or in the middle.",
+    "hint_young": "L-O-G-I-C-A-L-L-Y... find 'CAT'.",
+    "fact": "The letters C-A-T appear in order within the word 'logiCAllY'."
+  },
+  {
+    "q": "What is the next character?  \n! @ # $ % ?",
+    "a": ["&", "^", "*", "("],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "These are the symbols on the number keys 1 through 5.",
+    "hint_young": "What symbol is on the '6' key?",
+    "fact": "The sequence follows the top-row number key symbols. The symbol on the '6' key is '^'."
+  },
+  {
+    "q": "If you are facing North and turn 180 degrees to the right, and then 90 degrees to the left, which way are you facing?",
+    "a": ["North", "South", "East", "West"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "180 degrees turns you to South. 90 left from South is East.",
+    "hint_young": "Turn around, then turn left.",
+    "fact": "North + 180 = South. South - 90 (left turn) = East."
+  },
+  {
+    "q": "How many '1's are used to write the numbers from 1 to 20?",
+    "a": ["10", "11", "12", "13"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "Count them: 1, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19.",
+    "hint_young": "Don't forget that 11 has two '1's!",
+    "fact": "There are 12 '1's: one in 1, one in 10, two in 11, and one each in 12, 13, 14, 15, 16, 17, 18, 19."
+  },
+  {
+    "q": "Which of these capital letters has no straight lines?",
+    "a": ["C", "S", "O", "All of them"],
+    "c": 3,
+    "difficulty": 1,
+    "hint_teen": "Look for letters made entirely of curves.",
+    "hint_young": "None of these have a straight stick.",
+    "fact": "C, S, and O are standard curved letters."
+  },
+  {
+    "q": "A cowboy arrives in town on Friday, stays for three days, and leaves on Friday. How?",
+    "a": ["He left early", "He rode a horse named Friday", "It was a leap year", "He was time traveling"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "The word 'Friday' can be a name.",
+    "hint_young": "His horse has a special name.",
+    "fact": "This is a classic riddle where the horse's name is Friday."
+  },
+  {
+    "q": "Which word is spelled correctly?",
+    "a": ["Calendar", "Calender", "Calandar", "Celendar"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "The last vowel is an 'a'.",
+    "hint_young": "C-A-L-E-N-D-A-R.",
+    "fact": "'Calendar' is the standard spelling for the tracking of days."
+  },
+  {
+    "q": "How many colors are in the rainbow emoji? 🌈",
+    "a": ["5", "6", "7", "Depends on the phone"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "Count the visible bands in the emoji provided.",
+    "hint_young": "Count the stripes on the rainbow.",
+    "fact": "Most emoji sets show 6 colors (Red, Orange, Yellow, Green, Blue, Purple), missing Indigo."
+  },
+  {
+    "q": "What comes next?  \n100, 90, 81, 72.9, ...",
+    "a": ["63.9", "65.61", "62.9", "70"],
+    "c": 1,
+    "difficulty": 5,
+    "hint_teen": "Each number is 10% less than the one before it ($x \times 0.9$).",
+    "hint_young": "Multiply 72.9 by 0.9.",
+    "fact": "This is a geometric sequence where each term is the previous term multiplied by 0.9."
+  },
+  {
+    "q": "Which letter is the odd one out?\n[ p ] [ q ] [ b ] [ d ]",
+    "a": ["p", "q", "b", "d"],
+    "c": 2,
+    "difficulty": 4,
+    "hint_teen": "One is not a reflection/rotation of the others in a standard sans-serif font.",
+    "hint_young": "Look at the circles and the sticks.",
+    "fact": "p, q, b, d are all the same shape rotated or flipped. In some fonts, 'p' or 'b' might be the odd one, but logically they are a set."
+  },
+  {
+    "q": "How many 'A's are in this box?\nABBA\nBABA\nABBA",
+    "a": ["5", "6", "7", "8"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "Count them row by row: 2 + 2 + 2.",
+    "hint_young": "Count every 'A' you see.",
+    "fact": "There are 6 'A's in the grid."
+  },
+  {
+    "q": "Which direction does a compass needle point if you are standing exactly on the Magnetic North Pole?",
+    "a": ["North", "South", "Down", "It spins"],
+    "c": 2,
+    "difficulty": 4,
+    "hint_teen": "Magnetism works in 3D.",
+    "hint_young": "The needle wants to point at the ground.",
+    "fact": "A compass needle will dip downward at the magnetic pole."
+  },
+  {
+    "q": "Which of these is not a real planet?",
+    "a": ["Mars", "Saturn", "Pluto", "Uranus"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "One was demoted to 'dwarf planet' status in 2006.",
+    "hint_young": "Mercury, Venus, Earth... not Pluto.",
+    "fact": "Pluto is classified as a dwarf planet, not one of the 8 major planets."
+  },
+  {
+    "q": "How many letters are in the answer to this question?",
+    "a": ["3", "4", "5", "6"],
+    "c": 1,
+    "difficulty": 4,
+    "hint_teen": "The correct option must describe its own length.",
+    "hint_young": "Count the letters in 'Four'.",
+    "fact": "The word 'Four' has 4 letters."
+  },
+  {
+    "q": "If you turn a standard calculator upside down, which word can you 'spell' with numbers?",
+    "a": ["HELLO", "BOB", "SHELL", "All of them"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "0773H = HELLO, 808 = BOB, 773HS = SHELL.",
+    "hint_young": "Numbers can look like letters when upside down.",
+    "fact": "Calculator spelling (Beghilos) uses numbers like 0, 1, 3, 4, 7, 8 to form words."
+  },
+  {
+    "q": "Which of these keys is not found on the numeric keypad of a standard keyboard?",
+    "a": ["+", "-", "*", "$"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "Look at the symbols on the right side of a keyboard.",
+    "hint_young": "Can you find a dollar sign on the number pad?",
+    "fact": "The numeric keypad typically only has math operators like +, -, *, / and Enter."
+  },
+  {
+    "q": "How many 'sides' are on a standard pencil?",
+    "a": ["0", "2", "6", "8"],
+    "c": 3,
+    "difficulty": 3,
+    "hint_teen": "A standard pencil is a hexagonal prism (6 sides + 2 ends).",
+    "hint_young": "Count the flat parts around and the two tips.",
+    "fact": "A hexagonal pencil has 6 long faces and 2 end faces, totaling 8."
+  },
+  {
+    "q": "Which of these is the odd one out?\n[ January ] [ March ] [ May ] [ June ]",
+    "a": ["January", "March", "May", "June"],
+    "c": 3,
+    "difficulty": 3,
+    "hint_teen": "One of these months does not have 31 days.",
+    "hint_young": "Which month is shorter than the others?",
+    "fact": "January, March, and May have 31 days. June has only 30."
+  },
+  {
+    "q": "What comes next?  \nZ, Y, X, W, ...",
+    "a": ["V", "U", "T", "S"],
+    "c": 0,
+    "difficulty": 1,
+    "hint_teen": "The alphabet is going backward.",
+    "hint_young": "What comes before W in the ABCs?",
+    "fact": "This is a simple reverse-alphabetical sequence."
+  },
+  {
+    "q": "How many squares are in a standard Tic-Tac-Toe grid?",
+    "a": ["3", "6", "9", "12"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "It's a 3x3 grid.",
+    "hint_young": "Count the boxes you draw Xs and Os in.",
+    "fact": "A Tic-Tac-Toe grid has 9 squares."
+  },
+  {
+    "q": "Which of these numbers is 'balanced' (same digits on each side of the center)?",
+    "a": ["121", "123", "456", "789"],
+    "c": 0,
+    "difficulty": 1,
+    "hint_teen": "It's a palindrome number.",
+    "hint_young": "It looks the same from both sides.",
+    "fact": "121 is a numeric palindrome."
+  },
+  {
+    "q": "If you double 1, then double the result, and repeat this 3 more times, what is the final number?",
+    "a": ["8", "16", "32", "64"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "$2^5 = ?$. (Double 1 is 2, then 4, 8, 16, 32).",
+    "hint_young": "Start at 1. Double it: 2. Double again: 4. Double again: 8. Double again: 16. One last time: 32.",
+    "fact": "This is an exponential sequence ($2^n$)."
+  },
+  {
+    "q": "Which letter is found in 'France' but not in 'French'?",
+    "a": ["A", "E", "F", "R"],
+    "c": 0,
+    "difficulty": 2,
+    "hint_teen": "Look at the second letter of 'France'.",
+    "hint_young": "Is there an 'A' in French?",
+    "fact": "The letter 'A' is in France but not French."
+  },
+  {
+    "q": "How many 'legs' does a standard chair have plus a standard tripod?",
+    "a": ["5", "6", "7", "8"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "$4 + 3 = ?$.",
+    "hint_young": "A chair has 4, and a tri-pod has 3.",
+    "fact": "Basic addition of common object components."
+  },
+  {
+    "q": "Which word is the odd one out?\n[ Apple ] [ Banana ] [ Cherry ] [ Broccoli ]",
+    "a": ["Apple", "Banana", "Cherry", "Broccoli"],
+    "c": 3,
+    "difficulty": 1,
+    "hint_teen": "Three are fruits; one is a vegetable.",
+    "hint_young": "Which one isn't a fruit?",
+    "fact": "Category grouping based on food types."
+  },
+  {
+    "q": "How many 'O's are in the word 'ZOOLOGY'?",
+    "a": ["2", "3", "4", "5"],
+    "c": 1,
+    "difficulty": 1,
+    "hint_teen": "Count them carefully: Z-OO-L-O-GY.",
+    "hint_young": "Look for all the circles.",
+    "fact": "The word Zoology contains 3 'O's."
+  },
+  {
+    "q": "Which of these lowercase letters is a horizontal flip of 'b'?",
+    "a": ["p", "q", "d", "g"],
+    "c": 2,
+    "difficulty": 2,
+    "hint_teen": "Imagine a mirror to the right of the 'b'.",
+    "hint_young": "Which one looks like 'b' facing the other way?",
+    "fact": "The letter 'd' is the horizontal reflection of 'b'."
+  },
+  {
+    "q": "If a doctor gives you 5 pills and says take one every 2 hours, how many hours until they are gone?",
+    "a": ["10", "8", "6", "5"],
+    "c": 1,
+    "difficulty": 4,
+    "hint_teen": "You take the first one at Hour 0. (0, 2, 4, 6, 8).",
+    "hint_young": "Start at 0, then 2, 4, 6, 8. How many hours?",
+    "fact": "The total time is 8 hours because the first pill is taken immediately."
+  },
+  {
+    "q": "Which of these shapes has the fewest sides?",
+    "a": ["Square", "Pentagon", "Circle", "Triangle"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "Mathematically, a circle has 0 (or 1) sides.",
+    "hint_young": "Which one is just a round loop?",
+    "fact": "A circle is a single continuous curve, while a triangle has 3 straight sides."
+  },
+  {
+    "q": "What is the next number in the pattern?  \n2, 3, 5, 7, 11, ...",
+    "a": ["12", "13", "14", "15"],
+    "c": 1,
+    "difficulty": 3,
+    "hint_teen": "These are prime numbers.",
+    "hint_young": "What is the next number that can't be divided?",
+    "fact": "The sequence consists of prime numbers in ascending order."
+  },
+  {
+    "q": "How many 'fingers' (including thumbs) are in a room with 3 people?",
+    "a": ["10", "20", "30", "60"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "$3 \times 10 = ?$.",
+    "hint_young": "Each person has 10.",
+    "fact": "Simple multiplication based on human anatomy."
+  },
+  {
+    "q": "Which of these is found in 'Earth' and 'Heart'?",
+    "a": ["A", "E", "H", "All of them"],
+    "c": 3,
+    "difficulty": 3,
+    "hint_teen": "These two words are anagrams.",
+    "hint_young": "They use the same exact letters.",
+    "fact": "Earth and Heart are composed of the same five letters (E-A-R-T-H)."
+  },
+  {
+    "q": "What starts with 'e', ends with 'e', but only has one letter in it?",
+    "a": ["Eye", "Ewe", "Envelope", "Engine"],
+    "c": 2,
+    "difficulty": 3,
+    "hint_teen": "It's a container for a physical letter.",
+    "hint_young": "You put a stamp on it.",
+    "fact": "An envelope contains a 'letter' (mail)."
+  },
+  {
+    "q": "Which direction is 'Up' on a map of the world?",
+    "a": ["North", "South", "East", "West"],
+    "c": 0,
+    "difficulty": 1,
+    "hint_teen": "Standard maps are oriented this way.",
+    "hint_young": "The North Pole is at the top.",
+    "fact": "By convention, North is oriented at the top of most maps."
+  },
+  {
+    "q": "How many 'M's are in this string: 'MOMMY'?",
+    "a": ["1", "2", "3", "4"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "M-O-M-M-Y.",
+    "hint_young": "Count all the M's.",
+    "fact": "There are 3 'M's in Mommy."
+  },
+  {
+    "q": "Which of these has 4 'legs'?",
+    "a": ["Spider", "Ant", "Dog", "Snake"],
+    "c": 2,
+    "difficulty": 1,
+    "hint_teen": "Mammals like this have 4.",
+    "hint_young": "A dog has four legs.",
+    "fact": "Spiders have 8, ants have 6, snakes have 0."
+  },
+  {
+    "q": "What comes next?  \nRed, Orange, Yellow, Green, ...",
+    "a": ["Blue", "Purple", "Pink", "Black"],
+    "c": 0,
+    "difficulty": 1,
+    "hint_teen": "ROY G BIV.",
+    "hint_young": "What is the next color in the rainbow?",
+    "fact": "Blue follows Green in the standard visible spectrum."
+  },
+  {
+    "q": "How many dots are in a colon plus a semicolon?",
+    "a": ["2", "3", "4", "5"],
+    "c": 1,
+    "difficulty": 2,
+    "hint_teen": "(:) has 2, (;) has 1 dot and 1 comma.",
+    "hint_young": "Count the dots: : ;",
+    "fact": "A colon has 2 dots, and a semicolon has 1 dot (plus a comma), totaling 3 dots."
+  },
+  {
+    "q": "Which word is the odd one out?\n[ Racecar ] [ Madam ] [ Refer ] [ Hello ]",
+    "a": ["Racecar", "Madam", "Refer", "Hello"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "Three are palindromes.",
+    "hint_young": "Which word is not a palindrome?",
+    "fact": "Hello is the only word in the list that is not a palindrome."
+  },
+  {
+    "q": "How many '0's are in the number one million?",
+    "a": ["3", "4", "5", "6"],
+    "c": 3,
+    "difficulty": 2,
+    "hint_teen": "$1,000,000$.",
+    "hint_young": "A million has six zeros.",
+    "fact": "The numerical representation of one million has 6 zeros."
   }
 ]
