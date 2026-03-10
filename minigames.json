@@ -1,0 +1,12 @@
+[
+  {
+    "id": "the-impostor",
+    "title": "The Impostor",
+    "type": "impostor-grid",
+    "description": "Find the one odd emoji. First correct player wins the bonus. A wrong guess locks that player out for the round.",
+    "bonus": 300,
+    "gridSize": 10,
+    "baseEmoji": "🍎",
+    "impostorEmoji": "🍅"
+  }
+]

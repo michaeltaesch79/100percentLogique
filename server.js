@@ -11,6 +11,8 @@ const PORT = process.env.PORT || 3000;
 // ─── QUESTIONS (loaded from questions.json) ──────────────────────────────────
 const ALL_QUESTIONS = JSON.parse(fs.readFileSync(path.join(__dirname, 'questions.json'), 'utf8'))
   .filter(q => !q.disabled);
+const MINI_GAMES = JSON.parse(fs.readFileSync(path.join(__dirname, 'minigames.json'), 'utf8'))
+  .filter(g => !g.disabled);
 
 // ─── STATE ─────────────────────────────────────────────────────────────────
 let game = {
@@ -24,6 +26,9 @@ let game = {
   questions:  [],   // selected subset for this game
   gameLength: 20,   // 20, 40, or 60
   lastReveal: null, // cached for reconnecting players
+  currentMiniGame: null,
+  miniGameCursor:  0,
+  lastMiniGame:    null,
 };
 
 const COLORS = ['#FFD700','#00D4FF','#FF6B6B','#76FF7A','#FF9F43','#A29BFE','#FD79A8','#00CEC9'];
@@ -57,6 +62,31 @@ function shuffle(arr) {
     [a[i],a[j]] = [a[j],a[i]];
   }
   return a;
+}
+
+function getCurrentMiniGamePayload() {
+  if (!game.currentMiniGame) return null;
+  const {
+    id, type, title, description, bonus, gridSize, baseEmoji, impostorEmoji,
+    cells, attemptingId, lockedOutIds, winnerId, resolved
+  } = game.currentMiniGame;
+  return {
+    type: 'mini-game',
+    id,
+    gameType: type,
+    title,
+    description,
+    bonus,
+    gridSize,
+    baseEmoji,
+    impostorEmoji,
+    cells,
+    attemptingId,
+    lockedOutIds,
+    winnerId,
+    resolved,
+    scores: publicScores(),
+  };
 }
 
 // ─── GAME LOGIC ─────────────────────────────────────────────────────────────
@@ -105,6 +135,46 @@ function startQuestion() {
   if (qNum > 1 && qNum % 5 === 1) {
     // After previous reveal host will have triggered this — handled via host-next
   }
+}
+
+function startMiniGame() {
+  if (!MINI_GAMES.length) {
+    startQuestion();
+    return;
+  }
+
+  const template = MINI_GAMES[game.miniGameCursor % MINI_GAMES.length];
+  game.miniGameCursor++;
+  const gridSize = Number(template.gridSize) || 10;
+  const totalCells = gridSize * gridSize;
+  const baseEmoji = template.baseEmoji || '🍎';
+  const impostorEmoji = template.impostorEmoji || '🍅';
+  const impostorIndex = Math.floor(Math.random() * totalCells);
+  const cells = Array.from({ length: totalCells }, (_, index) =>
+    index === impostorIndex ? impostorEmoji : baseEmoji
+  );
+
+  game.phase = 'minigame';
+  game.currentMiniGame = {
+    id: template.id,
+    type: template.type,
+    title: template.title,
+    description: template.description || '',
+    bonus: Number(template.bonus) || 300,
+    gridSize,
+    baseEmoji,
+    impostorEmoji,
+    impostorIndex,
+    cells,
+    attemptingId: null,
+    lockedOutIds: [],
+    winnerId: null,
+    resolved: false,
+  };
+
+  const payload = getCurrentMiniGamePayload();
+  game.lastMiniGame = payload;
+  broadcast(payload);
 }
 
 function submitAnswer(playerId, answerIndex) {
@@ -177,6 +247,85 @@ function doReveal() {
 function finishGame() {
   game.phase = 'finished';
   broadcast({ type: 'finished', scores: publicScores() });
+}
+
+function claimMiniGameAttempt(playerId) {
+  if (game.phase !== 'minigame' || !game.currentMiniGame || game.currentMiniGame.resolved) return;
+  if (game.currentMiniGame.attemptingId) return;
+  if (game.currentMiniGame.lockedOutIds.includes(playerId)) return;
+  if (!game.players.find(p => p.id === playerId)?.ws) return;
+
+  game.currentMiniGame.attemptingId = playerId;
+  const payload = getCurrentMiniGamePayload();
+  game.lastMiniGame = payload;
+  broadcast(payload);
+}
+
+function resolveMiniGame(winnerId) {
+  if (game.phase !== 'minigame' || !game.currentMiniGame || game.currentMiniGame.resolved) return;
+  if (winnerId) {
+    const player = game.players.find(p => p.id === winnerId);
+    if (!player) return;
+    player.score += game.currentMiniGame.bonus;
+  }
+  game.currentMiniGame.winnerId = winnerId || null;
+  game.currentMiniGame.attemptingId = null;
+  game.currentMiniGame.resolved = true;
+
+  const payload = {
+    type: 'mini-game-result',
+    id: game.currentMiniGame.id,
+    gameType: game.currentMiniGame.type,
+    title: game.currentMiniGame.title,
+    description: game.currentMiniGame.description,
+    gridSize: game.currentMiniGame.gridSize,
+    baseEmoji: game.currentMiniGame.baseEmoji,
+    impostorEmoji: game.currentMiniGame.impostorEmoji,
+    cells: game.currentMiniGame.cells,
+    lockedOutIds: game.currentMiniGame.lockedOutIds,
+    winnerId,
+    bonus: game.currentMiniGame.bonus,
+    scores: publicScores(),
+  };
+  game.lastMiniGame = { ...getCurrentMiniGamePayload(), ...payload };
+  broadcast(payload);
+}
+
+function submitMiniGameGuess(playerId, index) {
+  if (game.phase !== 'minigame' || !game.currentMiniGame || game.currentMiniGame.resolved) return;
+  if (game.currentMiniGame.attemptingId !== playerId) return;
+
+  if (index === game.currentMiniGame.impostorIndex) {
+    resolveMiniGame(playerId);
+    return;
+  }
+
+  if (!game.currentMiniGame.lockedOutIds.includes(playerId)) {
+    game.currentMiniGame.lockedOutIds.push(playerId);
+  }
+  game.currentMiniGame.attemptingId = null;
+
+  const activePlayers = game.players
+    .filter(p => p.ws)
+    .map(p => p.id)
+    .filter(id => !game.currentMiniGame.lockedOutIds.includes(id));
+
+  if (!activePlayers.length) {
+    skipMiniGame();
+    return;
+  }
+
+  const payload = {
+    ...getCurrentMiniGamePayload(),
+    lastWrongPlayerId: playerId,
+  };
+  game.lastMiniGame = payload;
+  broadcast(payload);
+}
+
+function skipMiniGame() {
+  if (game.phase !== 'minigame' || !game.currentMiniGame || game.currentMiniGame.resolved) return;
+  resolveMiniGame(null);
 }
 
 // ─── HTTP SERVER ────────────────────────────────────────────────────────────
@@ -286,6 +435,9 @@ wss.on('connection', (ws) => {
           .slice(0, len)
           .sort((a, b) => (a.difficulty || 3) - (b.difficulty || 3));
         game.currentQ  = -1;
+        game.currentMiniGame = null;
+        game.lastMiniGame = null;
+        game.miniGameCursor = 0;
         game.players.forEach(p => p.score = 0);
         startQuestion();
         break;
@@ -293,7 +445,24 @@ wss.on('connection', (ws) => {
 
       case 'host-next':
         if (!isHost) break;
-        if (game.phase === 'reveal' || game.phase === 'podium') startQuestion();
+        if (game.phase === 'reveal') startQuestion();
+        if (game.phase === 'minigame' && game.currentMiniGame?.resolved) {
+          game.currentMiniGame = null;
+          game.lastMiniGame = null;
+          startQuestion();
+        }
+        break;
+
+      case 'host-start-mini-game':
+        if (!isHost) break;
+        if (game.phase !== 'reveal') break;
+        if ((game.currentQ + 1) % 5 !== 0 || game.currentQ >= game.questions.length - 1) break;
+        startMiniGame();
+        break;
+
+      case 'host-skip-mini-game':
+        if (!isHost) break;
+        skipMiniGame();
         break;
 
       case 'host-reveal':
@@ -328,6 +497,11 @@ wss.on('connection', (ws) => {
             });
           } else if (game.phase === 'reveal' && game.lastReveal) {
             send(ws, game.lastReveal);
+          } else if (game.phase === 'minigame' && game.currentMiniGame) {
+            send(ws, getCurrentMiniGamePayload());
+            if (game.currentMiniGame.resolved && game.lastMiniGame?.type === 'mini-game-result') {
+              send(ws, game.lastMiniGame);
+            }
           }
         } else {
           send(ws, { type: 'rejoin-fail' });
@@ -339,11 +513,20 @@ wss.on('connection', (ws) => {
         if (myId) submitAnswer(myId, msg.answerIndex);
         break;
 
+      case 'player-mini-game-claim':
+        if (myId) claimMiniGameAttempt(myId);
+        break;
+
+      case 'player-mini-game-guess':
+        if (myId) submitMiniGameGuess(myId, msg.index);
+        break;
+
       case 'host-reset':
         if (!isHost) break;
         clearTimeout(game.timerTO);
         game.phase = 'lobby'; game.currentQ = -1; game.answers = {};
-        game.questions = []; game.lastReveal = null;
+        game.questions = []; game.lastReveal = null; game.currentMiniGame = null;
+        game.lastMiniGame = null; game.miniGameCursor = 0;
         // Remove disconnected players; reset scores for connected ones
         game.players = game.players.filter(p => p.ws && p.ws.readyState === WebSocket.OPEN);
         game.players.forEach(p => p.score = 0);

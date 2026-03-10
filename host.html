@@ -138,6 +138,25 @@ body{font-family:'Nunito',sans-serif;background:var(--blue);color:var(--white);m
 .pod-bar-wrap{width:100%;max-width:600px;height:8px;background:rgba(255,255,255,.1);border-radius:4px;}
 .pod-bar{height:100%;border-radius:4px;transition:width 1s ease;}
 
+/* MINI-GAME OVERLAY */
+#miniGameOverlay{display:none;position:fixed;inset:0;z-index:65;background:rgba(2,11,45,.97);
+  flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;overflow-y:auto;}
+#miniGameOverlay.show{display:flex;}
+.mini-tag{font-size:12px;font-weight:800;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;}
+.mini-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,5vw,58px);letter-spacing:4px;color:var(--gold);text-align:center;}
+.mini-card{width:100%;max-width:760px;background:rgba(255,255,255,.06);border:1px solid rgba(255,215,0,.25);
+  border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:14px;}
+.mini-prompt{font-size:clamp(18px,2.2vw,28px);font-weight:800;line-height:1.35;text-align:center;}
+.mini-list{display:flex;flex-direction:column;gap:8px;color:rgba(255,255,255,.82);}
+.mini-row{font-size:15px;line-height:1.45;}
+.mini-bonus{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--gold);}
+.mini-status{font-size:16px;font-weight:800;color:rgba(255,255,255,.85);text-align:center;min-height:24px;}
+.mini-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.mini-grid{display:grid;gap:4px;justify-content:center;}
+.mini-cell{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:20px;}
+.mini-players{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.mini-player{background:rgba(255,255,255,.08);border-radius:12px;padding:8px 12px;font-size:13px;font-weight:800;}
+
 /* ── FINAL SCREEN ── */
 #finalScreen{display:none;position:fixed;inset:0;z-index:50;background:rgba(2,11,45,.97);
   flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px;}
@@ -247,9 +266,26 @@ body{font-family:'Nunito',sans-serif;background:var(--blue);color:var(--white);m
   <div class="podium-title">🏅 Standings</div>
   <div class="podium-subtitle" id="podiumSubtitle">After 5 questions</div>
   <div class="podium-list" id="podiumList"></div>
-  <button class="btn btn-gold" onclick="hostNext()" style="margin-top:8px;font-size:18px;padding:14px 40px;">
+  <button class="btn btn-gold" onclick="startMiniGamePhase()" style="margin-top:8px;font-size:18px;padding:14px 40px;">
     Continue ▶
   </button>
+</div>
+
+<div id="miniGameOverlay">
+  <div class="mini-tag">Mini Game</div>
+  <div class="mini-title" id="miniGameTitle">Bonus Round</div>
+  <div class="mini-card">
+    <div class="mini-prompt" id="miniGamePrompt"></div>
+    <div class="mini-list" id="miniGameDetails"></div>
+    <div class="mini-grid" id="miniGameGrid"></div>
+    <div class="mini-players" id="miniGamePlayers"></div>
+    <div class="mini-bonus" id="miniGameBonus">300 pts bonus</div>
+  </div>
+  <div class="mini-status" id="miniGameStatus">Waiting for the first buzz...</div>
+  <div class="mini-actions">
+    <button class="btn btn-out" id="skipMiniBtn" onclick="skipMiniGame()">Skip Bonus</button>
+    <button class="btn btn-gold" id="continueMiniBtn" onclick="hostNext()" style="display:none">Next Question →</button>
+  </div>
 </div>
 
 <!-- ══ FINAL SCREEN ══ -->
@@ -297,13 +333,17 @@ ws.onopen = () => ws.send(JSON.stringify({type:'host-connect'}));
 ws.onerror = e => console.error('WS error',e);
 
 let players=[], curQ=null, selectedLength=20;
+let activeMiniGame=null;
 
 function send(obj){ ws.send(JSON.stringify(obj)); }
 function hostStart(){ send({type:'host-start', gameLength:selectedLength}); }
 function hostReveal(){ send({type:'host-reveal'}); }
+function startMiniGamePhase(){ send({type:'host-start-mini-game'}); }
+function skipMiniGame(){ send({type:'host-skip-mini-game'}); }
 function hostNext(){
   document.getElementById('revealOverlay').classList.remove('show');
   document.getElementById('podiumOverlay').classList.remove('show');
+  document.getElementById('miniGameOverlay').classList.remove('show');
   document.getElementById('nextBtn').style.display='none';
   send({type:'host-next'});
 }
@@ -323,11 +363,14 @@ ws.onmessage = (e) => {
     case 'question':  showQuestion(msg); break;
     case 'answer-in': players=msg.scores; renderScores(msg.answeredCount,msg.totalPlayers); break;
     case 'reveal':    showReveal(msg); break;
+    case 'mini-game': players=msg.scores||players; showMiniGame(msg); break;
+    case 'mini-game-result': players=msg.scores||players; showMiniGameResult(msg); break;
     case 'finished':  showFinal(msg.scores); break;
     case 'reset-ack':
       document.getElementById('finalScreen').classList.remove('show');
       document.getElementById('revealOverlay').classList.remove('show');
       document.getElementById('podiumOverlay').classList.remove('show');
+      document.getElementById('miniGameOverlay').classList.remove('show');
       document.getElementById('gameWrap').style.display='none';
       document.getElementById('lobbyScreen').style.display='flex';
       players=[]; renderLobby(); break;
@@ -402,6 +445,7 @@ function showQuestion(msg){
   document.getElementById('gameWrap').style.display='flex';
   document.getElementById('revealOverlay').classList.remove('show');
   document.getElementById('podiumOverlay').classList.remove('show');
+  document.getElementById('miniGameOverlay').classList.remove('show');
   document.getElementById('nextBtn').style.display='none';
   curQ=msg;
   document.getElementById('qNum').textContent=`${msg.index+1} / ${msg.total}`;
@@ -424,6 +468,7 @@ function showQuestion(msg){
 
 /* ── REVEAL ── */
 function showReveal(msg){
+  const tb=document.getElementById('timerBar'); if(tb){tb.style.transition='none';tb.style.width='0%';}
   musicFadeOut(600);
   // Highlight correct/wrong answers
   msg.answers && Object.entries(msg.answers).forEach(([,ai])=>{
@@ -503,6 +548,79 @@ function showMidPodium(scores, qNum){
     list.appendChild(row);
   });
   document.getElementById('podiumOverlay').classList.add('show');
+}
+
+function showMiniGame(msg){
+  activeMiniGame = msg;
+  document.getElementById('revealOverlay').classList.remove('show');
+  document.getElementById('podiumOverlay').classList.remove('show');
+  document.getElementById('miniGameTitle').textContent = msg.title;
+  document.getElementById('miniGamePrompt').textContent = msg.description || 'Spot the impostor.';
+  document.getElementById('miniGameBonus').textContent = `${msg.bonus} pts bonus`;
+  const details=document.getElementById('miniGameDetails');
+  details.innerHTML = `
+    <div class="mini-row">1. Claim the round from your phone.</div>
+    <div class="mini-row">2. Find the single different emoji in the grid.</div>
+    <div class="mini-row">3. A wrong guess locks that player out for this round.</div>`;
+  renderMiniGameGrid(msg);
+  renderMiniGamePlayers(msg);
+  const attemptName = players.find(p=>p.id===msg.attemptingId)?.name;
+  const wrongName = players.find(p=>p.id===msg.lastWrongPlayerId)?.name;
+  document.getElementById('miniGameStatus').textContent = wrongName
+    ? `${wrongName} missed and is locked out.`
+    : attemptName
+      ? `${attemptName} is making an attempt.`
+      : 'Waiting for a player to claim the round...';
+  document.getElementById('skipMiniBtn').style.display = msg.resolved ? 'none' : 'inline-flex';
+  document.getElementById('continueMiniBtn').style.display = msg.resolved ? 'inline-flex' : 'none';
+  document.getElementById('miniGameOverlay').classList.add('show');
+}
+
+function showMiniGameResult(msg){
+  activeMiniGame = {...(activeMiniGame||{}), ...msg, resolved:true};
+  renderMiniGameGrid(activeMiniGame);
+  renderMiniGamePlayers(activeMiniGame);
+  renderScores(0, players.length);
+  const winnerName = players.find(p=>p.id===msg.winnerId)?.name;
+  document.getElementById('miniGameStatus').textContent = winnerName
+    ? `${winnerName} wins the ${msg.bonus}-point bonus.`
+    : 'No bonus awarded this round.';
+  document.getElementById('skipMiniBtn').style.display = 'none';
+  document.getElementById('continueMiniBtn').style.display = 'inline-flex';
+  document.getElementById('miniGameOverlay').classList.add('show');
+}
+
+function renderMiniGameGrid(msg){
+  const grid=document.getElementById('miniGameGrid');
+  grid.style.gridTemplateColumns=`repeat(${msg.gridSize||10}, 34px)`;
+  grid.innerHTML='';
+  (msg.cells||[]).forEach(cell=>{
+    const item=document.createElement('div');
+    item.className='mini-cell';
+    item.textContent=cell;
+    grid.appendChild(item);
+  });
+}
+
+function renderMiniGamePlayers(msg){
+  const wrap=document.getElementById('miniGamePlayers');
+  wrap.innerHTML='';
+  players.forEach(p=>{
+    const item=document.createElement('div');
+    item.className='mini-player';
+    const isAttempting = p.id === msg.attemptingId;
+    const isLocked = (msg.lockedOutIds||[]).includes(p.id);
+    const isWinner = p.id === msg.winnerId;
+    item.style.borderLeft=`3px solid ${p.color}`;
+    item.textContent = isWinner
+      ? `${p.name} +${msg.bonus}`
+      : isAttempting
+        ? `${p.name} trying...`
+        : isLocked
+          ? `${p.name} locked`
+          : p.name;
+    wrap.appendChild(item);
+  });
 }
 
 /* ── FINAL ── */
