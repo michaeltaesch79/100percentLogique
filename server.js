@@ -70,7 +70,7 @@ function getCurrentMiniGamePayload() {
   const {
     id, type, title, description, bonus, gridSize, baseEmoji, impostorEmoji,
     cells, startsAt, lockedOutIds, winnerId, resolved, lastWrongPlayerId,
-    equations, targetEmoji
+    equations, targetEmoji, word
   } = game.currentMiniGame;
   return {
     type: 'mini-game',
@@ -85,6 +85,7 @@ function getCurrentMiniGamePayload() {
     cells,
     equations,
     targetEmoji,
+    word,
     startsAt,
     lockedOutIds,
     winnerId,
@@ -131,6 +132,18 @@ function buildMiniGameFromTemplate(template) {
       equations,
       targetEmoji: template.targetEmoji || emojiSet[0],
       targetValue: values[template.targetEmoji || emojiSet[0]],
+    };
+  }
+
+  if (template.type === 'mirror-word') {
+    const words = Array.isArray(template.words) && template.words.length
+      ? template.words
+      : ['MOM', 'WOW', 'TOT', 'OTTO', 'HI', 'TIT'];
+    const word = String(words[Math.floor(Math.random() * words.length)] || 'MOM').toUpperCase();
+
+    return {
+      ...common,
+      word,
     };
   }
 
@@ -313,6 +326,7 @@ function resolveMiniGame(winnerId) {
     cells: game.currentMiniGame.cells,
     equations: game.currentMiniGame.equations,
     targetEmoji: game.currentMiniGame.targetEmoji,
+    word: game.currentMiniGame.word,
     startsAt: game.currentMiniGame.startsAt,
     lockedOutIds: game.currentMiniGame.lockedOutIds,
     winnerId,
@@ -339,6 +353,12 @@ function submitMiniGameGuess(playerId, index) {
   if (game.currentMiniGame.type === 'emoji-math') {
     const guess = Number(index);
     if (Number.isFinite(guess) && guess === game.currentMiniGame.targetValue) {
+      resolveMiniGame(playerId);
+      return;
+    }
+  } else if (game.currentMiniGame.type === 'mirror-word') {
+    const guess = String(index || '').trim().toUpperCase();
+    if (guess && guess === game.currentMiniGame.word) {
       resolveMiniGame(playerId);
       return;
     }

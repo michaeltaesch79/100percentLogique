@@ -17,5 +17,13 @@
     "bonus": 300,
     "targetEmoji": "🦊",
     "emojiSet": ["🦊", "🐻", "🐸"]
+  },
+  {
+    "id": "mirror-sprint",
+    "title": "The Mirror Sprint",
+    "type": "mirror-word",
+    "description": "Read the mirrored word and type it forwards. First correct answer wins the bonus. A wrong answer locks that player out for the round.",
+    "bonus": 300,
+    "words": ["MOM", "WOW", "TOT", "OTTO", "HI", "TIT"]
   }
 ]

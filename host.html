@@ -158,6 +158,7 @@ body{font-family:'Nunito',sans-serif;background:var(--blue);color:var(--white);m
 .mini-equations{display:flex;flex-direction:column;gap:8px;align-items:center;}
 .mini-equation{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:1px;color:var(--white);}
 .mini-question{font-size:18px;font-weight:800;color:var(--cyan);text-align:center;}
+.mini-mirror-word{display:none;font-family:'Bebas Neue',sans-serif;font-size:72px;letter-spacing:6px;color:var(--white);transform:scaleX(-1);}
 .mini-players{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
 .mini-player{background:rgba(255,255,255,.08);border-radius:12px;padding:8px 12px;font-size:13px;font-weight:800;}
 
@@ -283,6 +284,7 @@ body{font-family:'Nunito',sans-serif;background:var(--blue);color:var(--white);m
     <div class="mini-list" id="miniGameDetails"></div>
     <div class="mini-countdown" id="miniGameCountdown">5</div>
     <div class="mini-equations" id="miniGameEquations" style="display:none"></div>
+    <div class="mini-mirror-word" id="miniGameMirrorWord"></div>
     <div class="mini-grid" id="miniGameGrid"></div>
     <div class="mini-players" id="miniGamePlayers"></div>
     <div class="mini-bonus" id="miniGameBonus">300 pts bonus</div>
@@ -572,6 +574,11 @@ function showMiniGame(msg){
       <div class="mini-row">1. Countdown starts at 5.</div>
       <div class="mini-row">2. Solve the equations and find the target emoji value.</div>
       <div class="mini-row">3. A wrong answer locks that player out for this round.</div>`
+    : msg.gameType === 'mirror-word'
+      ? `
+      <div class="mini-row">1. Countdown starts at 5.</div>
+      <div class="mini-row">2. Read the mirrored word and type it forwards.</div>
+      <div class="mini-row">3. A wrong answer locks that player out for this round.</div>`
     : `
       <div class="mini-row">1. Countdown starts at 5.</div>
       <div class="mini-row">2. Everyone races to find the single different emoji.</div>
@@ -609,16 +616,28 @@ function showMiniGameResult(msg){
 function renderMiniGameBody(msg){
   const grid=document.getElementById('miniGameGrid');
   const equations=document.getElementById('miniGameEquations');
+  const mirrorWord=document.getElementById('miniGameMirrorWord');
   if (msg.gameType === 'emoji-math') {
     grid.style.display='none';
+    mirrorWord.style.display='none';
     equations.style.display='flex';
     equations.innerHTML = (msg.equations||[]).map(eq => `<div class="mini-equation">${eq}</div>`).join('') +
       `<div class="mini-question">What is ${msg.targetEmoji}?</div>`;
     return;
   }
 
+  if (msg.gameType === 'mirror-word') {
+    grid.style.display='none';
+    equations.style.display='none';
+    equations.innerHTML='';
+    mirrorWord.style.display='block';
+    mirrorWord.textContent = msg.word || '';
+    return;
+  }
+
   equations.style.display='none';
   equations.innerHTML='';
+  mirrorWord.style.display='none';
   grid.style.display='grid';
   grid.style.gridTemplateColumns=`repeat(${msg.gridSize||10}, 34px)`;
   grid.innerHTML='';

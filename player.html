@@ -151,6 +151,7 @@ body { font-family:'Nunito',sans-serif; background:var(--blue); color:var(--whit
 .mini-equations { display:flex; flex-direction:column; gap:8px; width:100%; max-width:500px; align-items:center; }
 .mini-equation { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:1px; }
 .mini-question { font-size:18px; font-weight:800; color:var(--cyan); text-align:center; }
+.mini-mirror-word { display:none; font-family:'Bebas Neue',sans-serif; font-size:72px; letter-spacing:6px; transform:scaleX(-1); }
 .mini-math-form { width:100%; max-width:500px; display:none; gap:10px; align-items:center; }
 .mini-math-input { flex:1; background:rgba(255,255,255,.1); border:2px solid rgba(255,255,255,.2); border-radius:12px;
   padding:14px 16px; color:var(--white); font-size:22px; font-weight:800; text-align:center; }
@@ -162,6 +163,14 @@ body { font-family:'Nunito',sans-serif; background:var(--blue); color:var(--whit
   color:var(--white); font-size:20px; display:flex; align-items:center; justify-content:center; }
 .mini-cell.active { box-shadow:0 0 0 2px rgba(0,212,255,.45) inset; }
 .mini-cell.locked, .mini-cell:disabled { opacity:.45; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+.shake { animation: shake .35s ease; }
 
 /* ── FINAL PAGE ── */
 .final-title { font-family:'Bebas Neue',sans-serif; font-size:48px; color:var(--gold);
@@ -272,11 +281,12 @@ body { font-family:'Nunito',sans-serif; background:var(--blue); color:var(--whit
       <div class="mini-item">1. Wait for the 5 second countdown.</div>
       <div class="mini-item">2. Tap the one emoji that is different.</div>
       <div class="mini-item">3. Wrong guess means you are locked out.</div>
-    </div>
-    <div class="mini-countdown" id="miniCountdown">5</div>
-    <div class="mini-bonus" id="miniBonus">+300 pts</div>
+  </div>
+  <div class="mini-countdown" id="miniCountdown">5</div>
+  <div class="mini-bonus" id="miniBonus">+300 pts</div>
   </div>
   <div class="mini-equations" id="miniEquations" style="display:none"></div>
+  <div class="mini-mirror-word" id="miniMirrorWord"></div>
   <div class="mini-grid" id="miniGrid"></div>
   <div class="mini-math-form" id="miniMathForm">
     <input class="mini-math-input" id="miniMathInput" type="number" inputmode="numeric" placeholder="?" />
@@ -566,10 +576,15 @@ function showMiniGame(msg) {
     document.getElementById('miniStatus').textContent = `You found it and won +${msg.bonus}.`;
   } else if ((msg.lockedOutIds || []).includes(myId)) {
     document.getElementById('miniStatus').textContent = 'You missed it and are locked out for this round.';
+    if (msg.lastWrongPlayerId === myId) triggerMiniShake();
   } else if (Date.now() < (msg.startsAt || 0)) {
     document.getElementById('miniStatus').textContent = '5... 4... 3... 2... 1...';
   } else {
-    document.getElementById('miniStatus').textContent = `Find it fast. First correct tap wins ${msg.bonus} points.`;
+    document.getElementById('miniStatus').textContent = msg.gameType === 'mirror-word'
+      ? `Read it fast. First correct word wins ${msg.bonus} points.`
+      : msg.gameType === 'emoji-math'
+        ? `Solve it fast. First correct answer wins ${msg.bonus} points.`
+        : `Find it fast. First correct tap wins ${msg.bonus} points.`;
   }
 
   showPage('miniGamePage');
@@ -587,7 +602,7 @@ function showMiniGameResult(msg) {
     document.getElementById('miniStatus').textContent = `Congratulations! You got +${msg.bonus}. Next question in 4 seconds...`;
   } else if (msg.winnerId) {
     const winner = msg.scores.find(p => p.id === msg.winnerId);
-    document.getElementById('miniStatus').textContent = `${winner?.name || 'A player'} found it first and got +${msg.bonus}. Next question in 4 seconds...`;
+    document.getElementById('miniStatus').textContent = `${winner?.name || 'A player'} won +${msg.bonus}. Next question in 4 seconds...`;
   } else {
     document.getElementById('miniStatus').textContent = 'No winner this round. Next question in 4 seconds...';
   }
@@ -596,18 +611,39 @@ function showMiniGameResult(msg) {
 
 function renderMiniBody(msg) {
   const equations = document.getElementById('miniEquations');
+  const mirrorWord = document.getElementById('miniMirrorWord');
   const form = document.getElementById('miniMathForm');
   const input = document.getElementById('miniMathInput');
   const submit = document.getElementById('miniMathSubmit');
   const grid = document.getElementById('miniGrid');
+  const locked = msg.resolved || Date.now() < (msg.startsAt || 0) || (msg.lockedOutIds || []).includes(myId);
   if (msg.gameType === 'emoji-math') {
     grid.style.display = 'none';
+    mirrorWord.style.display = 'none';
     equations.style.display = 'flex';
     form.style.display = 'flex';
+    input.type = 'number';
+    input.inputMode = 'numeric';
+    input.placeholder = '?';
     equations.innerHTML = (msg.equations || []).map(eq =>
       `<div class="mini-equation">${eq}</div>`
     ).join('') + `<div class="mini-question">What is ${msg.targetEmoji}?</div>`;
-    const locked = msg.resolved || Date.now() < (msg.startsAt || 0) || (msg.lockedOutIds || []).includes(myId);
+    input.disabled = locked;
+    submit.disabled = locked || input.value.trim() === '';
+    if (!locked) input.focus();
+    return;
+  }
+
+  if (msg.gameType === 'mirror-word') {
+    grid.style.display = 'none';
+    equations.style.display = 'none';
+    equations.innerHTML = '';
+    mirrorWord.style.display = 'block';
+    mirrorWord.textContent = msg.word || '';
+    form.style.display = 'flex';
+    input.type = 'text';
+    input.inputMode = 'text';
+    input.placeholder = 'Type the word';
     input.disabled = locked;
     submit.disabled = locked || input.value.trim() === '';
     if (!locked) input.focus();
@@ -616,6 +652,7 @@ function renderMiniBody(msg) {
 
   equations.style.display = 'none';
   equations.innerHTML = '';
+  mirrorWord.style.display = 'none';
   form.style.display = 'none';
   const size = msg.gridSize || 10;
   grid.style.display = 'grid';
@@ -642,12 +679,13 @@ function submitMiniGameGuess(index) {
 }
 
 function submitMiniMath() {
-  if (!activeMiniGame || activeMiniGame.gameType !== 'emoji-math') return;
+  if (!activeMiniGame || (activeMiniGame.gameType !== 'emoji-math' && activeMiniGame.gameType !== 'mirror-word')) return;
   if (activeMiniGame.resolved || Date.now() < (activeMiniGame.startsAt || 0)) return;
   const input = document.getElementById('miniMathInput');
   const raw = input.value.trim();
   if (!raw) return;
-  send({ type:'player-mini-game-guess', index: Number(raw) });
+  const value = activeMiniGame.gameType === 'emoji-math' ? Number(raw) : raw;
+  send({ type:'player-mini-game-guess', index: value });
   input.disabled = true;
   document.getElementById('miniMathSubmit').disabled = true;
   document.getElementById('miniStatus').textContent = 'Answer sent. Checking...';
@@ -680,6 +718,15 @@ function stopMiniCountdown() {
     clearInterval(miniCountdownTimer);
     miniCountdownTimer = null;
   }
+}
+
+function triggerMiniShake() {
+  const target = document.getElementById('miniMathForm').style.display !== 'none'
+    ? document.getElementById('miniMathForm')
+    : document.getElementById('miniGrid');
+  target.classList.remove('shake');
+  void target.offsetWidth;
+  target.classList.add('shake');
 }
 
 /* ── FINAL ──────────────────────────────────────── */
