@@ -23,6 +23,7 @@ let game = {
   timerTO:    null,
   questions:  [],   // selected subset for this game
   gameLength: 20,   // 20, 40, or 60
+  lastReveal: null, // cached for reconnecting players
 };
 
 const COLORS = ['#FFD700','#00D4FF','#FF6B6B','#76FF7A','#FF9F43','#A29BFE','#FD79A8','#00CEC9'];
@@ -34,7 +35,7 @@ function send(ws, obj) {
 function broadcast(obj, excludeWs = null) {
   const msg = JSON.stringify(obj);
   game.players.forEach(p => {
-    if (p.ws !== excludeWs && p.ws.readyState === WebSocket.OPEN) p.ws.send(msg);
+    if (p.ws && p.ws !== excludeWs && p.ws.readyState === WebSocket.OPEN) p.ws.send(msg);
   });
   if (game.hostWs && game.hostWs !== excludeWs && game.hostWs.readyState === WebSocket.OPEN)
     game.hostWs.send(msg);
@@ -157,7 +158,7 @@ function doReveal() {
     Object.entries(game.answers).map(([id, ans]) => [id, ans.index])
   );
 
-  broadcast({
+  const revealData = {
     type:         'reveal',
     correctIndex: q.c,
     correctText:  q.a[q.c],
@@ -168,7 +169,9 @@ function doReveal() {
     showPodium,
     qNum,
     firstCorrectId,
-  });
+  };
+  game.lastReveal = revealData;
+  broadcast(revealData);
 }
 
 function finishGame() {
@@ -298,6 +301,40 @@ wss.on('connection', (ws) => {
         doReveal();
         break;
 
+      case 'player-rejoin': {
+        const player = game.players.find(p => p.id === msg.savedId);
+        if (player && game.phase !== 'lobby' && game.phase !== 'finished') {
+          myId = msg.savedId;
+          player.ws = ws;
+          const myAnswerEntry = game.answers[myId];
+          send(ws, {
+            type: 'rejoin-ack',
+            id: myId, color: player.color, avatar: player.avatar,
+            name: player.name, ageGroup: player.ageGroup, score: player.score,
+            phase: game.phase,
+            lastAnswer: myAnswerEntry
+              ? { answerIndex: myAnswerEntry.index, position: myAnswerEntry.position + 1 }
+              : null,
+          });
+          if (game.phase === 'question') {
+            const q = game.questions[game.currentQ];
+            const hint = player.ageGroup === 'teen' ? q.hint_teen
+                       : player.ageGroup === 'young' ? q.hint_young : null;
+            send(ws, {
+              type: 'question',
+              index: game.currentQ, total: game.questions.length,
+              q: q.q, answers: q.a, timeLimit: 30, timerEnd: game.timerEnd, hint,
+              myAnswerIndex: myAnswerEntry ? myAnswerEntry.index : null,
+            });
+          } else if (game.phase === 'reveal' && game.lastReveal) {
+            send(ws, game.lastReveal);
+          }
+        } else {
+          send(ws, { type: 'rejoin-fail' });
+        }
+        break;
+      }
+
       case 'player-answer':
         if (myId) submitAnswer(myId, msg.answerIndex);
         break;
@@ -306,7 +343,9 @@ wss.on('connection', (ws) => {
         if (!isHost) break;
         clearTimeout(game.timerTO);
         game.phase = 'lobby'; game.currentQ = -1; game.answers = {};
-        game.questions = [];
+        game.questions = []; game.lastReveal = null;
+        // Remove disconnected players; reset scores for connected ones
+        game.players = game.players.filter(p => p.ws && p.ws.readyState === WebSocket.OPEN);
         game.players.forEach(p => p.score = 0);
         broadcastLobby();
         send(ws, { type:'reset-ack' });
@@ -316,7 +355,16 @@ wss.on('connection', (ws) => {
 
   ws.on('close', () => {
     if (isHost) { game.hostWs = null; return; }
-    if (myId) { game.players = game.players.filter(p => p.id !== myId); broadcastLobby(); }
+    if (myId) {
+      if (game.phase === 'lobby' || game.phase === 'finished') {
+        game.players = game.players.filter(p => p.id !== myId);
+        broadcastLobby();
+      } else {
+        // Mid-game: keep player's score, just mark them offline
+        const player = game.players.find(p => p.id === myId);
+        if (player) player.ws = null;
+      }
+    }
   });
 });
 

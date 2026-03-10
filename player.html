@@ -331,7 +331,12 @@ ws.onopen = () => {
   document.getElementById('wsStatus').style.color = '#00E676';
   document.getElementById('wsStatus').textContent = '✅ Connected!';
   document.getElementById('joinBtn').disabled = false;
-  if (pendingJoin) { send(pendingJoin); pendingJoin = null; }
+  const savedId = localStorage.getItem('quiz_player_id');
+  if (savedId) {
+    send({ type: 'player-rejoin', savedId });
+  } else if (pendingJoin) {
+    send(pendingJoin); pendingJoin = null;
+  }
 };
 ws.onerror = () => {
   document.getElementById('wsStatus').style.color = '#FF1744';
@@ -349,12 +354,24 @@ ws.onmessage = (e) => {
   switch(msg.type) {
     case 'join-ack':
       myId = msg.id; myColor = msg.color; myAvatar = msg.avatar;
+      localStorage.setItem('quiz_player_id', myId);
       const avatarEl = document.getElementById('myAvatarLobby');
       renderAvatar(avatarEl, myAvatar);
       document.getElementById('myNameTxt').textContent = msg.name;
       const ageLabels = {teen:'🧒 Teen (hints on!)', young:'🧑 Young Adult (hints on!)', adult:'🧓 Adult (no hints)'};
       document.getElementById('myAgeBadge').textContent = ageLabels[msg.ageGroup] || 'Adult';
       showPage('lobbyPage');
+      break;
+    case 'rejoin-ack':
+      myId = msg.id; myColor = msg.color; myAvatar = msg.avatar; myScore = msg.score;
+      if (msg.lastAnswer) {
+        myLastAnswer = msg.lastAnswer.answerIndex;
+        myAnswerPosition = msg.lastAnswer.position;
+      }
+      // Next message (question/reveal) will call showPage
+      break;
+    case 'rejoin-fail':
+      localStorage.removeItem('quiz_player_id');
       break;
     case 'avatar-info':
       updateAvatarAvailability(msg.takenAvatars || []);
@@ -394,7 +411,11 @@ document.getElementById('nameInput').addEventListener('keydown', e => { if(e.key
 
 /* ── QUESTION ───────────────────────────────────── */
 function showQuestion(msg) {
-  myLastAnswer = null; myAnswerPosition = null; curCorrect = null;
+  // On rejoin, myLastAnswer/myAnswerPosition are already set by rejoin-ack; preserve them
+  if (msg.myAnswerIndex === undefined || msg.myAnswerIndex === null) {
+    myLastAnswer = null; myAnswerPosition = null;
+  }
+  curCorrect = null;
   document.getElementById('qBadge').textContent = `Q ${msg.index+1} / ${msg.total}`;
   document.getElementById('myScoreTxt').textContent = myScore;
   document.getElementById('qText').textContent = msg.q;
@@ -429,6 +450,15 @@ function showQuestion(msg) {
     btn.onclick = () => submitAnswer(i, msg.answers);
     grid.appendChild(btn);
   });
+
+  // Rejoin: restore already-answered state visually
+  if (msg.myAnswerIndex !== null && msg.myAnswerIndex !== undefined) {
+    document.querySelectorAll('.ans-btn').forEach((btn, i) => {
+      btn.disabled = true;
+      if (i === msg.myAnswerIndex) btn.classList.add('selected');
+    });
+    document.getElementById('sentBanner').style.display = 'block';
+  }
 
   showPage('questionPage');
 }
@@ -468,6 +498,7 @@ function showReveal(msg) {
 
 /* ── FINAL ──────────────────────────────────────── */
 function showFinal(scores) {
+  localStorage.removeItem('quiz_player_id');
   const sorted = [...scores].sort((a,b)=>b.score-a.score);
   const myRank = sorted.findIndex(p=>p.id===myId)+1;
   const medals = ['🥇','🥈','🥉'];
