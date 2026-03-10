@@ -69,7 +69,8 @@ function getCurrentMiniGamePayload() {
   if (!game.currentMiniGame) return null;
   const {
     id, type, title, description, bonus, gridSize, baseEmoji, impostorEmoji,
-    cells, startsAt, lockedOutIds, winnerId, resolved, lastWrongPlayerId
+    cells, startsAt, lockedOutIds, winnerId, resolved, lastWrongPlayerId,
+    equations, targetEmoji
   } = game.currentMiniGame;
   return {
     type: 'mini-game',
@@ -82,12 +83,73 @@ function getCurrentMiniGamePayload() {
     baseEmoji,
     impostorEmoji,
     cells,
+    equations,
+    targetEmoji,
     startsAt,
     lockedOutIds,
     winnerId,
     resolved,
     lastWrongPlayerId,
     scores: publicScores(),
+  };
+}
+
+function buildMiniGameFromTemplate(template) {
+  const common = {
+    id: template.id,
+    type: template.type,
+    title: template.title,
+    description: template.description || '',
+    bonus: Number(template.bonus) || 300,
+    startsAt: Date.now() + 5000,
+    lockedOutIds: [],
+    winnerId: null,
+    resolved: false,
+    lastWrongPlayerId: null,
+  };
+
+  if (template.type === 'emoji-math') {
+    const emojiSet = Array.isArray(template.emojiSet) && template.emojiSet.length >= 3
+      ? template.emojiSet.slice(0, 3)
+      : ['🦊', '🐻', '🐸'];
+    const firstValue = 1 + Math.floor(Math.random() * 6);
+    const secondValue = firstValue + 1 + Math.floor(Math.random() * 4);
+    const thirdValue = 1 + Math.floor(Math.random() * 6);
+    const values = {
+      [emojiSet[0]]: firstValue,
+      [emojiSet[1]]: secondValue,
+      [emojiSet[2]]: thirdValue,
+    };
+    const equations = [
+      `${emojiSet[0]} + ${emojiSet[0]} = ${values[emojiSet[0]] * 2}`,
+      `${emojiSet[1]} + ${emojiSet[2]} = ${values[emojiSet[1]] + values[emojiSet[2]]}`,
+      `${emojiSet[1]} - ${emojiSet[0]} = ${values[emojiSet[1]] - values[emojiSet[0]]}`,
+    ];
+
+    return {
+      ...common,
+      equations,
+      targetEmoji: template.targetEmoji || emojiSet[0],
+      targetValue: values[template.targetEmoji || emojiSet[0]],
+    };
+  }
+
+  const gridSize = Number(template.gridSize) || 10;
+  const totalCells = gridSize * gridSize;
+  const baseEmoji = template.baseEmoji || '🍎';
+  const impostorEmoji = template.impostorEmoji || '🍅';
+  const impostorIndex = Math.floor(Math.random() * totalCells);
+  const cells = Array.from({ length: totalCells }, (_, index) =>
+    index === impostorIndex ? impostorEmoji : baseEmoji
+  );
+
+  return {
+    ...common,
+    gridSize,
+    baseEmoji,
+    impostorEmoji,
+    impostorIndex,
+    cells,
   };
 }
 
@@ -147,34 +209,9 @@ function startMiniGame() {
 
   const template = MINI_GAMES[game.miniGameCursor % MINI_GAMES.length];
   game.miniGameCursor++;
-  const gridSize = Number(template.gridSize) || 10;
-  const totalCells = gridSize * gridSize;
-  const baseEmoji = template.baseEmoji || '🍎';
-  const impostorEmoji = template.impostorEmoji || '🍅';
-  const impostorIndex = Math.floor(Math.random() * totalCells);
-  const cells = Array.from({ length: totalCells }, (_, index) =>
-    index === impostorIndex ? impostorEmoji : baseEmoji
-  );
-  const startsAt = Date.now() + 5000;
 
   game.phase = 'minigame';
-  game.currentMiniGame = {
-    id: template.id,
-    type: template.type,
-    title: template.title,
-    description: template.description || '',
-    bonus: Number(template.bonus) || 300,
-    gridSize,
-    baseEmoji,
-    impostorEmoji,
-    impostorIndex,
-    cells,
-    startsAt,
-    lockedOutIds: [],
-    winnerId: null,
-    resolved: false,
-    lastWrongPlayerId: null,
-  };
+  game.currentMiniGame = buildMiniGameFromTemplate(template);
   clearTimeout(game.miniGameResumeTO);
 
   const payload = getCurrentMiniGamePayload();
@@ -274,6 +311,8 @@ function resolveMiniGame(winnerId) {
     baseEmoji: game.currentMiniGame.baseEmoji,
     impostorEmoji: game.currentMiniGame.impostorEmoji,
     cells: game.currentMiniGame.cells,
+    equations: game.currentMiniGame.equations,
+    targetEmoji: game.currentMiniGame.targetEmoji,
     startsAt: game.currentMiniGame.startsAt,
     lockedOutIds: game.currentMiniGame.lockedOutIds,
     winnerId,
@@ -297,9 +336,17 @@ function submitMiniGameGuess(playerId, index) {
   if (Date.now() < game.currentMiniGame.startsAt) return;
   if (game.currentMiniGame.lockedOutIds.includes(playerId)) return;
 
-  if (index === game.currentMiniGame.impostorIndex) {
-    resolveMiniGame(playerId);
-    return;
+  if (game.currentMiniGame.type === 'emoji-math') {
+    const guess = Number(index);
+    if (Number.isFinite(guess) && guess === game.currentMiniGame.targetValue) {
+      resolveMiniGame(playerId);
+      return;
+    }
+  } else {
+    if (index === game.currentMiniGame.impostorIndex) {
+      resolveMiniGame(playerId);
+      return;
+    }
   }
 
   if (!game.currentMiniGame.lockedOutIds.includes(playerId)) {

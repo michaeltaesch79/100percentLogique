@@ -148,6 +148,15 @@ body { font-family:'Nunito',sans-serif; background:var(--blue); color:var(--whit
 .mini-bonus { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--gold); text-align:center; }
 .mini-countdown { font-family:'Bebas Neue',sans-serif; font-size:72px; line-height:1; color:var(--cyan); text-align:center; }
 .mini-status { font-size:15px; text-align:center; color:rgba(255,255,255,.78); max-width:500px; }
+.mini-equations { display:flex; flex-direction:column; gap:8px; width:100%; max-width:500px; align-items:center; }
+.mini-equation { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:1px; }
+.mini-question { font-size:18px; font-weight:800; color:var(--cyan); text-align:center; }
+.mini-math-form { width:100%; max-width:500px; display:none; gap:10px; align-items:center; }
+.mini-math-input { flex:1; background:rgba(255,255,255,.1); border:2px solid rgba(255,255,255,.2); border-radius:12px;
+  padding:14px 16px; color:var(--white); font-size:22px; font-weight:800; text-align:center; }
+.mini-math-submit { background:linear-gradient(135deg,var(--cyan),#69f0ff); color:#00142b; border:none; border-radius:12px;
+  padding:14px 18px; font-size:18px; font-weight:900; }
+.mini-math-submit:disabled, .mini-math-input:disabled { opacity:.45; }
 .mini-grid { display:grid; gap:4px; width:100%; max-width:500px; justify-content:center; }
 .mini-cell { width:100%; aspect-ratio:1; min-width:28px; border:none; border-radius:8px; background:rgba(255,255,255,.08);
   color:var(--white); font-size:20px; display:flex; align-items:center; justify-content:center; }
@@ -267,7 +276,12 @@ body { font-family:'Nunito',sans-serif; background:var(--blue); color:var(--whit
     <div class="mini-countdown" id="miniCountdown">5</div>
     <div class="mini-bonus" id="miniBonus">+300 pts</div>
   </div>
+  <div class="mini-equations" id="miniEquations" style="display:none"></div>
   <div class="mini-grid" id="miniGrid"></div>
+  <div class="mini-math-form" id="miniMathForm">
+    <input class="mini-math-input" id="miniMathInput" type="number" inputmode="numeric" placeholder="?" />
+    <button class="mini-math-submit" id="miniMathSubmit" onclick="submitMiniMath()">Submit</button>
+  </div>
   <div class="mini-status" id="miniStatus">Get ready...</div>
 </div>
 
@@ -546,7 +560,7 @@ function showMiniGame(msg) {
   document.getElementById('miniTitle').textContent = msg.title;
   document.getElementById('miniPrompt').textContent = msg.description || 'Find the impostor emoji.';
   document.getElementById('miniBonus').textContent = `+${msg.bonus} pts`;
-  renderMiniGrid(msg);
+  renderMiniBody(msg);
   syncMiniCountdown(msg);
   if (msg.winnerId === myId) {
     document.getElementById('miniStatus').textContent = `You found it and won +${msg.bonus}.`;
@@ -564,7 +578,7 @@ function showMiniGame(msg) {
 function showMiniGameResult(msg) {
   stopMiniCountdown();
   activeMiniGame = { ...(activeMiniGame || {}), ...msg, resolved: true };
-  renderMiniGrid(activeMiniGame);
+  renderMiniBody(activeMiniGame);
   const me = msg.scores && msg.scores.find(p => p.id === myId);
   if (me) myScore = me.score;
   document.getElementById('myScoreTxt').textContent = myScore;
@@ -580,9 +594,31 @@ function showMiniGameResult(msg) {
   showPage('miniGamePage');
 }
 
-function renderMiniGrid(msg) {
+function renderMiniBody(msg) {
+  const equations = document.getElementById('miniEquations');
+  const form = document.getElementById('miniMathForm');
+  const input = document.getElementById('miniMathInput');
+  const submit = document.getElementById('miniMathSubmit');
   const grid = document.getElementById('miniGrid');
+  if (msg.gameType === 'emoji-math') {
+    grid.style.display = 'none';
+    equations.style.display = 'flex';
+    form.style.display = 'flex';
+    equations.innerHTML = (msg.equations || []).map(eq =>
+      `<div class="mini-equation">${eq}</div>`
+    ).join('') + `<div class="mini-question">What is ${msg.targetEmoji}?</div>`;
+    const locked = msg.resolved || Date.now() < (msg.startsAt || 0) || (msg.lockedOutIds || []).includes(myId);
+    input.disabled = locked;
+    submit.disabled = locked || input.value.trim() === '';
+    if (!locked) input.focus();
+    return;
+  }
+
+  equations.style.display = 'none';
+  equations.innerHTML = '';
+  form.style.display = 'none';
   const size = msg.gridSize || 10;
+  grid.style.display = 'grid';
   grid.style.gridTemplateColumns = `repeat(${size}, minmax(0, 1fr))`;
   grid.innerHTML = '';
   (msg.cells || []).forEach((cell, index) => {
@@ -605,6 +641,18 @@ function submitMiniGameGuess(index) {
   document.getElementById('miniStatus').textContent = 'Guess sent. Checking...';
 }
 
+function submitMiniMath() {
+  if (!activeMiniGame || activeMiniGame.gameType !== 'emoji-math') return;
+  if (activeMiniGame.resolved || Date.now() < (activeMiniGame.startsAt || 0)) return;
+  const input = document.getElementById('miniMathInput');
+  const raw = input.value.trim();
+  if (!raw) return;
+  send({ type:'player-mini-game-guess', index: Number(raw) });
+  input.disabled = true;
+  document.getElementById('miniMathSubmit').disabled = true;
+  document.getElementById('miniStatus').textContent = 'Answer sent. Checking...';
+}
+
 function syncMiniCountdown(msg) {
   stopMiniCountdown();
   const el = document.getElementById('miniCountdown');
@@ -615,7 +663,7 @@ function syncMiniCountdown(msg) {
       return;
     }
     el.textContent = 'GO';
-    renderMiniGrid({ ...(activeMiniGame || msg), startsAt: msg.startsAt });
+    renderMiniBody({ ...(activeMiniGame || msg), startsAt: msg.startsAt });
     if (miniCountdownTimer) {
       clearInterval(miniCountdownTimer);
       miniCountdownTimer = null;
@@ -655,6 +703,15 @@ function showFinal(scores) {
     </div>`).join('');
   showPage('finalPage');
 }
+
+document.getElementById('miniMathInput').addEventListener('input', () => {
+  const disabled = document.getElementById('miniMathInput').value.trim() === '';
+  document.getElementById('miniMathSubmit').disabled = disabled;
+});
+
+document.getElementById('miniMathInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') submitMiniMath();
+});
 </script>
 </body>
 </html>

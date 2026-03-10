@@ -8,5 +8,14 @@
     "gridSize": 10,
     "baseEmoji": "🍎",
     "impostorEmoji": "🍅"
+  },
+  {
+    "id": "emoji-math-speedrun",
+    "title": "Emoji Math Speedrun",
+    "type": "emoji-math",
+    "description": "Solve the emoji equations and submit the value of the target emoji. First correct answer wins the bonus. A wrong answer locks that player out for the round.",
+    "bonus": 300,
+    "targetEmoji": "🦊",
+    "emojiSet": ["🦊", "🐻", "🐸"]
   }
 ]
