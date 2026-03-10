@@ -29,6 +29,7 @@ let game = {
   currentMiniGame: null,
   miniGameCursor:  0,
   lastMiniGame:    null,
+  miniGameResumeTO:null,
 };
 
 const COLORS = ['#FFD700','#00D4FF','#FF6B6B','#76FF7A','#FF9F43','#A29BFE','#FD79A8','#00CEC9'];
@@ -68,7 +69,7 @@ function getCurrentMiniGamePayload() {
   if (!game.currentMiniGame) return null;
   const {
     id, type, title, description, bonus, gridSize, baseEmoji, impostorEmoji,
-    cells, attemptingId, lockedOutIds, winnerId, resolved
+    cells, startsAt, lockedOutIds, winnerId, resolved, lastWrongPlayerId
   } = game.currentMiniGame;
   return {
     type: 'mini-game',
@@ -81,10 +82,11 @@ function getCurrentMiniGamePayload() {
     baseEmoji,
     impostorEmoji,
     cells,
-    attemptingId,
+    startsAt,
     lockedOutIds,
     winnerId,
     resolved,
+    lastWrongPlayerId,
     scores: publicScores(),
   };
 }
@@ -153,6 +155,7 @@ function startMiniGame() {
   const cells = Array.from({ length: totalCells }, (_, index) =>
     index === impostorIndex ? impostorEmoji : baseEmoji
   );
+  const startsAt = Date.now() + 5000;
 
   game.phase = 'minigame';
   game.currentMiniGame = {
@@ -166,11 +169,13 @@ function startMiniGame() {
     impostorEmoji,
     impostorIndex,
     cells,
-    attemptingId: null,
+    startsAt,
     lockedOutIds: [],
     winnerId: null,
     resolved: false,
+    lastWrongPlayerId: null,
   };
+  clearTimeout(game.miniGameResumeTO);
 
   const payload = getCurrentMiniGamePayload();
   game.lastMiniGame = payload;
@@ -249,18 +254,6 @@ function finishGame() {
   broadcast({ type: 'finished', scores: publicScores() });
 }
 
-function claimMiniGameAttempt(playerId) {
-  if (game.phase !== 'minigame' || !game.currentMiniGame || game.currentMiniGame.resolved) return;
-  if (game.currentMiniGame.attemptingId) return;
-  if (game.currentMiniGame.lockedOutIds.includes(playerId)) return;
-  if (!game.players.find(p => p.id === playerId)?.ws) return;
-
-  game.currentMiniGame.attemptingId = playerId;
-  const payload = getCurrentMiniGamePayload();
-  game.lastMiniGame = payload;
-  broadcast(payload);
-}
-
 function resolveMiniGame(winnerId) {
   if (game.phase !== 'minigame' || !game.currentMiniGame || game.currentMiniGame.resolved) return;
   if (winnerId) {
@@ -269,7 +262,6 @@ function resolveMiniGame(winnerId) {
     player.score += game.currentMiniGame.bonus;
   }
   game.currentMiniGame.winnerId = winnerId || null;
-  game.currentMiniGame.attemptingId = null;
   game.currentMiniGame.resolved = true;
 
   const payload = {
@@ -282,18 +274,28 @@ function resolveMiniGame(winnerId) {
     baseEmoji: game.currentMiniGame.baseEmoji,
     impostorEmoji: game.currentMiniGame.impostorEmoji,
     cells: game.currentMiniGame.cells,
+    startsAt: game.currentMiniGame.startsAt,
     lockedOutIds: game.currentMiniGame.lockedOutIds,
     winnerId,
+    lastWrongPlayerId: game.currentMiniGame.lastWrongPlayerId,
     bonus: game.currentMiniGame.bonus,
     scores: publicScores(),
   };
   game.lastMiniGame = { ...getCurrentMiniGamePayload(), ...payload };
   broadcast(payload);
+
+  game.miniGameResumeTO = setTimeout(() => {
+    if (game.phase !== 'minigame' || !game.currentMiniGame?.resolved) return;
+    game.currentMiniGame = null;
+    game.lastMiniGame = null;
+    startQuestion();
+  }, 4000);
 }
 
 function submitMiniGameGuess(playerId, index) {
   if (game.phase !== 'minigame' || !game.currentMiniGame || game.currentMiniGame.resolved) return;
-  if (game.currentMiniGame.attemptingId !== playerId) return;
+  if (Date.now() < game.currentMiniGame.startsAt) return;
+  if (game.currentMiniGame.lockedOutIds.includes(playerId)) return;
 
   if (index === game.currentMiniGame.impostorIndex) {
     resolveMiniGame(playerId);
@@ -303,7 +305,7 @@ function submitMiniGameGuess(playerId, index) {
   if (!game.currentMiniGame.lockedOutIds.includes(playerId)) {
     game.currentMiniGame.lockedOutIds.push(playerId);
   }
-  game.currentMiniGame.attemptingId = null;
+  game.currentMiniGame.lastWrongPlayerId = playerId;
 
   const activePlayers = game.players
     .filter(p => p.ws)
@@ -447,6 +449,7 @@ wss.on('connection', (ws) => {
         if (!isHost) break;
         if (game.phase === 'reveal') startQuestion();
         if (game.phase === 'minigame' && game.currentMiniGame?.resolved) {
+          clearTimeout(game.miniGameResumeTO);
           game.currentMiniGame = null;
           game.lastMiniGame = null;
           startQuestion();
@@ -513,10 +516,6 @@ wss.on('connection', (ws) => {
         if (myId) submitAnswer(myId, msg.answerIndex);
         break;
 
-      case 'player-mini-game-claim':
-        if (myId) claimMiniGameAttempt(myId);
-        break;
-
       case 'player-mini-game-guess':
         if (myId) submitMiniGameGuess(myId, msg.index);
         break;
@@ -524,6 +523,7 @@ wss.on('connection', (ws) => {
       case 'host-reset':
         if (!isHost) break;
         clearTimeout(game.timerTO);
+        clearTimeout(game.miniGameResumeTO);
         game.phase = 'lobby'; game.currentQ = -1; game.answers = {};
         game.questions = []; game.lastReveal = null; game.currentMiniGame = null;
         game.lastMiniGame = null; game.miniGameCursor = 0;

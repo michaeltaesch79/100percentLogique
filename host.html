@@ -150,6 +150,7 @@ body{font-family:'Nunito',sans-serif;background:var(--blue);color:var(--white);m
 .mini-list{display:flex;flex-direction:column;gap:8px;color:rgba(255,255,255,.82);}
 .mini-row{font-size:15px;line-height:1.45;}
 .mini-bonus{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--gold);}
+.mini-countdown{font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:1;color:var(--cyan);text-align:center;}
 .mini-status{font-size:16px;font-weight:800;color:rgba(255,255,255,.85);text-align:center;min-height:24px;}
 .mini-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
 .mini-grid{display:grid;gap:4px;justify-content:center;}
@@ -277,11 +278,12 @@ body{font-family:'Nunito',sans-serif;background:var(--blue);color:var(--white);m
   <div class="mini-card">
     <div class="mini-prompt" id="miniGamePrompt"></div>
     <div class="mini-list" id="miniGameDetails"></div>
+    <div class="mini-countdown" id="miniGameCountdown">5</div>
     <div class="mini-grid" id="miniGameGrid"></div>
     <div class="mini-players" id="miniGamePlayers"></div>
     <div class="mini-bonus" id="miniGameBonus">300 pts bonus</div>
   </div>
-  <div class="mini-status" id="miniGameStatus">Waiting for the first buzz...</div>
+  <div class="mini-status" id="miniGameStatus">Get ready...</div>
   <div class="mini-actions">
     <button class="btn btn-out" id="skipMiniBtn" onclick="skipMiniGame()">Skip Bonus</button>
     <button class="btn btn-gold" id="continueMiniBtn" onclick="hostNext()" style="display:none">Next Question →</button>
@@ -334,6 +336,7 @@ ws.onerror = e => console.error('WS error',e);
 
 let players=[], curQ=null, selectedLength=20;
 let activeMiniGame=null;
+let miniCountdownTimer=null;
 
 function send(obj){ ws.send(JSON.stringify(obj)); }
 function hostStart(){ send({type:'host-start', gameLength:selectedLength}); }
@@ -344,6 +347,7 @@ function hostNext(){
   document.getElementById('revealOverlay').classList.remove('show');
   document.getElementById('podiumOverlay').classList.remove('show');
   document.getElementById('miniGameOverlay').classList.remove('show');
+  stopMiniCountdown();
   document.getElementById('nextBtn').style.display='none';
   send({type:'host-next'});
 }
@@ -371,6 +375,7 @@ ws.onmessage = (e) => {
       document.getElementById('revealOverlay').classList.remove('show');
       document.getElementById('podiumOverlay').classList.remove('show');
       document.getElementById('miniGameOverlay').classList.remove('show');
+      stopMiniCountdown();
       document.getElementById('gameWrap').style.display='none';
       document.getElementById('lobbyScreen').style.display='flex';
       players=[]; renderLobby(); break;
@@ -559,34 +564,36 @@ function showMiniGame(msg){
   document.getElementById('miniGameBonus').textContent = `${msg.bonus} pts bonus`;
   const details=document.getElementById('miniGameDetails');
   details.innerHTML = `
-    <div class="mini-row">1. Claim the round from your phone.</div>
-    <div class="mini-row">2. Find the single different emoji in the grid.</div>
+    <div class="mini-row">1. Countdown starts at 5.</div>
+    <div class="mini-row">2. Everyone races to find the single different emoji.</div>
     <div class="mini-row">3. A wrong guess locks that player out for this round.</div>`;
   renderMiniGameGrid(msg);
   renderMiniGamePlayers(msg);
-  const attemptName = players.find(p=>p.id===msg.attemptingId)?.name;
+  syncMiniCountdown(msg);
   const wrongName = players.find(p=>p.id===msg.lastWrongPlayerId)?.name;
   document.getElementById('miniGameStatus').textContent = wrongName
     ? `${wrongName} missed and is locked out.`
-    : attemptName
-      ? `${attemptName} is making an attempt.`
-      : 'Waiting for a player to claim the round...';
+    : Date.now() < (msg.startsAt||0)
+      ? '5... 4... 3... 2... 1...'
+      : 'Find the impostor. First correct player wins 300 points.';
   document.getElementById('skipMiniBtn').style.display = msg.resolved ? 'none' : 'inline-flex';
   document.getElementById('continueMiniBtn').style.display = msg.resolved ? 'inline-flex' : 'none';
   document.getElementById('miniGameOverlay').classList.add('show');
 }
 
 function showMiniGameResult(msg){
+  stopMiniCountdown();
   activeMiniGame = {...(activeMiniGame||{}), ...msg, resolved:true};
   renderMiniGameGrid(activeMiniGame);
   renderMiniGamePlayers(activeMiniGame);
   renderScores(0, players.length);
   const winnerName = players.find(p=>p.id===msg.winnerId)?.name;
+  document.getElementById('miniGameCountdown').textContent = winnerName ? 'WIN' : 'END';
   document.getElementById('miniGameStatus').textContent = winnerName
-    ? `${winnerName} wins the ${msg.bonus}-point bonus.`
-    : 'No bonus awarded this round.';
+    ? `Congratulations ${winnerName}! ${msg.bonus} bonus points. Next question in 4 seconds.`
+    : 'No bonus awarded. Next question in 4 seconds.';
   document.getElementById('skipMiniBtn').style.display = 'none';
-  document.getElementById('continueMiniBtn').style.display = 'inline-flex';
+  document.getElementById('continueMiniBtn').style.display = 'none';
   document.getElementById('miniGameOverlay').classList.add('show');
 }
 
@@ -608,19 +615,44 @@ function renderMiniGamePlayers(msg){
   players.forEach(p=>{
     const item=document.createElement('div');
     item.className='mini-player';
-    const isAttempting = p.id === msg.attemptingId;
     const isLocked = (msg.lockedOutIds||[]).includes(p.id);
     const isWinner = p.id === msg.winnerId;
     item.style.borderLeft=`3px solid ${p.color}`;
     item.textContent = isWinner
       ? `${p.name} +${msg.bonus}`
-      : isAttempting
-        ? `${p.name} trying...`
-        : isLocked
+      : isLocked
           ? `${p.name} locked`
           : p.name;
     wrap.appendChild(item);
   });
+}
+
+function syncMiniCountdown(msg){
+  stopMiniCountdown();
+  const el=document.getElementById('miniGameCountdown');
+  const tick=()=>{
+    const remaining = Math.max(0, (msg.startsAt||0) - Date.now());
+    if (remaining > 0) {
+      el.textContent = String(Math.ceil(remaining / 1000));
+      return;
+    }
+    el.textContent = 'GO';
+    if (miniCountdownTimer) {
+      clearInterval(miniCountdownTimer);
+      miniCountdownTimer = null;
+    }
+  };
+  tick();
+  if (!msg.resolved && Date.now() < (msg.startsAt||0)) {
+    miniCountdownTimer = setInterval(tick, 100);
+  }
+}
+
+function stopMiniCountdown(){
+  if (miniCountdownTimer) {
+    clearInterval(miniCountdownTimer);
+    miniCountdownTimer = null;
+  }
 }
 
 /* ── FINAL ── */

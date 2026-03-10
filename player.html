@@ -146,9 +146,7 @@ body { font-family:'Nunito',sans-serif; background:var(--blue); color:var(--whit
 .mini-list { display:flex; flex-direction:column; gap:8px; color:rgba(255,255,255,.8); }
 .mini-item { font-size:14px; line-height:1.45; }
 .mini-bonus { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--gold); text-align:center; }
-.buzz-btn { background:linear-gradient(135deg,var(--cyan),#69f0ff); color:#00142b; border:none; border-radius:16px;
-  padding:16px 20px; width:100%; max-width:500px; font-size:24px; font-weight:900; font-family:'Nunito',sans-serif; }
-.buzz-btn:disabled { opacity:.45; }
+.mini-countdown { font-family:'Bebas Neue',sans-serif; font-size:72px; line-height:1; color:var(--cyan); text-align:center; }
 .mini-status { font-size:15px; text-align:center; color:rgba(255,255,255,.78); max-width:500px; }
 .mini-grid { display:grid; gap:4px; width:100%; max-width:500px; justify-content:center; }
 .mini-cell { width:100%; aspect-ratio:1; min-width:28px; border:none; border-radius:8px; background:rgba(255,255,255,.08);
@@ -262,15 +260,15 @@ body { font-family:'Nunito',sans-serif; background:var(--blue); color:var(--whit
   <div class="mini-card">
     <div class="mini-prompt" id="miniPrompt"></div>
     <div class="mini-list" id="miniDetails">
-      <div class="mini-item">1. Tap claim first.</div>
-      <div class="mini-item">2. Then tap the one emoji that is different.</div>
+      <div class="mini-item">1. Wait for the 5 second countdown.</div>
+      <div class="mini-item">2. Tap the one emoji that is different.</div>
       <div class="mini-item">3. Wrong guess means you are locked out.</div>
     </div>
+    <div class="mini-countdown" id="miniCountdown">5</div>
     <div class="mini-bonus" id="miniBonus">+300 pts</div>
   </div>
-  <button class="buzz-btn" id="buzzBtn" onclick="claimMiniGame()">Claim Attempt</button>
   <div class="mini-grid" id="miniGrid"></div>
-  <div class="mini-status" id="miniStatus">Tap claim first if you want the 300-point bonus attempt.</div>
+  <div class="mini-status" id="miniStatus">Get ready...</div>
 </div>
 
 <!-- ══ FINAL PAGE ══ -->
@@ -345,6 +343,7 @@ let myAnswerPosition = null; // 1-based position of my answer submission
 let curCorrect       = null;
 let pendingJoin      = null;
 let activeMiniGame   = null;
+let miniCountdownTimer = null;
 
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
@@ -548,47 +547,35 @@ function showMiniGame(msg) {
   document.getElementById('miniPrompt').textContent = msg.description || 'Find the impostor emoji.';
   document.getElementById('miniBonus').textContent = `+${msg.bonus} pts`;
   renderMiniGrid(msg);
-
-  const buzzBtn = document.getElementById('buzzBtn');
-  buzzBtn.style.display = 'block';
-  buzzBtn.disabled = !!msg.resolved || !!msg.attemptingId || (msg.lockedOutIds || []).includes(myId);
+  syncMiniCountdown(msg);
   if (msg.winnerId === myId) {
     document.getElementById('miniStatus').textContent = `You found it and won +${msg.bonus}.`;
   } else if ((msg.lockedOutIds || []).includes(myId)) {
     document.getElementById('miniStatus').textContent = 'You missed it and are locked out for this round.';
-  } else if (msg.attemptingId === myId) {
-    document.getElementById('miniStatus').textContent = 'Your turn. Tap the different emoji now.';
-  } else if (msg.attemptingId) {
-    const attemptName = msg.scores.find(p => p.id === msg.attemptingId)?.name;
-    document.getElementById('miniStatus').textContent = `${attemptName || 'Another player'} is trying now.`;
+  } else if (Date.now() < (msg.startsAt || 0)) {
+    document.getElementById('miniStatus').textContent = '5... 4... 3... 2... 1...';
   } else {
-    document.getElementById('miniStatus').textContent = `Tap first if you want the ${msg.bonus}-point bonus attempt.`;
+    document.getElementById('miniStatus').textContent = `Find it fast. First correct tap wins ${msg.bonus} points.`;
   }
 
   showPage('miniGamePage');
 }
 
-function claimMiniGame() {
-  if (!activeMiniGame || activeMiniGame.attemptingId || activeMiniGame.resolved) return;
-  send({ type:'player-mini-game-claim' });
-  document.getElementById('buzzBtn').disabled = true;
-  document.getElementById('miniStatus').textContent = 'Claim sent. Waiting for the server...';
-}
-
 function showMiniGameResult(msg) {
+  stopMiniCountdown();
   activeMiniGame = { ...(activeMiniGame || {}), ...msg, resolved: true };
   renderMiniGrid(activeMiniGame);
   const me = msg.scores && msg.scores.find(p => p.id === myId);
   if (me) myScore = me.score;
   document.getElementById('myScoreTxt').textContent = myScore;
-  document.getElementById('buzzBtn').style.display = 'none';
+  document.getElementById('miniCountdown').textContent = msg.winnerId === myId ? 'WIN' : 'END';
   if (msg.winnerId === myId) {
-    document.getElementById('miniStatus').textContent = `You got the +${msg.bonus} bonus. Waiting for the next question...`;
+    document.getElementById('miniStatus').textContent = `Congratulations! You got +${msg.bonus}. Next question in 4 seconds...`;
   } else if (msg.winnerId) {
     const winner = msg.scores.find(p => p.id === msg.winnerId);
-    document.getElementById('miniStatus').textContent = `${winner?.name || 'A player'} got the +${msg.bonus} bonus. Waiting for the next question...`;
+    document.getElementById('miniStatus').textContent = `${winner?.name || 'A player'} found it first and got +${msg.bonus}. Next question in 4 seconds...`;
   } else {
-    document.getElementById('miniStatus').textContent = 'No bonus awarded. Waiting for the next question...';
+    document.getElementById('miniStatus').textContent = 'No winner this round. Next question in 4 seconds...';
   }
   showPage('miniGamePage');
 }
@@ -602,8 +589,8 @@ function renderMiniGrid(msg) {
     const btn = document.createElement('button');
     btn.className = 'mini-cell';
     btn.textContent = cell;
-    const locked = msg.resolved || msg.attemptingId !== myId || (msg.lockedOutIds || []).includes(myId);
-    if (msg.attemptingId === myId && !msg.resolved) btn.classList.add('active');
+    const locked = msg.resolved || Date.now() < (msg.startsAt || 0) || (msg.lockedOutIds || []).includes(myId);
+    if (!locked) btn.classList.add('active');
     if (locked) btn.classList.add('locked');
     btn.disabled = locked;
     btn.onclick = () => submitMiniGameGuess(index);
@@ -612,16 +599,45 @@ function renderMiniGrid(msg) {
 }
 
 function submitMiniGameGuess(index) {
-  if (!activeMiniGame || activeMiniGame.attemptingId !== myId || activeMiniGame.resolved) return;
+  if (!activeMiniGame || activeMiniGame.resolved || Date.now() < (activeMiniGame.startsAt || 0)) return;
   send({ type:'player-mini-game-guess', index });
   document.querySelectorAll('.mini-cell').forEach(btn => btn.disabled = true);
   document.getElementById('miniStatus').textContent = 'Guess sent. Checking...';
 }
 
+function syncMiniCountdown(msg) {
+  stopMiniCountdown();
+  const el = document.getElementById('miniCountdown');
+  const tick = () => {
+    const remaining = Math.max(0, (msg.startsAt || 0) - Date.now());
+    if (remaining > 0) {
+      el.textContent = String(Math.ceil(remaining / 1000));
+      return;
+    }
+    el.textContent = 'GO';
+    renderMiniGrid({ ...(activeMiniGame || msg), startsAt: msg.startsAt });
+    if (miniCountdownTimer) {
+      clearInterval(miniCountdownTimer);
+      miniCountdownTimer = null;
+    }
+  };
+  tick();
+  if (!msg.resolved && Date.now() < (msg.startsAt || 0)) {
+    miniCountdownTimer = setInterval(tick, 100);
+  }
+}
+
+function stopMiniCountdown() {
+  if (miniCountdownTimer) {
+    clearInterval(miniCountdownTimer);
+    miniCountdownTimer = null;
+  }
+}
+
 /* ── FINAL ──────────────────────────────────────── */
 function showFinal(scores) {
   localStorage.removeItem('quiz_player_id');
-  document.getElementById('buzzBtn').style.display = 'block';
+  stopMiniCountdown();
   const sorted = [...scores].sort((a,b)=>b.score-a.score);
   const myRank = sorted.findIndex(p=>p.id===myId)+1;
   const medals = ['🥇','🥈','🥉'];
